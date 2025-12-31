@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 use Trexzactyl\Models\Setting;
 use Illuminate\Support\Facades\DB;

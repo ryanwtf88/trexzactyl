@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\DB;

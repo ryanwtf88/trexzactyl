@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 namespace Trexzactyl\Http\Controllers\Api\Application\Nodes;
 

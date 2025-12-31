@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 namespace Trexzactyl\Http\Middleware\Api\Client;
 

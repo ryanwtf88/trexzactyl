@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 use Trexzactyl\Helpers\Time;
 use Illuminate\Support\Str;

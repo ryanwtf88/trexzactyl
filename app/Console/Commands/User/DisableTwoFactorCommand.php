@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 namespace Trexzactyl\Console\Commands\User;
 

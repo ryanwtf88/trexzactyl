@@ -11,6 +11,9 @@ class CreateNodeConfigurationTokensTable extends Migration
      */
     public function up()
     {
+        if (Schema::hasTable('node_configuration_tokens')) {
+            return;
+        }
         Schema::create('node_configuration_tokens', function (Blueprint $table) {
             $table->increments('id');
             $table->char('token', 32);

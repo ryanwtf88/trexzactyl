@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 namespace Trexzactyl\Exceptions\Service\Database;
 

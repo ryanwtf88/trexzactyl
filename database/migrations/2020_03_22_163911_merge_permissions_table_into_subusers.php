@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 use Trexzactyl\Models\Permission;
 use Illuminate\Support\Collection;

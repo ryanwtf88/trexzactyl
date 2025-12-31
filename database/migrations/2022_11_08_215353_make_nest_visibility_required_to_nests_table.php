@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 use Trexzactyl\Models\Nest;
 use Illuminate\Support\Facades\Schema;

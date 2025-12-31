@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 namespace Database\Seeders;
 
@@ -44,7 +44,7 @@ class EggSeeder extends Seeder
         foreach (static::$import as $nest) {
             /* @noinspection PhpParamsInspection */
             $this->parseEggFiles(
-                Nest::query()->where('author', 'support@Trexzactyl.com')->where('name', $nest)->firstOrFail()
+                Nest::query()->where('author', 'ryanwtf88@gmail.com')->where('name', $nest)->firstOrFail()
             );
         }
     }

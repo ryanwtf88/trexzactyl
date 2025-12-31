@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 use Trexzactyl\Models\Task;
 use Illuminate\Support\Facades\Schema;

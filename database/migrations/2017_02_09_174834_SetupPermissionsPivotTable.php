@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 use Trexzactyl\Models\Subuser;
 use Trexzactyl\Models\Permission;

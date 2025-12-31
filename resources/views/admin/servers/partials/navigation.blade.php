@@ -1,4 +1,4 @@
-﻿@php
+@php
     /** @var \Trexzactyl\Models\Server $server */
     $router = app('router');
 @endphp

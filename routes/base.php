@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 use Trexzactyl\Http\Controllers\Base;
 use Illuminate\Support\Facades\Route;
