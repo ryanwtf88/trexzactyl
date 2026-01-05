@@ -31,7 +31,7 @@ class ServerRenewalService
     public function handle(ClientApiRequest $request, Server $server): Server
     {
         $user = $request->user();
-        $cost = $this->settings->get('Trexzactyl::renewal:cost', 200);
+        $cost = $this->settings->get('trexzactyl::renewal:cost', 200);
 
         if ($user->store_balance < $cost) {
             throw new DisplayException('You do not have enough credits to renew your server.');
@@ -39,7 +39,7 @@ class ServerRenewalService
 
         try {
             $user->update(['store_balance' => $user->store_balance - $cost]);
-            $server->update(['renewal' => $server->renewal + $this->settings->get('Trexzactyl::renewal:default', 7)]);
+            $server->update(['renewal' => $server->renewal + $this->settings->get('trexzactyl::renewal:default', 7)]);
         } catch (DisplayException $ex) {
             throw new DisplayException('An unexpected error occured while trying to renew your server.');
         }

@@ -34,6 +34,10 @@ class AssetHashService
         $file = last(explode('/', $resource));
         $data = Arr::get($this->manifest(), $file) ?? $file;
 
+        if (is_string($data)) {
+            return str_replace($file, $data, $resource);
+        }
+
         return str_replace($file, Arr::get($data, 'src') ?? $file, $resource);
     }
 

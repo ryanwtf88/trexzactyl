@@ -203,7 +203,7 @@ class User extends Model implements
         'store_slots' => 'sometimes|int',
         'store_ports' => 'sometimes|int',
         'store_backups' => 'sometimes|int',
-        'store_database' => 'sometimes|int',
+        'store_databases' => 'sometimes|int',
     ];
 
     /**

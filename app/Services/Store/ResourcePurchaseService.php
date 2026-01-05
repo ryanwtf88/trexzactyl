@@ -67,6 +67,6 @@ class ResourcePurchaseService
             $resource = rtrim($resource, 's');
         }
 
-        return $this->settings->get('Trexzactyl::store:cost:' . $resource);
+        return $this->settings->get('trexzactyl::store:cost:' . $resource, 0);
     }
 }

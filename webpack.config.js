@@ -100,7 +100,7 @@ module.exports = {
             DEBUG: process.env.NODE_ENV !== 'production',
             WEBPACK_BUILD_HASH: Date.now().toString(16),
         }),
-        new AssetsManifestPlugin({ writeToDisk: true, publicPath: true, integrity: true, integrityHashes: ['sha384'] }),
+        new AssetsManifestPlugin({ writeToDisk: true, publicPath: true }),
         // ForkTsCheckerWebpackPlugin removed to force build
 
         process.env.ANALYZE_BUNDLE ? new BundleAnalyzerPlugin({

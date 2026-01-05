@@ -68,7 +68,9 @@ const App = () => {
         earnCredits().catch(() => console.error('Failed to add credits'));
     }
 
-    earn();
+    if (TrexzactylUser) {
+        earn();
+    }
 
     return (
         <>

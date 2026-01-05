@@ -42,7 +42,7 @@ class ResourceController extends ClientApiController
     public function costs(Request $request)
     {
         $data = [];
-        $prefix = 'Trexzactyl::store:cost:';
+        $prefix = 'trexzactyl::store:cost:';
         $types = ['cpu', 'memory', 'disk', 'slot', 'port', 'backup', 'database'];
 
         foreach ($types as $type) {
@@ -61,9 +61,9 @@ class ResourceController extends ClientApiController
      */
     public function earn(Request $request)
     {
-        $amount = $this->settings->get('Trexzactyl::earn:amount', 0);
+        $amount = $this->settings->get('trexzactyl::earn:amount', 0);
 
-        if ($this->settings->get('Trexzactyl::earn:enabled') != 'true') {
+        if ($this->settings->get('trexzactyl::earn:enabled') != 'true') {
             throw new DisplayException('Credit earning is currently disabled.');
         }
 

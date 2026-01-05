@@ -27,8 +27,8 @@ Route::prefix('/account')->middleware(AccountSubject::class)->group(function () 
         Route::post('/two-factor/disable', [Client\TwoFactorController::class, 'delete']);
     });
 
-    Route::get('/logs', [Client\AccountLogController::class, 'index'])->withoutMiddleware(RequireTwoFactorAuthentication::class);
-    Route::delete('/logs', [Client\AccountLogController::class, 'delete'])->withoutMiddleware(RequireTwoFactorAuthentication::class);
+    // Route::get('/logs', [Client\AccountLogController::class, 'index'])->withoutMiddleware(RequireTwoFactorAuthentication::class);
+    // Route::delete('/logs', [Client\AccountLogController::class, 'delete'])->withoutMiddleware(RequireTwoFactorAuthentication::class);
 
     Route::post('/verify', [Client\AccountController::class, 'verify'])->name('api:client.account.verify');
     Route::post('/coupon', [Client\AccountController::class, 'coupon'])->name('api:client.account.coupon');
