@@ -75,7 +75,7 @@ export default () => {
                 Are you sure you want to purchase this resource ({resource})? This will take the credits from your
                 account and add the resource. This is not a reversible transaction.
             </Dialog.Confirm>
-            <Container className={'lg:grid lg:grid-cols-4 my-10 gap-8'}>
+            <Container css={tw`lg:grid lg:grid-cols-4 my-10 gap-8`}>
                 <PurchaseBox
                     type={'CPU'}
                     amount={50}
@@ -84,7 +84,7 @@ export default () => {
                     setOpen={setOpen}
                     icon={<Icon.Cpu />}
                     setResource={setResource}
-                    description={'Buy CPU to improve server load times and performance.'}
+                    description={'Improve server load times and processing performance.'}
                 />
                 <PurchaseBox
                     type={'Memory'}
@@ -94,7 +94,7 @@ export default () => {
                     setOpen={setOpen}
                     icon={<Icon.PieChart />}
                     setResource={setResource}
-                    description={'Buy RAM to improve overall server performance.'}
+                    description={'Improve overall server stability and memory headroom.'}
                 />
                 <PurchaseBox
                     type={'Disk'}
@@ -104,7 +104,7 @@ export default () => {
                     setOpen={setOpen}
                     icon={<Icon.HardDrive />}
                     setResource={setResource}
-                    description={'Buy disk to store more files.'}
+                    description={'Expand storage capacity for more files and data.'}
                 />
                 <PurchaseBox
                     type={'Slots'}
@@ -113,10 +113,10 @@ export default () => {
                     setOpen={setOpen}
                     icon={<Icon.Server />}
                     setResource={setResource}
-                    description={'Buy a server slot so you can deploy a new server.'}
+                    description={'Increase your server slot limit to deploy new instances.'}
                 />
             </Container>
-            <Container className={'lg:grid lg:grid-cols-4 my-10 gap-8'}>
+            <Container css={tw`lg:grid lg:grid-cols-4 my-10 gap-8`}>
                 <PurchaseBox
                     type={'Ports'}
                     amount={1}
@@ -124,7 +124,7 @@ export default () => {
                     setOpen={setOpen}
                     icon={<Icon.Share2 />}
                     setResource={setResource}
-                    description={'Buy a network port to add to a server.'}
+                    description={'Add extra network ports for additional services.'}
                 />
                 <PurchaseBox
                     type={'Backups'}
@@ -133,7 +133,7 @@ export default () => {
                     setOpen={setOpen}
                     icon={<Icon.Archive />}
                     setResource={setResource}
-                    description={'Buy a backup to keep your data secure.'}
+                    description={'Secure more backup slots to keep your data safe.'}
                 />
                 <PurchaseBox
                     type={'Databases'}
@@ -142,29 +142,41 @@ export default () => {
                     setOpen={setOpen}
                     icon={<Icon.Database />}
                     setResource={setResource}
-                    description={'Buy a database to get and set data.'}
+                    description={'Add more MySQL databases for your applications.'}
                 />
-                <TitledGreyBox title={'How to use resources'}>
-                    <p className={'font-semibold'}>Adding to an existing server</p>
-                    <p className={'text-xs text-gray-500'}>
-                        If you have a server that is already deployed, you can add resources to it by going to the
-                        &apos;edit&apos; tab.
-                    </p>
-                    <p className={'font-semibold mt-1'}>Adding to a new server</p>
-                    <p className={'text-xs text-gray-500'}>
-                        You can buy resources and add them to a new server in the server creation page, which you can
-                        access via the store.
-                    </p>
-                </TitledGreyBox>
-            </Container>
-            <div className={'flex justify-center items-center'}>
-                <div className={'bg-auto bg-center bg-storeone p-4 m-4 rounded-lg'}>
-                    <div className={'text-center bg-gray-900 bg-opacity-75 p-4'}>
-                        <h1 className={'text-4xl'}>Ready to get started?</h1>
-                        <Link to={'/store/create'}>
-                            <Button.Text className={'w-full mt-4'}>Create a server</Button.Text>
-                        </Link>
+                <div css={tw`bg-neutral-900/40 backdrop-blur-md border border-white/5 rounded-2xl p-6`}>
+                    <h3 css={tw`text-sm font-black uppercase tracking-widest text-neutral-100 mb-4 flex items-center`}>
+                        <Icon.Info size={16} css={tw`mr-2 text-blue-400`} /> Usage Guide
+                    </h3>
+                    <div css={tw`space-y-4`}>
+                        <div>
+                            <p css={tw`text-xs font-black uppercase tracking-widest text-blue-400 mb-1`}>Existing Servers</p>
+                            <p css={tw`text-xs text-neutral-400 leading-relaxed font-medium`}>
+                                Navigate to a server&apos;s &apos;Edit&apos; tab to allocate newly purchased resources.
+                            </p>
+                        </div>
+                        <div>
+                            <p css={tw`text-xs font-black uppercase tracking-widest text-blue-400 mb-1`}>New Deployments</p>
+                            <p css={tw`text-xs text-neutral-400 leading-relaxed font-medium`}>
+                                Allocated resources can be assigned during the creation process in the storefront.
+                            </p>
+                        </div>
                     </div>
+                </div>
+            </Container>
+            <div css={tw`flex justify-center items-center mt-16`}>
+                <div
+                    className={'group'}
+                    css={tw`w-full max-w-4xl bg-blue-600/5 backdrop-blur-sm border border-blue-500/20 p-8 rounded-3xl text-center relative overflow-hidden`}
+                >
+                    <div css={tw`absolute inset-0 bg-gradient-to-r from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                    <h1 css={tw`text-4xl font-black uppercase tracking-tighter text-neutral-100 mb-2`}>Ready to get started?</h1>
+                    <p css={tw`text-neutral-400 font-medium mb-8`}>Deploy your next high-performance server in seconds.</p>
+                    <Link to={'/store/create'}>
+                        <Button css={tw`px-12 bg-blue-600/10 text-blue-400 border border-blue-500/30 hover:bg-blue-600/20 hover:border-blue-500/60 font-black uppercase tracking-widest text-sm py-4 rounded-xl transition-all shadow-lg`}>
+                            Create a server
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </PageContentBlock>

@@ -2,6 +2,7 @@
 
 namespace Trexzactyl\Http\Controllers\Admin\Trexzactyl;
 
+use Trexzactyl\Traits\Commands\EnvironmentWriterTrait;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
@@ -14,6 +15,8 @@ use Illuminate\Contracts\Config\Repository as ConfigRepository;
 
 class AdvancedController extends Controller
 {
+    use EnvironmentWriterTrait;
+
     /**
      * AdvancedController constructor.
      */
@@ -55,6 +58,12 @@ class AdvancedController extends Controller
         foreach ($request->normalize() as $key => $value) {
             $this->settings->set('settings::' . $key, $value);
         }
+
+        $this->writeToEnvironment([
+            'RECAPTCHA_ENABLED' => $request->input('recaptcha:enabled'),
+            'RECAPTCHA_SECRET_KEY' => $request->input('recaptcha:secret_key'),
+            'RECAPTCHA_SITE_KEY' => $request->input('recaptcha:website_key'),
+        ]);
 
         $this->kernel->call('queue:restart');
         $this->alert->success('Advanced settings have been updated successfully and the queue worker was restarted to apply these changes.')->flash();

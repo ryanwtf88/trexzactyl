@@ -1,4 +1,5 @@
 import useFlash from '@/plugins/useFlash';
+import tw from 'twin.macro';
 import apiVerify from '@/api/account/verify';
 import { useStoreState } from '@/state/hooks';
 import React, { useEffect, useState } from 'react';
@@ -38,55 +39,50 @@ export default () => {
     };
 
     return (
-        <>
+        <div css={tw`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full`}>
             {store.earn.enabled ? (
-                <InformationBox icon={faCircle} iconCss={'animate-pulse'}>
-                    Earning <span className={'text-green-600'}>{store.earn.amount}</span> credits / min.
+                <InformationBox icon={faCircle as any} iconCss={'animate-pulse'}>
+                    Earning <span css={tw`text-green-400 font-bold ml-1`}>{store.earn.amount}</span> <span css={tw`text-neutral-500 text-xs uppercase ml-1`}>credits / min</span>
                 </InformationBox>
             ) : (
-                <InformationBox icon={faExclamationCircle}>
-                    Credit earning is currently <span className={'text-red-600'}>disabled.</span>
+                <InformationBox icon={faExclamationCircle as any}>
+                    Credit earning <span css={tw`text-red-400 font-bold ml-1`}>Disabled</span>
                 </InformationBox>
             )}
-            <InformationBox icon={faCoins}>
-                You have <span className={'text-green-600'}>{bal}</span> credits available.
+            <InformationBox icon={faCoins as any}>
+                <span css={tw`text-green-400 font-bold mr-1`}>{bal}</span> Credits Available
             </InformationBox>
-            <InformationBox icon={faUserLock}>
+            <InformationBox icon={faUserLock as any}>
                 {user.useTotp ? (
-                    <>
-                        <span className={'text-green-600'}>2FA is enabled</span> on your account.
-                    </>
+                    <span css={tw`text-green-400 font-bold`}>2FA Secure</span>
                 ) : (
-                    <>
-                        <span className={'text-yellow-600'}>Enable 2FA</span> to secure your account.
-                    </>
+                    <span css={tw`text-yellow-400 font-bold`}>Enable 2FA</span>
                 )}
             </InformationBox>
             {!user.verified ? (
-                <InformationBox icon={faTimesCircle} iconCss={'text-yellow-500'}>
-                    <span onClick={verify} className={'cursor-pointer text-blue-400'}>
-                        Verify your account to get started.
+                <InformationBox icon={faTimesCircle as any} iconCss={'text-yellow-500'}>
+                    <span onClick={verify} css={tw`cursor-pointer text-blue-400 hover:text-blue-300 font-bold`}>
+                        Verify Account
                     </span>
                 </InformationBox>
             ) : (
-                <InformationBox icon={faScroll}>
-                    {activity ? (
-                        <>
-                            <span className={'text-neutral-400'}>
+                <InformationBox icon={faScroll as any}>
+                    <div css={tw`flex flex-col`}>
+                        <span css={tw`text-neutral-400 text-xs`}>Latest Activity</span>
+                        <div css={tw`truncate max-w-[150px]`}>
+                            {activity ? (
                                 <Translate
                                     ns={'activity'}
                                     values={properties}
                                     i18nKey={activity.event.replace(':', '.')}
                                 />
-                            </span>
-                            {' - '}
-                            {formatDistanceToNowStrict(activity.timestamp, { addSuffix: true })}
-                        </>
-                    ) : (
-                        'Unable to get latest activity logs.'
-                    )}
+                            ) : (
+                                'No logs'
+                            )}
+                        </div>
+                    </div>
                 </InformationBox>
             )}
-        </>
+        </div>
     );
 };

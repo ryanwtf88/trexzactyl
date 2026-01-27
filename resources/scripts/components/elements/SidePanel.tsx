@@ -23,20 +23,22 @@ export default () => {
     };
 
     const PanelDiv = styled.div`
-        ${tw`h-screen sticky bg-neutral-800 flex flex-col w-20 fixed top-0`};
+        ${tw`h-[calc(100vh - 2rem)] sticky bg-neutral-900/40 backdrop-blur-xl flex flex-col w-24 fixed top-4 left-4 rounded-3xl border border-white/5 shadow-2xl overflow-hidden`};
 
         & > div {
-            ${tw`mx-auto`};
+            ${tw`mx-auto w-full flex flex-col items-center px-4`};
 
             & > a,
             & > div {
+                ${tw`transition-all duration-300`};
+
                 &:hover {
-                    ${tw`text-neutral-100`};
+                    ${tw`text-blue-400`};
                 }
 
                 &:active,
                 &.active {
-                    ${tw`text-green-600`};
+                    ${tw`text-blue-500`};
                 }
             }
         }
@@ -48,62 +50,61 @@ export default () => {
             <Link to={'/'}>
                 <img className={'p-2'} src={logo ?? 'https://avatars.githubusercontent.com/u/91636558'} />
             </Link>
-            <div>
+            <div css={tw`flex-1 w-full space-y-4 mt-8`}>
                 <div className={'navigation-link'}>
-                    <div className={'bg-gray-700 rounded-lg p-2 my-8'}>
-                        <SearchContainer size={32} />
+                    <div css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}>
+                        <SearchContainer size={24} />
                     </div>
                 </div>
                 <NavLink to={'/'} className={'navigation-link'} exact>
-                    <Tooltip placement={'bottom'} content={'Servers'}>
-                        <div className={'bg-gray-700 rounded-lg p-2 my-8'}>
-                            <Icon.Server size={32} />
+                    <Tooltip placement={'right'} content={'Servers'}>
+                        <div css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}>
+                            <Icon.Server size={24} />
                         </div>
                     </Tooltip>
                 </NavLink>
                 <NavLink to={'/account'} className={'navigation-link'}>
-                    <Tooltip placement={'bottom'} content={'Account'}>
-                        <div className={'bg-gray-700 rounded-lg p-2 my-8'}>
-                            <Icon.User size={32} />
+                    <Tooltip placement={'right'} content={'Account'}>
+                        <div css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}>
+                            <Icon.User size={24} />
                         </div>
                     </Tooltip>
                 </NavLink>
                 {store && (
                     <NavLink to={'/store'} className={'navigation-link'}>
-                        <Tooltip placement={'bottom'} content={'Store'}>
-                            <div className={'bg-gray-700 rounded-lg p-2 my-8'}>
-                                <Icon.ShoppingCart size={32} />
+                        <Tooltip placement={'right'} content={'Store'}>
+                            <div css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}>
+                                <Icon.ShoppingCart size={24} />
                             </div>
                         </Tooltip>
                     </NavLink>
                 )}
                 {tickets && (
                     <NavLink to={'/tickets'} className={'navigation-link'}>
-                        <Tooltip placement={'bottom'} content={'Tickets'}>
-                            <div className={'bg-gray-700 rounded-lg p-2 my-8'}>
-                                <Icon.HelpCircle size={32} />
+                        <Tooltip placement={'right'} content={'Tickets'}>
+                            <div css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}>
+                                <Icon.HelpCircle size={24} />
                             </div>
                         </Tooltip>
                     </NavLink>
                 )}
                 {rootAdmin && (
                     <a href={'/admin'} className={'navigation-link'}>
-                        <Tooltip placement={'bottom'} content={'Admin'}>
-                            <div className={'bg-gray-700 rounded-lg p-2 my-8'}>
-                                <Icon.Settings size={32} />
+                        <Tooltip placement={'right'} content={'Admin'}>
+                            <div css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}>
+                                <Icon.Settings size={24} />
                             </div>
                         </Tooltip>
                     </a>
                 )}
-                <div id={'logo'}>
-                    <button onClick={onTriggerLogout} className={'navigation-link'}>
-                        <Tooltip placement={'bottom'} content={'Logout'}>
-                            <div className={'flex flex-row fixed bottom-0 mb-8 bg-gray-700 rounded-lg p-2'}>
-                                <Icon.LogOut size={32} />
-                            </div>
-                        </Tooltip>
-                    </button>
-                </div>
+            </div>
+
+            <div css={tw`pb-6 w-full px-4`}>
+                <button onClick={onTriggerLogout} css={tw`w-full flex justify-center items-center bg-red-500/10 hover:bg-red-500/20 text-red-400 p-3 rounded-2xl transition-all`}>
+                    <Tooltip placement={'right'} content={'Logout'}>
+                        <Icon.LogOut size={24} />
+                    </Tooltip>
+                </button>
             </div>
         </PanelDiv>
     );

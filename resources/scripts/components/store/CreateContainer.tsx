@@ -1,9 +1,11 @@
+import tw from 'twin.macro';
 import * as Icon from 'react-feather';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FieldProps } from 'formik';
 import useFlash from '@/plugins/useFlash';
 import { useStoreState } from 'easy-peasy';
 import { number, object, string } from 'yup';
 import Field from '@/components/elements/Field';
+import Input from '@/components/elements/Input';
 import Select from '@/components/elements/Select';
 import { Egg, getEggs } from '@/api/store/getEggs';
 import createServer from '@/api/store/createServer';
@@ -14,24 +16,9 @@ import { Button } from '@/components/elements/button';
 import InputSpinner from '@/components/elements/InputSpinner';
 import StoreError from '@/components/elements/store/StoreError';
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import TitledGreyBox from '@/components/elements/TitledGreyBox';
 import FlashMessageRender from '@/components/FlashMessageRender';
-import StoreContainer from '@/components/elements/StoreContainer';
 import { getResources, Resources } from '@/api/store/getResources';
 import PageContentBlock from '@/components/elements/PageContentBlock';
-import {
-    faArchive,
-    faCube,
-    faDatabase,
-    faEgg,
-    faHdd,
-    faLayerGroup,
-    faList,
-    faMemory,
-    faMicrochip,
-    faNetworkWired,
-    faStickyNote,
-} from '@fortawesome/free-solid-svg-icons';
 
 interface CreateValues {
     name: string;
@@ -154,123 +141,147 @@ export default () => {
                     egg: number().required().default(egg),
                 })}
             >
-                <Form>
-                    <h1 className={'text-5xl'}>Basic Details</h1>
-                    <h3 className={'text-2xl text-neutral-500'}>Set the basic fields for your new server.</h3>
-                    <StoreContainer className={'lg:grid lg:grid-cols-2 my-10 gap-4'}>
-                        <TitledGreyBox title={'Server name'} icon={faStickyNote} className={'mt-8 sm:mt-0'}>
-                            <Field name={'name'} />
-                            <p className={'mt-1 text-xs'}>Assign a name to your server for use in the Panel.</p>
-                            <p className={'mt-1 text-xs text-gray-400'}>
-                                Character limits: <code>a-z A-Z 0-9 _ - .</code> and <code>[Space]</code>.
-                            </p>
-                        </TitledGreyBox>
-                        <TitledGreyBox title={'Server description'} icon={faList} className={'mt-8 sm:mt-0'}>
-                            <Field name={'description'} />
-                            <p className={'mt-1 text-xs'}>Set a description for your server.</p>
-                            <p className={'mt-1 text-xs text-yellow-400'}>* Optional</p>
-                        </TitledGreyBox>
-                    </StoreContainer>
-                    <h1 className={'text-5xl'}>Resource Limits</h1>
-                    <h3 className={'text-2xl text-neutral-500'}>Set specific limits for CPU, RAM and more.</h3>
-                    <StoreContainer className={'lg:grid lg:grid-cols-3 my-10 gap-4'}>
-                        <TitledGreyBox title={'Server CPU limit'} icon={faMicrochip} className={'mt-8 sm:mt-0'}>
-                            <Field name={'cpu'} />
-                            <p className={'mt-1 text-xs'}>Assign a limit for usable CPU.</p>
-                            <p className={'mt-1 text-xs text-gray-400'}>{resources.cpu}% in account</p>
-                        </TitledGreyBox>
-                        <TitledGreyBox title={'Server RAM limit'} icon={faMemory} className={'mt-8 sm:mt-0'}>
-                            <div className={'relative'}>
-                                <Field name={'memory'} />
-                                <p className={'absolute text-sm top-1.5 right-2 bg-gray-700 p-2 rounded-lg'}>MB</p>
+                <Form css={tw`space-y-6`}>
+                    {/* Basic Details & Resource Limits Row */}
+                    <div css={tw`grid grid-cols-1 lg:grid-cols-2 gap-6`}>
+                        <div css={tw`bg-neutral-900/40 backdrop-blur-md border border-white/5 p-6 rounded-2xl relative overflow-hidden transition-all hover:bg-neutral-900/60`}>
+                            <div css={tw`flex items-center mb-4`}>
+                                <div css={tw`bg-blue-600/10 p-2 rounded-lg border border-blue-500/20 mr-3`}>
+                                    <Icon.Tag size={18} css={tw`text-blue-400`} />
+                                </div>
+                                <h2 css={tw`text-sm font-black uppercase tracking-widest text-neutral-100`}>Basic Details</h2>
                             </div>
-                            <p className={'mt-1 text-xs'}>Assign a limit for usable RAM.</p>
-                            <p className={'mt-1 text-xs text-gray-400'}>{resources.memory}MB available</p>
-                        </TitledGreyBox>
-                        <TitledGreyBox title={'Server Storage limit'} icon={faHdd} className={'mt-8 sm:mt-0'}>
-                            <div className={'relative'}>
-                                <Field name={'disk'} />
-                                <p className={'absolute text-sm top-1.5 right-2 bg-gray-700 p-2 rounded-lg'}>MB</p>
+                            <div css={tw`space-y-4`}>
+                                <div>
+                                    <h3 css={tw`text-[10px] uppercase font-black tracking-widest text-neutral-500 mb-1 ml-1`}>Server Name</h3>
+                                    <Field name={'name'} css={tw`bg-neutral-900/50 border-neutral-800 focus:border-blue-500/50 rounded-xl h-10 text-sm`} />
+                                </div>
+                                <div>
+                                    <h3 css={tw`text-[10px] uppercase font-black tracking-widest text-neutral-500 mb-1 ml-1`}>Description (Optional)</h3>
+                                    <Field name={'description'} css={tw`bg-neutral-900/50 border-neutral-800 focus:border-blue-500/50 rounded-xl h-10 text-sm`} />
+                                </div>
                             </div>
-                            <p className={'mt-1 text-xs'}>Assign a limit for usable storage.</p>
-                            <p className={'mt-1 text-xs text-gray-400'}>{resources.disk}MB available</p>
-                        </TitledGreyBox>
-                    </StoreContainer>
-                    <h1 className={'text-5xl'}>Feature Limits</h1>
-                    <h3 className={'text-2xl text-neutral-500'}>
-                        Add databases, allocations and ports to your server.
-                    </h3>
-                    <StoreContainer className={'lg:grid lg:grid-cols-3 my-10 gap-4'}>
-                        <TitledGreyBox title={'Server allocations'} icon={faNetworkWired} className={'mt-8 sm:mt-0'}>
-                            <Field name={'ports'} />
-                            <p className={'mt-1 text-xs'}>Assign a number of ports to your server.</p>
-                            <p className={'mt-1 text-xs text-gray-400'}>{resources.ports} available</p>
-                        </TitledGreyBox>
-                        <TitledGreyBox title={'Server backups'} icon={faArchive} className={'mt-8 sm:mt-0'}>
-                            <Field name={'backups'} />
-                            <p className={'mt-1 text-xs'}>Assign a number of backups to your server.</p>
-                            <p className={'mt-1 text-xs text-gray-400'}>{resources.backups} available</p>
-                        </TitledGreyBox>
-                        <TitledGreyBox title={'Server databases'} icon={faDatabase} className={'mt-8 sm:mt-0'}>
-                            <Field name={'databases'} />
-                            <p className={'mt-1 text-xs'}>Assign a number of databases to your server.</p>
-                            <p className={'mt-1 text-xs text-gray-400'}>{resources.databases} available</p>
-                        </TitledGreyBox>
-                    </StoreContainer>
-                    <h1 className={'text-5xl'}>Deployment</h1>
-                    <h3 className={'text-2xl text-neutral-500'}>Choose a node and server type.</h3>
-                    <StoreContainer className={'lg:grid lg:grid-cols-3 my-10 gap-4'}>
-                        <TitledGreyBox title={'Available Nodes'} icon={faLayerGroup} className={'mt-8 sm:mt-0'}>
-                            <Select name={'node'} onChange={(e) => setNode(parseInt(e.target.value))}>
-                                {!node && <option>Select a node...</option>}
-                                {nodes.map((n) => (
-                                    <option key={n.id} value={n.id}>
-                                        {n.name} ({n.location}) |{' '}
-                                        {100 - parseInt(((n?.used / n?.total) * 100).toFixed(0))}% free | {n.deployFee}{' '}
-                                        credits
-                                    </option>
-                                ))}
-                            </Select>
-                            <p className={'mt-1 text-xs text-gray-400'}>Select a node to deploy your server to.</p>
-                        </TitledGreyBox>
-                        <TitledGreyBox title={'Server Nest'} icon={faCube} className={'mt-8 sm:mt-0'}>
-                            <Select name={'nest'} onChange={(nest) => changeNest(nest)}>
-                                {!nest && <option>Select a nest...</option>}
-                                {nests.map((n) => (
-                                    <option key={n.id} value={n.id}>
-                                        {n.name}
-                                    </option>
-                                ))}
-                            </Select>
-                            <p className={'mt-1 text-xs text-gray-400'}>Select a nest to use for your server.</p>
-                        </TitledGreyBox>
-                        <TitledGreyBox title={'Server Egg'} icon={faEgg} className={'mt-8 sm:mt-0'}>
-                            <Select name={'egg'} onChange={(e) => setEgg(parseInt(e.target.value))}>
-                                {!egg && <option>Select an egg...</option>}
-                                {eggs.map((e) => (
-                                    <option key={e.id} value={e.id}>
-                                        {e.name}
-                                    </option>
-                                ))}
-                            </Select>
-                            <p className={'mt-1 text-xs text-gray-400'}>
-                                Choose what game you want to run on your server.
-                            </p>
-                        </TitledGreyBox>
-                    </StoreContainer>
-                    <InputSpinner visible={loading}>
-                        <FlashMessageRender byKey={'store:create'} className={'my-2'} />
-                        <div className={'text-right'}>
-                            <Button
-                                type={'submit'}
-                                className={'w-1/6 mb-4'}
-                                size={Button.Sizes.Large}
-                                disabled={loading}
-                            >
-                                <Icon.Server className={'mr-2'} /> Create
-                            </Button>
                         </div>
-                    </InputSpinner>
+
+                        <div css={tw`bg-neutral-900/40 backdrop-blur-md border border-white/5 p-6 rounded-2xl relative overflow-hidden transition-all hover:bg-neutral-900/60`}>
+                            <div css={tw`flex items-center mb-4`}>
+                                <div css={tw`bg-blue-600/10 p-2 rounded-lg border border-blue-500/20 mr-3`}>
+                                    <Icon.Cpu size={18} css={tw`text-blue-400`} />
+                                </div>
+                                <h2 css={tw`text-sm font-black uppercase tracking-widest text-neutral-100`}>Resource Limits</h2>
+                            </div>
+                            <div css={tw`grid grid-cols-3 gap-3`}>
+                                <div>
+                                    <h3 css={tw`text-[10px] uppercase font-black tracking-widest text-neutral-500 mb-1 ml-1`}>CPU (%)</h3>
+                                    <Field name={'cpu'} type={'number'} css={tw`bg-neutral-900/50 border-neutral-800 focus:border-blue-500/50 rounded-xl h-10 text-sm`} />
+                                </div>
+                                <div>
+                                    <h3 css={tw`text-[10px] uppercase font-black tracking-widest text-neutral-500 mb-1 ml-1`}>RAM (MB)</h3>
+                                    <Field name={'memory'} type={'number'} css={tw`bg-neutral-900/50 border-neutral-800 focus:border-blue-500/50 rounded-xl h-10 text-sm`} />
+                                </div>
+                                <div>
+                                    <h3 css={tw`text-[10px] uppercase font-black tracking-widest text-neutral-500 mb-1 ml-1`}>Disk (MB)</h3>
+                                    <Field name={'disk'} type={'number'} css={tw`bg-neutral-900/50 border-neutral-800 focus:border-blue-500/50 rounded-xl h-10 text-sm`} />
+                                </div>
+                            </div>
+                            <div css={tw`mt-4 flex justify-between text-[9px] font-black uppercase tracking-widest text-neutral-500`}>
+                                <span>Pool: <span css={tw`text-blue-400`}>{resources.cpu}% CPU</span></span>
+                                <span>Pool: <span css={tw`text-blue-400`}>{resources.memory}MB RAM</span></span>
+                                <span>Pool: <span css={tw`text-blue-400`}>{resources.disk}MB Disk</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Scaling & Deployment Row */}
+                    <div css={tw`grid grid-cols-1 lg:grid-cols-2 gap-6`}>
+                        <div css={tw`bg-neutral-900/40 backdrop-blur-md border border-white/5 p-6 rounded-2xl relative overflow-hidden transition-all hover:bg-neutral-900/60`}>
+                            <div css={tw`flex items-center mb-4`}>
+                                <div css={tw`bg-blue-600/10 p-2 rounded-lg border border-blue-500/20 mr-3`}>
+                                    <Icon.Layers size={18} css={tw`text-blue-400`} />
+                                </div>
+                                <h2 css={tw`text-sm font-black uppercase tracking-widest text-neutral-100`}>Scaling</h2>
+                            </div>
+                            <div css={tw`grid grid-cols-3 gap-3`}>
+                                <div>
+                                    <h3 css={tw`text-[10px] uppercase font-black tracking-widest text-neutral-500 mb-1 ml-1`}>Ports</h3>
+                                    <Field name={'ports'} type={'number'} css={tw`bg-neutral-900/50 border-neutral-800 focus:border-blue-500/50 rounded-xl h-10 text-sm`} />
+                                </div>
+                                <div>
+                                    <h3 css={tw`text-[10px] uppercase font-black tracking-widest text-neutral-500 mb-1 ml-1`}>DBs</h3>
+                                    <Field name={'databases'} type={'number'} css={tw`bg-neutral-900/50 border-neutral-800 focus:border-blue-500/50 rounded-xl h-10 text-sm`} />
+                                </div>
+                                <div>
+                                    <h3 css={tw`text-[10px] uppercase font-black tracking-widest text-neutral-500 mb-1 ml-1`}>Backups</h3>
+                                    <Field name={'backups'} type={'number'} css={tw`bg-neutral-900/50 border-neutral-800 focus:border-blue-500/50 rounded-xl h-10 text-sm`} />
+                                </div>
+                            </div>
+                            <div css={tw`mt-4 flex justify-between text-[9px] font-black uppercase tracking-widest text-neutral-500`}>
+                                <span>Pool: <span css={tw`text-blue-400`}>{resources.ports} Ports</span></span>
+                                <span>Pool: <span css={tw`text-blue-400`}>{resources.databases} DBs</span></span>
+                                <span>Pool: <span css={tw`text-blue-400`}>{resources.backups} Backups</span></span>
+                            </div>
+                        </div>
+
+                        <div css={tw`bg-neutral-900/40 backdrop-blur-md border border-white/5 p-6 rounded-2xl relative overflow-hidden transition-all hover:bg-neutral-900/60`}>
+                            <div css={tw`flex items-center mb-4`}>
+                                <div css={tw`bg-blue-600/10 p-2 rounded-lg border border-blue-500/20 mr-3`}>
+                                    <Icon.Grid size={18} css={tw`text-blue-400`} />
+                                </div>
+                                <h2 css={tw`text-sm font-black uppercase tracking-widest text-neutral-100`}>Deployment</h2>
+                            </div>
+                            <div css={tw`grid grid-cols-2 gap-3 mb-3`}>
+                                <div>
+                                    <h3 css={tw`text-[10px] uppercase font-black tracking-widest text-neutral-500 mb-1 ml-1`}>Select Node</h3>
+                                    <Select name={'node'} onChange={(e) => setNode(parseInt(e.target.value))} css={tw`bg-neutral-900/50 border-neutral-800 focus:border-blue-500/50 rounded-xl h-10 text-xs`}>
+                                        {!node && <option>Select a node...</option>}
+                                        {nodes.map((n) => (
+                                            <option key={n.id} value={n.id}>
+                                                {n.name} ({n.location}) | {100 - parseInt(((n?.used / n?.total) * 100).toFixed(0))}% Free
+                                            </option>
+                                        ))}
+                                    </Select>
+                                </div>
+                                <div>
+                                    <h3 css={tw`text-[10px] uppercase font-black tracking-widest text-neutral-500 mb-1 ml-1`}>Server Nest</h3>
+                                    <Select name={'nest'} onChange={(e) => changeNest(e)} css={tw`bg-neutral-900/50 border-neutral-800 focus:border-blue-500/50 rounded-xl h-10 text-xs`}>
+                                        {!nest && <option>Select a nest...</option>}
+                                        {nests.map((n) => (
+                                            <option key={n.id} value={n.id}>{n.name}</option>
+                                        ))}
+                                    </Select>
+                                </div>
+                            </div>
+                            <div css={tw`w-full`}>
+                                <h3 css={tw`text-[10px] uppercase font-black tracking-widest text-neutral-500 mb-1 ml-1`}>Server Egg</h3>
+                                <Select name={'egg'} onChange={(e) => setEgg(parseInt(e.target.value))} css={tw`bg-neutral-900/50 border-neutral-800 focus:border-blue-500/50 rounded-xl h-10 text-xs`}>
+                                    {!egg && <option>Select an egg...</option>}
+                                    {eggs.map((e) => (
+                                        <option key={e.id} value={e.id}>{e.name}</option>
+                                    ))}
+                                </Select>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Bottom Action Bar */}
+                    <div css={tw`bg-blue-600/5 backdrop-blur-sm border border-blue-500/20 p-6 rounded-2xl flex flex-col lg:flex-row items-center justify-between mt-6`}>
+                        <div css={tw`mb-4 lg:mb-0 text-center lg:text-left`}>
+                            <h2 css={tw`text-xl font-black uppercase tracking-tighter text-neutral-100`}>Finalize Deployment</h2>
+                            <p css={tw`text-neutral-500 text-xs font-medium`}>Ready to launch your high-performance instance?</p>
+                        </div>
+                        <div css={tw`w-full lg:w-auto`}>
+                            <InputSpinner visible={loading}>
+                                <Button
+                                    type={'submit'}
+                                    css={tw`w-full lg:px-12 bg-blue-600/10 text-blue-400 border border-blue-500/30 hover:bg-blue-600/20 hover:border-blue-500/60 font-black uppercase tracking-widest text-xs py-3 rounded-xl transition-all shadow-lg`}
+                                    size={Button.Sizes.Large}
+                                    disabled={loading}
+                                >
+                                    <Icon.Zap size={16} css={tw`mr-2`} /> Deploy Instance
+                                </Button>
+                            </InputSpinner>
+                        </div>
+                    </div>
                 </Form>
             </Formik>
         </PageContentBlock>

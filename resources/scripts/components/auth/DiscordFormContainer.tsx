@@ -37,8 +37,8 @@ const DiscordFormContainer = ({ children }: { children: React.ReactNode }) => {
                 <div css={tw`flex flex-col md:flex-row items-center gap-10`}>
                     <div css={tw`flex-none select-none`}>
                         <img
-                            src={'https://assets-global.website-files.com/6257adef93867e3c84519eb1/6257adef93867e61ba519eec_Discord_Icon_Full_Color.svg'}
-                            css={tw`block w-32 md:w-40 transition-transform duration-500 hover:scale-110`}
+                            src={'https://cdn.worldvectorlogo.com/logos/discord-6.svg'}
+                            css={tw`block w-24 md:w-32 transition-transform duration-500 hover:scale-110`}
                             alt={'Discord'}
                         />
                     </div>

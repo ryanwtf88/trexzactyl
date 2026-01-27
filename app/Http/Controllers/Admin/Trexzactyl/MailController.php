@@ -13,12 +13,15 @@ use Illuminate\View\Factory as ViewFactory;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Trexzactyl\Providers\SettingsServiceProvider;
+use Trexzactyl\Traits\Commands\EnvironmentWriterTrait;
 use Trexzactyl\Http\Requests\Admin\Trexzactyl\MailFormRequest;
 use Trexzactyl\Contracts\Repository\SettingsRepositoryInterface;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 
 class MailController extends Controller
 {
+    use EnvironmentWriterTrait;
+
     /**
      * MailController constructor.
      */
@@ -66,6 +69,21 @@ class MailController extends Controller
             }
 
             $this->settings->set('settings::' . $key, $value);
+        }
+
+        $this->writeToEnvironment([
+            'MAIL_HOST' => $request->input('mail:mailers:smtp:host'),
+            'MAIL_PORT' => $request->input('mail:mailers:smtp:port'),
+            'MAIL_ENCRYPTION' => $request->input('mail:mailers:smtp:encryption'),
+            'MAIL_USERNAME' => $request->input('mail:mailers:smtp:username'),
+            'MAIL_FROM_ADDRESS' => $request->input('mail:from:address'),
+            'MAIL_FROM_NAME' => $request->input('mail:from:name'),
+        ]);
+
+        if (!empty($request->input('mail:mailers:smtp:password'))) {
+            $this->writeToEnvironment([
+                'MAIL_PASSWORD' => $request->input('mail:mailers:smtp:password'),
+            ]);
         }
 
         $this->kernel->call('queue:restart');

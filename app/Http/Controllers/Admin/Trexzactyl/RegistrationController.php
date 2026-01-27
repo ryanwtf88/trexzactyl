@@ -7,10 +7,13 @@ use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Trexzactyl\Http\Controllers\Controller;
 use Trexzactyl\Contracts\Repository\SettingsRepositoryInterface;
+use Trexzactyl\Traits\Commands\EnvironmentWriterTrait;
 use Trexzactyl\Http\Requests\Admin\Trexzactyl\RegistrationFormRequest;
 
 class RegistrationController extends Controller
 {
+    use EnvironmentWriterTrait;
+
     /**
      * RegistrationController constructor.
      */
@@ -54,6 +57,12 @@ class RegistrationController extends Controller
         foreach ($request->normalize() as $key => $value) {
             $this->settings->set('trexzactyl::' . $key, $value);
         }
+
+        $this->writeToEnvironment([
+            'DISCORD_CLIENT_ID' => $request->input('discord:id'),
+            'DISCORD_CLIENT_SECRET' => $request->input('discord:secret'),
+            'DISCORD_REDIRECT_URI' => config('app.url') . '/auth/discord/callback',
+        ]);
 
         $this->alert->success('Trexzactyl Registration has been updated.')->flash();
 

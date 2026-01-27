@@ -38,67 +38,80 @@ export default ({ className, titles }: RowProps) => {
     if (!resources) return <Spinner size={'large'} centered />;
 
     const ResourceBox = (props: BoxProps) => (
-        <ContentBox title={titles ? props.title : undefined}>
+        <ContentBox css={tw`bg-neutral-900/40 backdrop-blur-md border border-white/5 rounded-xl p-2 transition-all hover:bg-neutral-900/60`}>
             <Tooltip content={props.description}>
-                <Wrapper>
-                    {props.icon}
-                    <span className={'ml-2'}>{props.toHuman ? megabytesToHuman(props.amount) : props.amount}</span>
-                    {props.suffix}
+                <Wrapper css={tw`flex flex-col items-center py-1`}>
+                    <div css={tw`bg-blue-600/10 p-2 rounded-lg border border-blue-500/20 mb-1 text-blue-400`}>
+                        {React.cloneElement(props.icon as React.ReactElement, { size: 14 })}
+                    </div>
+                    <p css={tw`text-[10px] font-black uppercase tracking-wider text-neutral-500 mb-0.5 leading-none`}>
+                        {props.title}
+                    </p>
+                    <div css={tw`flex items-baseline`}>
+                        <span css={tw`text-sm font-black text-neutral-100 tabular-nums`}>
+                            {props.toHuman ? megabytesToHuman(props.amount) : props.amount}
+                        </span>
+                        {props.suffix && (
+                            <span css={tw`text-[10px] text-neutral-500 font-bold ml-0.5 tracking-tight`}>
+                                {props.suffix}
+                            </span>
+                        )}
+                    </div>
                 </Wrapper>
             </Tooltip>
         </ContentBox>
     );
 
     return (
-        <StoreContainer className={classNames(className, 'grid grid-cols-2 sm:grid-cols-7 gap-x-6 gap-y-2')}>
+        <StoreContainer css={tw`grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 gap-4`}>
             <ResourceBox
                 title={'Credits'}
-                description={'The amount of credits you have available.'}
+                description={'Available credits'}
                 icon={<Icon.DollarSign />}
                 amount={resources.balance}
             />
             <ResourceBox
                 title={'CPU'}
-                description={'The amount of CPU (in %) you have available.'}
+                description={'Available CPU capacity'}
                 icon={<Icon.Cpu />}
                 amount={resources.cpu}
                 suffix={'%'}
             />
             <ResourceBox
                 title={'Memory'}
-                description={'The amount of RAM (in MB/GB) you have available.'}
+                description={'Available memory'}
                 icon={<Icon.PieChart />}
                 amount={resources.memory}
                 toHuman
             />
             <ResourceBox
                 title={'Disk'}
-                description={'The amount of storage (in MB/GB) you have available.'}
+                description={'Available storage'}
                 icon={<Icon.HardDrive />}
                 amount={resources.disk}
                 toHuman
             />
             <ResourceBox
                 title={'Slots'}
-                description={'The amount of servers you are able to deploy.'}
+                description={'Available server slots'}
                 icon={<Icon.Server />}
                 amount={resources.slots}
             />
             <ResourceBox
                 title={'Ports'}
-                description={'The amount of ports you can add to your servers.'}
+                description={'Available network ports'}
                 icon={<Icon.Share2 />}
                 amount={resources.ports}
             />
             <ResourceBox
                 title={'Backups'}
-                description={'The amount of backup slots you can add to your servers.'}
+                description={'Available backup slots'}
                 icon={<Icon.Archive />}
                 amount={resources.backups}
             />
             <ResourceBox
                 title={'Databases'}
-                description={'The amount of database slots you can add to your servers.'}
+                description={'Available MySQL databases'}
                 icon={<Icon.Database />}
                 amount={resources.databases}
             />

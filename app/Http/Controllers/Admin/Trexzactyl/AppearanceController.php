@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Trexzactyl\Http\Controllers\Controller;
 use Illuminate\Contracts\Config\Repository;
+use Trexzactyl\Traits\Commands\EnvironmentWriterTrait;
 use Trexzactyl\Exceptions\Model\DataValidationException;
 use Trexzactyl\Exceptions\Repository\RecordNotFoundException;
 use Trexzactyl\Contracts\Repository\SettingsRepositoryInterface;
@@ -14,6 +15,8 @@ use Trexzactyl\Http\Requests\Admin\Trexzactyl\AppearanceFormRequest;
 
 class AppearanceController extends Controller
 {
+    use EnvironmentWriterTrait;
+
     /**
      * AppearanceController constructor.
      */
@@ -48,6 +51,10 @@ class AppearanceController extends Controller
         foreach ($request->normalize() as $key => $value) {
             $this->settings->set('settings::' . $key, $value);
         }
+
+        $this->writeToEnvironment([
+            'APP_NAME' => $request->input('app:name'),
+        ]);
 
         $this->alert->success('Trexzactyl Appearance has been updated.')->flash();
 

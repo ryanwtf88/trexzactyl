@@ -1,3 +1,4 @@
+import tw from 'twin.macro';
 import React from 'react';
 import { useStoreState } from 'easy-peasy';
 import useWindowDimensions from '@/plugins/useWindowDimensions';
@@ -11,14 +12,14 @@ export default () => {
 
     return (
         <PageContentBlock title={'Storefront Overview'}>
-            <div className={'flex flex-row items-center justify-between mt-10'}>
+            <div css={tw`flex flex-row items-center justify-between mt-10`}>
                 {width >= 1280 && (
                     <div>
-                        <h1 className={'text-6xl'}>Hey, {username}!</h1>
-                        <h3 className={'text-2xl mt-2 text-neutral-500'}>👋 Welcome to the store.</h3>
+                        <h1 css={tw`text-6xl font-black uppercase tracking-tighter`}>Hey, {username}!</h1>
+                        <h3 css={tw`text-2xl mt-2 text-neutral-500 font-medium tracking-tight whitespace-nowrap`}>👋 Welcome to the store.</h3>
                     </div>
                 )}
-                <ResourceBar className={'w-full lg:w-3/4'} />
+                <ResourceBar css={tw`w-full lg:w-3/4`} />
             </div>
             <div className={'lg:grid lg:grid-cols-3 gap-8 my-10'}>
                 <StoreBanner

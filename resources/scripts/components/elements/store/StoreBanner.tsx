@@ -1,3 +1,4 @@
+import tw from 'twin.macro';
 import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
@@ -13,12 +14,21 @@ interface BannerProps {
 export default (props: BannerProps) => {
     return (
         <div
-            className={classNames(props.className, 'w-full bg-auto bg-center rounded-tr-xl rounded-bl-xl bg-gray-800')}
+            className={classNames(props.className)}
+            css={[
+                tw`w-full bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800/50 transition-all duration-300 relative`,
+                tw`hover:border-blue-500/30 hover:shadow-2xl`
+            ]}
         >
-            <div className={'bg-gray-900 bg-opacity-75 text-center rounded-lg p-2 m-2 lg:mt-[40rem]'}>
-                <p className={'text-3xl text-gray-200'}>{props.title}</p>
+            <div css={tw`absolute inset-0 bg-gradient-to-br from-blue-600/20 via-transparent to-purple-600/20 opacity-30`} />
+            <div css={tw`bg-neutral-900/80 backdrop-blur-md text-center p-6 m-4 mt-32 relative z-10 rounded-2xl border border-white/5`}>
+                <p css={tw`text-2xl text-neutral-200 font-black uppercase tracking-wider mb-4`}>{props.title}</p>
                 <Link to={`/store/${props.link}`}>
-                    <Button className={'my-2 w-full lg:w-1/2'}>{props.action}</Button>
+                    <Button
+                        css={tw`w-full bg-blue-600/10 text-blue-400 border border-blue-500/30 hover:bg-blue-600/20 hover:border-blue-500/60 font-black uppercase tracking-widest text-xs py-3 rounded-xl transition-all shadow-lg`}
+                    >
+                        {props.action}
+                    </Button>
                 </Link>
             </div>
         </div>
