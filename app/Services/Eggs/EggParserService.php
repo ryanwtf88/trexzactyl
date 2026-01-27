@@ -23,7 +23,12 @@ class EggParserService
         }
 
         /** @var array $parsed */
-        $parsed = json_decode($file->openFile()->fread($file->getSize()), true, 512, JSON_THROW_ON_ERROR);
+        $content = file_get_contents($file->getRealPath());
+        // Strip UTF-8 BOM if present
+        if (str_starts_with($content, "\xEF\xBB\xBF")) {
+            $content = substr($content, 3);
+        }
+        $parsed = json_decode(trim($content), true, 512, JSON_THROW_ON_ERROR);
         if (!in_array(Arr::get($parsed, 'meta.version') ?? '', ['PTDL_v1', 'PTDL_v2'])) {
             throw new InvalidFileUploadException('The JSON file provided is not in a format that can be recognized.');
         }
@@ -42,7 +47,7 @@ class EggParserService
             'features' => Arr::get($parsed, 'features'),
             'docker_images' => Arr::get($parsed, 'docker_images'),
             'file_denylist' => Collection::make(Arr::get($parsed, 'file_denylist'))
-                ->filter(fn ($value) => !empty($value)),
+                ->filter(fn($value) => !empty($value)),
             'update_url' => Arr::get($parsed, 'meta.update_url'),
             'config_files' => Arr::get($parsed, 'config.files'),
             'config_startup' => Arr::get($parsed, 'config.startup'),
