@@ -14,7 +14,7 @@ import CopyOnClick from '@/components/elements/CopyOnClick';
 import useFileManagerSwr from '@/plugins/useFileManagerSwr';
 import { FileObject } from '@/api/server/files/loadDirectory';
 import { useStoreActions, useStoreState } from '@/state/hooks';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { ServerError } from '@/components/elements/ScreenBlock';
 import ErrorBoundary from '@/components/elements/ErrorBoundary';
 import TitledGreyBox from '@/components/elements/TitledGreyBox';
@@ -68,6 +68,7 @@ export default () => {
     const selectedFilesLength = ServerContext.useStoreState((state) => state.files.selectedFiles.length);
 
     const [searchString, setSearchString] = useState('');
+    const fileListRef = useRef(null);
 
     useEffect(() => {
         clearFlashes('files');
@@ -121,7 +122,9 @@ export default () => {
                         <UploadButton />
                         <PullFileModal />
                         <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
-                            <Button css={tw`bg-blue-600/10 text-blue-400 border border-blue-500/30 hover:bg-blue-600/20 hover:border-blue-500/60 font-black uppercase tracking-widest text-[10px] px-4 py-2 rounded-lg transition-all`}>
+                            <Button
+                                css={tw`bg-blue-600/10 text-blue-400 border border-blue-500/30 hover:bg-blue-600/20 hover:border-blue-500/60 font-black uppercase tracking-widest text-[10px] px-4 py-2 rounded-lg transition-all`}
+                            >
                                 <div css={tw`flex items-center gap-2`}>
                                     <Icon.FilePlus css={tw`w-[18px] h-[18px] sm:w-[14px] sm:h-[14px]`} />
                                     <span css={tw`hidden sm:block`}>New File</span>
@@ -142,13 +145,13 @@ export default () => {
                             <p css={tw`text-sm`}>This directory seems to be empty.</p>
                         </div>
                     ) : (
-                        <CSSTransition classNames={'fade'} timeout={150} appear in>
-                            <div css={tw`p-2`}>
+                        <CSSTransition classNames={'fade'} timeout={150} appear in nodeRef={fileListRef}>
+                            <div css={tw`p-2`} ref={fileListRef}>
                                 {files.length > 250 && (
-                                    <div css={tw`rounded-lg bg-yellow-500/10 border border-yellow-500/20 mb-2 p-3 text-center`}>
-                                        <p css={tw`text-yellow-400 text-xs`}>
-                                            Limit: First 250 files shown.
-                                        </p>
+                                    <div
+                                        css={tw`rounded-lg bg-yellow-500/10 border border-yellow-500/20 mb-2 p-3 text-center`}
+                                    >
+                                        <p css={tw`text-yellow-400 text-xs`}>Limit: First 250 files shown.</p>
                                     </div>
                                 )}
                                 {sortFiles(files.slice(0, 250), searchString).map((file) => (
@@ -177,18 +180,20 @@ export default () => {
                         <div>
                             <Label>Server Address</Label>
                             <CopyOnClick text={`${ip(sftp.ip)}:${sftp.port}`}>
-                                <SearchInput type={'text'} value={`${ip(sftp.ip)}:${sftp.port}`} readOnly />
+                                <SearchInput type={'text'} value={`${ip(sftp.ip)}:${sftp.port}` || ''} readOnly />
                             </CopyOnClick>
                         </div>
                         <div>
                             <Label>Username</Label>
                             <CopyOnClick text={`${username}.${id}`}>
-                                <SearchInput type={'text'} value={`${username}.${id}`} readOnly />
+                                <SearchInput type={'text'} value={`${username}.${id}` || ''} readOnly />
                             </CopyOnClick>
                         </div>
                     </div>
 
-                    <div css={tw`mt-8 p-4 rounded-lg bg-blue-500/5 border border-blue-500/10 flex items-center justify-between`}>
+                    <div
+                        css={tw`mt-8 p-4 rounded-lg bg-blue-500/5 border border-blue-500/10 flex items-center justify-between`}
+                    >
                         <div css={tw`flex items-center gap-3`}>
                             <Icon.Info size={16} css={tw`text-blue-400`} />
                             <p css={tw`text-xs text-neutral-400`}>Password is the same as your panel password.</p>

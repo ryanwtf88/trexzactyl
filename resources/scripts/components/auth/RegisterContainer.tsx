@@ -47,17 +47,29 @@ const RegisterContainer = ({ history }: RouteComponentProps) => {
 
         register({ ...values, recaptchaData: token })
             .then((response) => {
+                if (response.verified === false) {
+                    addFlash({
+                        key: 'auth:register',
+                        type: 'info',
+                        message:
+                            'Your account has been created! Please check your email for a verification link to activate it.',
+                    });
+                    setSubmitting(false);
+                    return;
+                }
+
                 if (response.complete) {
-                    history.replace('/auth/login');
+                    history.push('/auth/login');
                     addFlash({
                         key: 'auth:register',
                         type: 'success',
-                        message: 'Account has been successfully created.',
+                        message: 'Account has been successfully created. You may now log in.',
                     });
                     return;
                 }
 
-                history.replace('/auth/register');
+                // Fallback for unexpected response but successful creation
+                history.push('/auth/login');
             })
             .catch((error) => {
                 console.error(error);
@@ -100,11 +112,11 @@ const RegisterContainer = ({ history }: RouteComponentProps) => {
                     />
                     <Button
                         type={'submit'}
-                        css={tw`mt-8 w-full bg-blue-600/10 text-blue-400 border border-blue-500/30 hover:bg-blue-600/20 hover:border-blue-500/60 font-black uppercase tracking-widest text-sm py-4 rounded-xl transition-all shadow-lg`}
+                        css={tw`mt-8 w-full bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 rounded-xl transition-all font-black uppercase tracking-widest text-xs py-3`}
                         size={Button.Sizes.Large}
                         disabled={isSubmitting}
                     >
-                        Create My Account
+                        {isSubmitting ? 'Creating account...' : 'Create My Account'}
                     </Button>
                     {recaptchaEnabled && (
                         <Reaptcha

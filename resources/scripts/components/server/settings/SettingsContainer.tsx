@@ -35,7 +35,9 @@ const SettingsContainer = () => {
                                 <Icon.Code size={18} />
                             </div>
                             <div>
-                                <h3 css={tw`text-sm font-black text-neutral-100 uppercase tracking-widest`}>Debug Info</h3>
+                                <h3 css={tw`text-sm font-black text-neutral-100 uppercase tracking-widest`}>
+                                    Debug Info
+                                </h3>
                                 <p css={tw`text-[10px] text-neutral-500 font-bold uppercase`}>System identifiers</p>
                             </div>
                         </div>
@@ -52,14 +54,22 @@ const SettingsContainer = () => {
                             <InfoRow className={'group'}>
                                 <div css={tw`flex items-center gap-3`}>
                                     <Icon.Hash size={14} css={tw`text-neutral-500`} />
-                                    <span css={tw`text-xs font-bold text-neutral-400 uppercase tracking-wider`}>Server ID</span>
+                                    <span css={tw`text-xs font-bold text-neutral-400 uppercase tracking-wider`}>
+                                        Server ID
+                                    </span>
                                 </div>
-                                <code css={tw`font-mono text-xs text-blue-300 font-bold truncate max-w-[180px]`}>{uuid}</code>
+                                <code css={tw`font-mono text-xs text-blue-300 font-bold truncate max-w-[180px]`}>
+                                    {uuid}
+                                </code>
                             </InfoRow>
                         </CopyOnClick>
                     </DebugCard>
 
-                    {deletion && <div css={tw`mb-6`}><DeleteServerBox /></div>}
+                    {deletion && (
+                        <div css={tw`mb-6`}>
+                            <DeleteServerBox />
+                        </div>
+                    )}
                     <ChangeBackgroundBox />
                 </div>
 

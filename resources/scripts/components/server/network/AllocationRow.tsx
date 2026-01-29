@@ -73,14 +73,18 @@ const AllocationRow = ({ allocation }: { allocation: Allocation }) => {
                 </div>
                 <div css={tw`mr-8 flex-1 md:w-48`}>
                     <CopyOnClick text={allocation.alias || ip(allocation.ip)}>
-                        <Code css={tw`bg-neutral-800/50 text-neutral-100 border-neutral-700 px-2 py-1 rounded w-48 truncate block group-hover:border-blue-500/30 transition-all`}>
+                        <Code
+                            css={tw`bg-neutral-800/50 text-neutral-100 border-neutral-700 px-2 py-1 rounded w-48 truncate block group-hover:border-blue-500/30 transition-all`}
+                        >
                             {allocation.alias || ip(allocation.ip)}
                         </Code>
                     </CopyOnClick>
                     <Label>{allocation.alias ? 'Hostname' : 'IP Address'}</Label>
                 </div>
                 <div css={tw`w-20 md:w-24 overflow-hidden`}>
-                    <Code css={tw`bg-neutral-800/50 text-neutral-100 border-neutral-700 px-2 py-1 rounded block group-hover:border-blue-500/30 transition-all`}>
+                    <Code
+                        css={tw`bg-neutral-800/50 text-neutral-100 border-neutral-700 px-2 py-1 rounded block group-hover:border-blue-500/30 transition-all`}
+                    >
                         {allocation.port}
                     </Code>
                     <Label>Port</Label>

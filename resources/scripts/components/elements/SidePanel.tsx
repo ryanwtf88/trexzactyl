@@ -52,20 +52,26 @@ export default () => {
             </Link>
             <div css={tw`flex-1 w-full space-y-4 mt-8`}>
                 <div className={'navigation-link'}>
-                    <div css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}>
+                    <div
+                        css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}
+                    >
                         <SearchContainer size={24} />
                     </div>
                 </div>
                 <NavLink to={'/'} className={'navigation-link'} exact>
                     <Tooltip placement={'right'} content={'Servers'}>
-                        <div css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}>
+                        <div
+                            css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}
+                        >
                             <Icon.Server size={24} />
                         </div>
                     </Tooltip>
                 </NavLink>
                 <NavLink to={'/account'} className={'navigation-link'}>
                     <Tooltip placement={'right'} content={'Account'}>
-                        <div css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}>
+                        <div
+                            css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}
+                        >
                             <Icon.User size={24} />
                         </div>
                     </Tooltip>
@@ -73,7 +79,9 @@ export default () => {
                 {store && (
                     <NavLink to={'/store'} className={'navigation-link'}>
                         <Tooltip placement={'right'} content={'Store'}>
-                            <div css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}>
+                            <div
+                                css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}
+                            >
                                 <Icon.ShoppingCart size={24} />
                             </div>
                         </Tooltip>
@@ -82,7 +90,9 @@ export default () => {
                 {tickets && (
                     <NavLink to={'/tickets'} className={'navigation-link'}>
                         <Tooltip placement={'right'} content={'Tickets'}>
-                            <div css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}>
+                            <div
+                                css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}
+                            >
                                 <Icon.HelpCircle size={24} />
                             </div>
                         </Tooltip>
@@ -91,7 +101,9 @@ export default () => {
                 {rootAdmin && (
                     <a href={'/admin'} className={'navigation-link'}>
                         <Tooltip placement={'right'} content={'Admin'}>
-                            <div css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}>
+                            <div
+                                css={tw`bg-white/5 hover:bg-white/10 rounded-2xl p-3 transition-colors flex justify-center items-center`}
+                            >
                                 <Icon.Settings size={24} />
                             </div>
                         </Tooltip>
@@ -100,7 +112,10 @@ export default () => {
             </div>
 
             <div css={tw`pb-6 w-full px-4`}>
-                <button onClick={onTriggerLogout} css={tw`w-full flex justify-center items-center bg-red-500/10 hover:bg-red-500/20 text-red-400 p-3 rounded-2xl transition-all`}>
+                <button
+                    onClick={onTriggerLogout}
+                    css={tw`w-full flex justify-center items-center bg-red-500/10 hover:bg-red-500/20 text-red-400 p-3 rounded-2xl transition-all`}
+                >
                     <Tooltip placement={'right'} content={'Logout'}>
                         <Icon.LogOut size={24} />
                     </Tooltip>

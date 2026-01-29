@@ -5,16 +5,13 @@ import { useStoreState } from 'easy-peasy';
 import { useLocation } from 'react-router';
 import TransitionRouter from '@/TransitionRouter';
 import Spinner from '@/components/elements/Spinner';
-import SidePanel from '@/components/elements/SidePanel';
 import { NavLink, Route, Switch } from 'react-router-dom';
 import { NotFound } from '@/components/elements/ScreenBlock';
 import SubNavigation from '@/components/elements/SubNavigation';
-import useWindowDimensions from '@/plugins/useWindowDimensions';
 import NavigationBar from '@/components/elements/NavigationBar';
 import ReferralContainer from '@/components/dashboard/ReferralContainer';
 import DashboardContainer from '@/components/dashboard/DashboardContainer';
 import AccountApiContainer from '@/components/dashboard/AccountApiContainer';
-import InformationContainer from '@/components/elements/InformationContainer';
 import AccountSSHContainer from '@/components/dashboard/ssh/AccountSSHContainer';
 import AccountOverviewContainer from '@/components/dashboard/AccountOverviewContainer';
 import AccountSecurityContainer from '@/components/dashboard/AccountSecurityContainer';
@@ -67,13 +64,7 @@ export default () => {
                         )}
                     </div>
                 </SubNavigation>
-            ) : (
-                <SubNavigation className={'lg:visible invisible'}>
-                    <div>
-                        <InformationContainer />
-                    </div>
-                </SubNavigation>
-            )}
+            ) : null}
             <TransitionRouter>
                 <React.Suspense fallback={<Spinner centered />}>
                     <Switch location={location}>

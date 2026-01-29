@@ -81,7 +81,13 @@ export default ({ className }: { className?: string }) => {
     return (
         <div className={classNames('flex flex-col gap-2', className)}>
             <StatBlock icon={faClock} title={'Uptime'}>
-                {status === null ? 'Offline' : stats.uptime > 0 ? <UptimeDuration uptime={stats.uptime / 1000} /> : capitalize(status)}
+                {status === null ? (
+                    'Offline'
+                ) : stats.uptime > 0 ? (
+                    <UptimeDuration uptime={stats.uptime / 1000} />
+                ) : (
+                    capitalize(status)
+                )}
             </StatBlock>
 
             <StatBlock icon={faWifi} title={'Address'} copyOnClick={allocation}>
@@ -90,10 +96,11 @@ export default ({ className }: { className?: string }) => {
 
             <StatBlock icon={faMicrochip} title={'CPU Usage'}>
                 <div className={'flex items-center'}>
-                    {status === 'offline' ? <span className={'text-neutral-500'}>Offline</span> : (
+                    {status === 'offline' ? (
+                        <span className={'text-neutral-500'}>Offline</span>
+                    ) : (
                         <>
-                            {stats.cpu.toFixed(2)}%
-                            <LimitText>/ {textLimits.cpu || '∞'}</LimitText>
+                            {stats.cpu.toFixed(2)}%<LimitText>/ {textLimits.cpu || '∞'}</LimitText>
                         </>
                     )}
                 </div>
@@ -101,7 +108,9 @@ export default ({ className }: { className?: string }) => {
 
             <StatBlock icon={faMemory} title={'Memory Usage'}>
                 <div className={'flex items-center'}>
-                    {status === 'offline' ? <span className={'text-neutral-500'}>Offline</span> : (
+                    {status === 'offline' ? (
+                        <span className={'text-neutral-500'}>Offline</span>
+                    ) : (
                         <>
                             {bytesToString(stats.memory)}
                             <LimitText>/ {textLimits.memory || '∞'}</LimitText>

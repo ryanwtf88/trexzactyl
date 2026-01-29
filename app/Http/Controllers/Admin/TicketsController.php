@@ -13,13 +13,15 @@ use Trexzactyl\Http\Requests\Admin\Tickets\TicketStatusRequest;
 use Trexzactyl\Http\Requests\Admin\Tickets\TicketToggleRequest;
 use Trexzactyl\Contracts\Repository\SettingsRepositoryInterface;
 use Trexzactyl\Http\Requests\Admin\Tickets\TicketMessageRequest;
+use Trexzactyl\Services\Tickets\DiscordWebhookService;
 
 class TicketsController extends Controller
 {
     public function __construct(
         protected Factory $view,
         protected AlertsMessageBag $alert,
-        protected SettingsRepositoryInterface $settings
+        protected SettingsRepositoryInterface $settings,
+        protected DiscordWebhookService $webhookService
     ) {
     }
 
@@ -32,6 +34,7 @@ class TicketsController extends Controller
             'tickets' => Ticket::all(),
             'enabled' => $this->settings->get('Trexzactyl::tickets:enabled', false),
             'max' => $this->settings->get('Trexzactyl::tickets:max', 3),
+            'webhook' => $this->settings->get('Trexzactyl::tickets:webhook', ''),
         ]);
     }
 
@@ -79,11 +82,21 @@ class TicketsController extends Controller
      */
     public function message(TicketMessageRequest $request, int $id): RedirectResponse
     {
-        TicketMessage::create([
+        $message = TicketMessage::create([
             'user_id' => $request->user()->id,
             'ticket_id' => $id,
             'content' => $request->input('content'),
         ]);
+
+        $ticket = Ticket::findOrFail($id);
+        $ticket->user->notify(new \Trexzactyl\Notifications\TicketReply($ticket, $ticket->user, $message->content));
+
+        $this->webhookService->dispatch(
+            'New Staff Reply',
+            $message->content,
+            $id,
+            $request->user()->email
+        );
 
         return redirect()->route('admin.tickets.view', $id);
     }
@@ -93,8 +106,15 @@ class TicketsController extends Controller
      */
     public function delete(int $id): RedirectResponse
     {
-        Ticket::findOrFail($id)->delete();
+        $ticket = Ticket::findOrFail($id);
+        $ticketId = $ticket->id;
+        $username = $ticket->user->username;
+        $user = $ticket->user;
+
+        $ticket->delete();
         TicketMessage::where('ticket_id', $id)->delete();
+
+        $user->notify(new \Trexzactyl\Notifications\TicketDeleted($ticketId, $username));
 
         $this->alert->success('Ticket ' . $id . ' has been deleted.')->flash();
 

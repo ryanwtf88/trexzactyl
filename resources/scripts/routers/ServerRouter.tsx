@@ -97,6 +97,8 @@ export default () => {
         };
     }, [match.params.id]);
 
+    const nodeRef = React.useRef(null);
+
     return (
         <div css={tw`pt-20`} key={'server-router'}>
             <NavigationBar />
@@ -108,8 +110,8 @@ export default () => {
                 )
             ) : (
                 <>
-                    <CSSTransition timeout={150} classNames={'fade'} appear in>
-                        <SubNavigation className={'j-down'}>
+                    <CSSTransition timeout={150} classNames={'fade'} appear in nodeRef={nodeRef}>
+                        <SubNavigation className={'j-down'} ref={nodeRef}>
                             <div>
                                 <NavLink to={match.url} exact>
                                     <div css={tw`flex items-center justify-between`}>

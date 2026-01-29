@@ -38,7 +38,7 @@ Route::prefix('/account')->middleware(AccountSubject::class)->group(function () 
     Route::put('/username', [Client\AccountController::class, 'updateUsername'])->name('api:client.account.update-username');
 
     Route::get('/activity', Client\ActivityLogController::class)->name('api:client.account.activity');
-    Route::get('/activity/latest', [Client\ActivityLogController::class, 'latest'])->name('api:client.account.activity');
+    Route::get('/activity/latest', [Client\ActivityLogController::class, 'latest'])->name('api:client.account.activity.latest');
 
     Route::prefix('/referrals')->group(function () {
         Route::get('/', [Client\ReferralsController::class, 'index']);
@@ -89,7 +89,7 @@ Route::group([
 ], function () {
     Route::get('/', [Client\Store\ResourceController::class, 'user'])->name('api:client:store.user');
     Route::get('/costs', [Client\Store\ResourceController::class, 'costs'])->name('api:client:store.costs');
-    Route::get('/nodes', [Client\Store\ServerController::class, 'nodes'])->name('api:client:store.nests');
+    Route::get('/nodes', [Client\Store\ServerController::class, 'nodes'])->name('api:client:store.nodes');
     Route::get('/nests', [Client\Store\ServerController::class, 'nests'])->name('api:client:store.nests');
 
     Route::group(['prefix' => '/create', 'middleware' => 'throttle:storefront'], function () {
@@ -147,7 +147,7 @@ Route::group([
     });
 
     Route::post('/plugins', [Client\Servers\PluginController::class, 'index'])->name('api:client:server.plugins');
-    Route::post('/plugins/install/{id}', [Client\Servers\PluginController::class, 'install'])->name('api:client:server.plugins');
+    Route::post('/plugins/install/{id}', [Client\Servers\PluginController::class, 'install'])->name('api:client:server.plugins.install');
 
     Route::group(['prefix' => '/analytics'], function () {
         Route::get('/', [Client\Servers\AnalyticsController::class, 'index']);

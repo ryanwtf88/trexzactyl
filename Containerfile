@@ -2,17 +2,17 @@
 FROM        --platform=$TARGETOS/$TARGETARCH registry.access.redhat.com/ubi9/nodejs-18-minimal AS builder
 
 USER        0
-RUN         npm install -g pnpm
+RUN         npm install -g npm
 
 WORKDIR     /var/www/pterodactyl
 
 COPY        --chown=1001:0 public ./public
 COPY        --chown=1001:0 resources/scripts ./resources/scripts
-COPY        --chown=1001:0 .eslintignore .eslintrc.js .npmrc .prettierrc.json package.json pnpm-lock.yaml tailwind.config.js tsconfig.json vite.config.ts ./
+COPY        --chown=1001:0 .eslintignore .eslintrc.js .npmrc .prettierrc.json package.json package-lock.json tailwind.config.js tsconfig.json vite.config.ts ./
 
-RUN         pnpm install --frozen-lockfile \
-    && pnpm build \
-    && rm -rf resources/scripts .eslintignore .eslintrc.yml .npmrc package.json pnpm-lock.yaml tailwind.config.js tsconfig.json vite.config.ts node_modules
+RUN         npm ci --legacy-peer-deps \
+    && npm run build \
+    && rm -rf resources/scripts .eslintignore .eslintrc.yml .npmrc package.json package-lock.json tailwind.config.js tsconfig.json vite.config.ts node_modules
 
 USER        1001
 

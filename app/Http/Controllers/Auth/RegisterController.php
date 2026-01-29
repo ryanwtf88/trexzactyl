@@ -30,15 +30,15 @@ class RegisterController extends AbstractLoginController
         $verified = true;
         $prefix = 'Trexzactyl::registration:';
 
-        if ($this->settings->get($prefix . 'enabled') != 'true') {
+        if ($this->settings->get($prefix . 'enabled', 'false') != 'true') {
             throw new DisplayException('Unable to register user.');
         }
 
-        if ($this->settings->get($prefix . 'verification') === 'true') {
+        if ($this->settings->get($prefix . 'verification', 'false') === 'true') {
             $verified = false;
         }
 
-        if ($this->settings->get('Trexzactyl::approvals:enabled') === 'true') {
+        if ($this->settings->get('Trexzactyl::approvals:enabled', 'false') === 'true') {
             $approved = false;
         }
 
@@ -64,6 +64,7 @@ class RegisterController extends AbstractLoginController
             'data' => [
                 'complete' => true,
                 'intended' => $this->redirectPath(),
+                'verified' => $verified,
             ],
         ]);
     }

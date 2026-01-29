@@ -33,11 +33,14 @@ const StartupContainer = () => {
     const [loading, setLoading] = useState(false);
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
-    const variables = ServerContext.useStoreState(({ server }) => ({
-        variables: server.data!.variables,
-        invocation: server.data!.invocation,
-        dockerImage: server.data!.dockerImage,
-    }), isEqual);
+    const variables = ServerContext.useStoreState(
+        ({ server }) => ({
+            variables: server.data!.variables,
+            invocation: server.data!.invocation,
+            dockerImage: server.data!.dockerImage,
+        }),
+        isEqual
+    );
 
     const { data, error, isValidating, mutate } = getServerStartup(uuid, {
         ...variables,
@@ -45,9 +48,15 @@ const StartupContainer = () => {
     });
 
     const setServerFromState = ServerContext.useStoreActions((actions) => actions.server.setServerFromState);
-    const isCustomImage = data && !Object.values(data.dockerImages).map((v) => v.toLowerCase()).includes(variables.dockerImage.toLowerCase());
+    const isCustomImage =
+        data &&
+        !Object.values(data.dockerImages)
+            .map((v) => v.toLowerCase())
+            .includes(variables.dockerImage.toLowerCase());
 
-    useEffect(() => { mutate(); }, []);
+    useEffect(() => {
+        mutate();
+    }, []);
 
     useDeepCompareEffect(() => {
         if (!data) return;
@@ -58,18 +67,21 @@ const StartupContainer = () => {
         }));
     }, [data]);
 
-    const updateSelectedDockerImage = useCallback((v: React.ChangeEvent<HTMLSelectElement>) => {
-        setLoading(true);
-        clearFlashes('startup:image');
-        const image = v.currentTarget.value;
-        setSelectedDockerImage(uuid, image)
-            .then(() => setServerFromState((s) => ({ ...s, dockerImage: image })))
-            .catch((error) => {
-                console.error(error);
-                clearAndAddHttpError({ key: 'startup:image', error });
-            })
-            .then(() => setLoading(false));
-    }, [uuid]);
+    const updateSelectedDockerImage = useCallback(
+        (v: React.ChangeEvent<HTMLSelectElement>) => {
+            setLoading(true);
+            clearFlashes('startup:image');
+            const image = v.currentTarget.value;
+            setSelectedDockerImage(uuid, image)
+                .then(() => setServerFromState((s) => ({ ...s, dockerImage: image })))
+                .catch((error) => {
+                    console.error(error);
+                    clearAndAddHttpError({ key: 'startup:image', error });
+                })
+                .then(() => setLoading(false));
+        },
+        [uuid]
+    );
 
     return !data ? (
         !error || (error && isValidating) ? (
@@ -86,8 +98,12 @@ const StartupContainer = () => {
                             <Icon.Terminal size={18} />
                         </div>
                         <div>
-                            <h3 css={tw`text-sm font-black text-neutral-100 uppercase tracking-widest`}>Startup Command</h3>
-                            <p css={tw`text-[10px] text-neutral-500 font-bold uppercase`}>Immutable dynamic execution string</p>
+                            <h3 css={tw`text-sm font-black text-neutral-100 uppercase tracking-widest`}>
+                                Startup Command
+                            </h3>
+                            <p css={tw`text-[10px] text-neutral-500 font-bold uppercase`}>
+                                Immutable dynamic execution string
+                            </p>
                         </div>
                     </div>
                     <CodeBlock>{data.invocation}</CodeBlock>
@@ -102,7 +118,9 @@ const StartupContainer = () => {
                             <Icon.Box size={18} />
                         </div>
                         <div>
-                            <h3 css={tw`text-sm font-black text-neutral-100 uppercase tracking-widest`}>Docker Image</h3>
+                            <h3 css={tw`text-sm font-black text-neutral-100 uppercase tracking-widest`}>
+                                Docker Image
+                            </h3>
                             <p css={tw`text-[10px] text-neutral-500 font-bold uppercase`}>Virtualization environment</p>
                         </div>
                     </div>
@@ -128,7 +146,12 @@ const StartupContainer = () => {
                         </>
                     ) : (
                         <>
-                            <Input disabled readOnly value={variables.dockerImage} css={tw`bg-neutral-800/50 border-neutral-700 opacity-50`} />
+                            <Input
+                                disabled
+                                readOnly
+                                value={variables.dockerImage}
+                                css={tw`bg-neutral-800/50 border-neutral-700 opacity-50`}
+                            />
                             {isCustomImage && (
                                 <p css={tw`text-[10px] text-yellow-500/80 mt-3 font-bold uppercase tracking-tight`}>
                                     Locked: Set by Administrator
@@ -140,7 +163,9 @@ const StartupContainer = () => {
             </div>
 
             <div css={tw`flex items-center gap-3 mb-6`}>
-                <div css={tw`px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-widest`}>
+                <div
+                    css={tw`px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-widest`}
+                >
                     Configuration Variables
                 </div>
                 <div css={tw`h-px bg-neutral-800 flex-1`} />

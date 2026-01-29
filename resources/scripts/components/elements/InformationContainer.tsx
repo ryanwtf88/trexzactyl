@@ -8,20 +8,12 @@ import { getResources } from '@/api/store/getResources';
 import Translate from '@/components/elements/Translate';
 import getLatestActivity, { Activity } from '@/api/account/getLatestActivity';
 import { wrapProperties } from '@/components/elements/activity/ActivityLogEntry';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faCircle,
-    faCoins,
-    faExclamationCircle,
-    faScroll,
-    faTimesCircle,
-    faUserLock,
-} from '@fortawesome/free-solid-svg-icons';
+import * as Icon from 'react-feather';
 import { motion } from 'framer-motion';
 
 const PremiumCardContainer = styled.div<{ $color: string }>`
     ${tw`relative p-6 rounded-2xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md overflow-hidden transition-all duration-300`};
-    
+
     &::before {
         content: '';
         position: absolute;
@@ -85,12 +77,20 @@ export default () => {
     return (
         <div css={tw`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 w-full`}>
             {store.earn.enabled ? (
-                <PremiumCard $color={'#4ade80'} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} whileHover={{ y: -4 }}>
+                <PremiumCard
+                    $color={'#4ade80'}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    whileHover={{ y: -4 }}
+                >
                     <IconWrapper $color={'#4ade80'}>
-                        <FontAwesomeIcon icon={faCircle as any} className="animate-pulse" />
+                        <Icon.Circle size={18} className='animate-pulse' />
                     </IconWrapper>
                     <div css={tw`flex flex-col`}>
-                        <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>Earning Rate</span>
+                        <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>
+                            Earning Rate
+                        </span>
                         <div css={tw`flex items-baseline`}>
                             <span css={tw`text-2xl font-black text-white mr-1.5`}>{store.earn.amount}</span>
                             <span css={tw`text-neutral-400 text-[10px] font-bold uppercase`}>CR / MIN</span>
@@ -98,23 +98,39 @@ export default () => {
                     </div>
                 </PremiumCard>
             ) : (
-                <PremiumCard $color={'#f87171'} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} whileHover={{ y: -4 }}>
+                <PremiumCard
+                    $color={'#f87171'}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    whileHover={{ y: -4 }}
+                >
                     <IconWrapper $color={'#f87171'}>
-                        <FontAwesomeIcon icon={faExclamationCircle as any} />
+                        <Icon.AlertCircle size={18} />
                     </IconWrapper>
                     <div css={tw`flex flex-col`}>
-                        <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>Earning Status</span>
+                        <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>
+                            Earning Status
+                        </span>
                         <span css={tw`text-lg font-black text-red-400 uppercase`}>Disabled</span>
                     </div>
                 </PremiumCard>
             )}
 
-            <PremiumCard $color={'#fbbf24'} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} whileHover={{ y: -4 }}>
+            <PremiumCard
+                $color={'#fbbf24'}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                whileHover={{ y: -4 }}
+            >
                 <IconWrapper $color={'#fbbf24'}>
-                    <FontAwesomeIcon icon={faCoins as any} />
+                    <Icon.DollarSign size={18} />
                 </IconWrapper>
                 <div css={tw`flex flex-col`}>
-                    <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>Available Credits</span>
+                    <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>
+                        Available Credits
+                    </span>
                     <div css={tw`flex items-baseline`}>
                         <span css={tw`text-2xl font-black text-white mr-1.5`}>{bal.toLocaleString()}</span>
                         <span css={tw`text-neutral-400 text-[10px] font-bold uppercase`}>Credits</span>
@@ -122,12 +138,20 @@ export default () => {
                 </div>
             </PremiumCard>
 
-            <PremiumCard $color={'#60a5fa'} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} whileHover={{ y: -4 }}>
+            <PremiumCard
+                $color={'#60a5fa'}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                whileHover={{ y: -4 }}
+            >
                 <IconWrapper $color={'#60a5fa'}>
-                    <FontAwesomeIcon icon={faUserLock as any} />
+                    <Icon.Lock size={18} />
                 </IconWrapper>
                 <div css={tw`flex flex-col`}>
-                    <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>Account Security</span>
+                    <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>
+                        Account Security
+                    </span>
                     {user.useTotp ? (
                         <span css={tw`text-lg font-black text-green-400 uppercase`}>2FA Active</span>
                     ) : (
@@ -137,24 +161,43 @@ export default () => {
             </PremiumCard>
 
             {!user.verified ? (
-                <PremiumCard $color={'#f43f5e'} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} whileHover={{ y: -4 }}>
+                <PremiumCard
+                    $color={'#f43f5e'}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    whileHover={{ y: -4 }}
+                >
                     <IconWrapper $color={'#f43f5e'}>
-                        <FontAwesomeIcon icon={faTimesCircle as any} />
+                        <Icon.XCircle size={18} />
                     </IconWrapper>
                     <div css={tw`flex flex-col`}>
-                        <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>Account Status</span>
-                        <span onClick={verify} css={tw`cursor-pointer text-lg font-black text-red-400 hover:text-red-300 transition-colors uppercase`}>
+                        <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>
+                            Account Status
+                        </span>
+                        <span
+                            onClick={verify}
+                            css={tw`cursor-pointer text-lg font-black text-red-400 hover:text-red-300 transition-colors uppercase`}
+                        >
                             Verify Email
                         </span>
                     </div>
                 </PremiumCard>
             ) : (
-                <PremiumCard $color={'#a78bfa'} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} whileHover={{ y: -4 }}>
+                <PremiumCard
+                    $color={'#a78bfa'}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    whileHover={{ y: -4 }}
+                >
                     <IconWrapper $color={'#a78bfa'}>
-                        <FontAwesomeIcon icon={faScroll as any} />
+                        <Icon.FileText size={18} />
                     </IconWrapper>
                     <div css={tw`flex flex-col`}>
-                        <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>Latest Activity</span>
+                        <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>
+                            Latest Activity
+                        </span>
                         <div css={tw`truncate max-w-full text-sm font-bold text-neutral-200 uppercase`}>
                             {activity ? (
                                 <Translate

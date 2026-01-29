@@ -135,7 +135,21 @@ export default () => {
             terminal.loadAddon(searchBar);
             terminal.loadAddon(webLinksAddon);
 
+            // @ts-expect-error this is a hack to prevent Canvas2D readback warnings
+            const originalGetContext = HTMLCanvasElement.prototype.getContext;
+            // @ts-expect-error this is a hack
+            HTMLCanvasElement.prototype.getContext = function (type, attributes) {
+                if (type === '2d') {
+                    attributes = { ...attributes, willReadFrequently: true };
+                }
+                return originalGetContext.call(this, type, attributes);
+            };
+
             terminal.open(ref.current);
+
+            // @ts-expect-error restore original getContext
+            HTMLCanvasElement.prototype.getContext = originalGetContext;
+
             fitAddon.fit();
             searchBar.addNewStyle(zIndex);
 

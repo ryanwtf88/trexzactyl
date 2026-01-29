@@ -35,15 +35,17 @@ const BackupContainer = () => {
                 {({ items }) =>
                     !items.length ? (
                         backupLimit > 0 ? (
-                            <div css={tw`p-12 flex flex-col items-center justify-center text-neutral-500 bg-neutral-900/50 backdrop-blur-md rounded-xl border border-neutral-700`}>
+                            <div
+                                css={tw`p-12 flex flex-col items-center justify-center text-neutral-500 bg-neutral-900/50 backdrop-blur-md rounded-xl border border-neutral-700`}
+                            >
                                 <Icon.Database size={48} css={tw`mb-4 opacity-20`} />
-                                <p css={tw`text-sm`}>It looks like there are no backups currently stored for this server.</p>
+                                <p css={tw`text-sm`}>
+                                    It looks like there are no backups currently stored for this server.
+                                </p>
                             </div>
                         ) : null
                     ) : (
-                        items.map((backup) => (
-                            <BackupRow key={backup.uuid} backup={backup} />
-                        ))
+                        items.map((backup) => <BackupRow key={backup.uuid} backup={backup} />)
                     )
                 }
             </Pagination>
@@ -58,10 +60,15 @@ const BackupContainer = () => {
             <Can action={'backup.create'}>
                 <div css={tw`mt-8 flex flex-col sm:flex-row items-center justify-between gap-4`}>
                     {backupLimit > 0 && (
-                        <div css={tw`flex items-center gap-3 p-3 rounded-lg bg-neutral-900/50 border border-neutral-700`}>
+                        <div
+                            css={tw`flex items-center gap-3 p-3 rounded-lg bg-neutral-900/50 border border-neutral-700`}
+                        >
                             <Icon.PieChart size={16} css={tw`text-blue-400`} />
                             <p css={tw`text-xs text-neutral-400 font-bold uppercase tracking-wider`}>
-                                Status: <span css={tw`text-neutral-100`}>{backups.backupCount} / {backupLimit} slots used</span>
+                                Status:{' '}
+                                <span css={tw`text-neutral-100`}>
+                                    {backups.backupCount} / {backupLimit} slots used
+                                </span>
                             </p>
                         </div>
                     )}

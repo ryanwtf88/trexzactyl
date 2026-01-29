@@ -32,17 +32,27 @@ export default ({ subuser }: { subuser: Subuser }) => {
                 <img css={tw`w-full h-full object-cover`} src={`${subuser.image}?s=400`} />
             </Avatar>
             <InfoBlock>
-                <p css={tw`font-bold text-neutral-100 group-hover:text-blue-400 transition-colors duration-200 truncate`}>{subuser.email}</p>
+                <p
+                    css={tw`font-bold text-neutral-100 group-hover:text-blue-400 transition-colors duration-200 truncate`}
+                >
+                    {subuser.email}
+                </p>
                 <div css={tw`flex items-center gap-3 mt-1`}>
                     <div css={tw`flex items-center gap-1 text-xs text-neutral-500`}>
                         <Icon.Shield size={10} />
-                        {subuser.permissions.filter((permission) => permission !== 'websocket.connect').length} Permissions
+                        {subuser.permissions.filter((permission) => permission !== 'websocket.connect').length}{' '}
+                        Permissions
                     </div>
                 </div>
             </InfoBlock>
 
             <div css={tw`ml-4 flex flex-col items-center`}>
-                <div css={[tw`p-2 rounded-lg bg-neutral-800 text-neutral-400 group-hover:bg-blue-500/10 transition-colors duration-200`, subuser.twoFactorEnabled && tw`text-green-400`]}>
+                <div
+                    css={[
+                        tw`p-2 rounded-lg bg-neutral-800 text-neutral-400 group-hover:bg-blue-500/10 transition-colors duration-200`,
+                        subuser.twoFactorEnabled && tw`text-green-400`,
+                    ]}
+                >
                     {subuser.twoFactorEnabled ? <Icon.Lock size={16} /> : <Icon.Unlock size={16} />}
                 </div>
                 <p css={tw`text-[8px] text-neutral-500 uppercase font-black mt-1`}>2FA Security</p>

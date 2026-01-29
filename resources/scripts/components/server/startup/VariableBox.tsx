@@ -38,13 +38,16 @@ const VariableBox = ({ variable }: { variable: ServerEggVariable }) => {
         clearFlashes(FLASH_KEY);
         updateStartupVariable(uuid, variable.envVariable, value)
             .then(([response, invocation]) =>
-                mutate((data) => ({
-                    ...data,
-                    invocation,
-                    variables: (data.variables || []).map((v) =>
-                        v.envVariable === response.envVariable ? response : v
-                    ),
-                }), false)
+                mutate(
+                    (data) => ({
+                        ...data,
+                        invocation,
+                        variables: (data.variables || []).map((v) =>
+                            v.envVariable === response.envVariable ? response : v
+                        ),
+                    }),
+                    false
+                )
             )
             .catch((error) => {
                 console.error(error);
@@ -53,7 +56,9 @@ const VariableBox = ({ variable }: { variable: ServerEggVariable }) => {
             .then(() => setLoading(false));
     }, 500);
 
-    const useSwitch = variable.rules.some((v) => v === 'boolean' || v === 'in:0,1' || v === 'in:1,0' || v === 'in:true,false' || v === 'in:false,true');
+    const useSwitch = variable.rules.some(
+        (v) => v === 'boolean' || v === 'in:0,1' || v === 'in:1,0' || v === 'in:true,false' || v === 'in:false,true'
+    );
     const isStringSwitch = variable.rules.some((v) => v === 'string');
     const selectValues = variable.rules.find((v) => v.startsWith('in:'))?.split(',') || [];
 
@@ -62,7 +67,9 @@ const VariableBox = ({ variable }: { variable: ServerEggVariable }) => {
             <div css={tw`flex items-center justify-between mb-4`}>
                 <div css={tw`flex items-center`}>
                     {!variable.isEditable && <Badge>Read Only</Badge>}
-                    <h4 css={tw`text-xs font-black text-neutral-400 uppercase tracking-widest group-hover:text-blue-400 transition-colors`}>
+                    <h4
+                        css={tw`text-xs font-black text-neutral-400 uppercase tracking-widest group-hover:text-blue-400 transition-colors`}
+                    >
                         {variable.name}
                     </h4>
                 </div>
@@ -79,7 +86,9 @@ const VariableBox = ({ variable }: { variable: ServerEggVariable }) => {
                         <Switch
                             readOnly={!canEdit || !variable.isEditable}
                             name={variable.envVariable}
-                            defaultChecked={isStringSwitch ? variable.serverValue === 'true' : variable.serverValue === '1'}
+                            defaultChecked={
+                                isStringSwitch ? variable.serverValue === 'true' : variable.serverValue === '1'
+                            }
                             onChange={() => {
                                 if (canEdit && variable.isEditable) {
                                     if (isStringSwitch) {
@@ -90,7 +99,9 @@ const VariableBox = ({ variable }: { variable: ServerEggVariable }) => {
                                 }
                             }}
                         />
-                        <span css={tw`text-xs text-neutral-500 font-medium`}>{variable.serverValue === '1' || variable.serverValue === 'true' ? 'Enabled' : 'Disabled'}</span>
+                        <span css={tw`text-xs text-neutral-500 font-medium`}>
+                            {variable.serverValue === '1' || variable.serverValue === 'true' ? 'Enabled' : 'Disabled'}
+                        </span>
                     </div>
                 ) : (
                     <>

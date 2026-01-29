@@ -134,21 +134,23 @@ export default () => {
                     setResource={setResource}
                     description={'Add more MySQL databases for your applications.'}
                 />
-                <div css={tw`bg-neutral-900/40 backdrop-blur-xl border border-neutral-700 rounded-3xl p-10 relative overflow-hidden flex flex-col justify-center`}>
+                <div
+                    css={tw`bg-neutral-900/40 backdrop-blur-xl border border-neutral-700 rounded-3xl p-10 relative overflow-hidden flex flex-col justify-center`}
+                >
                     <div css={tw`absolute top-0 right-0 w-24 h-24 bg-blue-500/10 blur-2xl -mr-12 -mt-12`} />
-                    <h3 css={tw`text-lg font-black uppercase tracking-widest text-white mb-6 flex items-center`}>
+                    <h3 css={tw`text-lg font-bold text-white mb-6 flex items-center`}>
                         <Icon.Info size={20} css={tw`mr-3 text-blue-400`} strokeWidth={2.5} /> Usage Guide
                     </h3>
                     <div css={tw`space-y-6 relative z-10`}>
                         <div>
-                            <p css={tw`text-[10px] font-black uppercase tracking-[0.2em] text-blue-400 mb-1.5`}>Server Allocation</p>
-                            <p css={tw`text-xs text-neutral-400 leading-relaxed font-bold uppercase tracking-wide`}>
+                            <p css={tw`text-xs font-bold text-blue-400 mb-1.5`}>Server Allocation</p>
+                            <p css={tw`text-xs text-neutral-400 leading-relaxed font-bold`}>
                                 Navigate to a server&apos;s &apos;Edit&apos; tab to distribute your credits.
                             </p>
                         </div>
                         <div>
-                            <p css={tw`text-[10px] font-black uppercase tracking-[0.2em] text-blue-400 mb-1.5`}>Deployment</p>
-                            <p css={tw`text-xs text-neutral-400 leading-relaxed font-bold uppercase tracking-wide`}>
+                            <p css={tw`text-xs font-bold text-blue-400 mb-1.5`}>Deployment</p>
+                            <p css={tw`text-xs text-neutral-400 leading-relaxed font-bold`}>
                                 Credits are automatically deducted during the server creation process.
                             </p>
                         </div>
@@ -164,15 +166,21 @@ export default () => {
                     transition={{ delay: 0.5 }}
                     css={tw`w-full max-w-5xl bg-neutral-900/40 backdrop-blur-xl border border-neutral-700 p-12 rounded-[2.5rem] text-center relative overflow-hidden shadow-2xl hover:border-blue-500 transition-all duration-500`}
                 >
-                    <div css={tw`absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5 opacity-50`} />
+                    <div
+                        css={tw`absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5 opacity-50`}
+                    />
                     <div css={tw`absolute -bottom-24 -left-24 w-64 h-64 bg-blue-500/10 blur-[100px] rounded-full`} />
                     <div css={tw`relative z-10`}>
-                        <h1 css={tw`text-5xl md:text-6xl font-black uppercase tracking-tighter text-white mb-4`}>Deploy Now</h1>
-                        <p css={tw`text-neutral-500 font-bold uppercase tracking-[0.2em] text-xs mb-10`}>Your high-performance instance is just a click away</p>
+                        <h1 css={tw`text-5xl md:text-6xl font-black text-white mb-4`}>Deploy Now</h1>
+                        <p css={tw`text-neutral-500 font-bold text-xs mb-10`}>
+                            Your high-performance instance is just a click away
+                        </p>
                         <Link to={'/store/create'}>
-                            <Button css={tw`px-16 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-widest text-sm py-5 rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-95`}>
+                            <button
+                                css={tw`px-16 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm py-5 rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-95`}
+                            >
                                 Initialize Instance
-                            </Button>
+                            </button>
                         </Link>
                     </div>
                 </motion.div>

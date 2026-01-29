@@ -33,10 +33,10 @@ class DiscordController extends Controller
     {
         return new JsonResponse([
             'https://discord.com/api/oauth2/authorize?'
-            . 'client_id=' . $this->settings->get('Trexzactyl::discord:id')
+            . 'client_id=' . $this->settings->get('Trexzactyl::discord:id', '')
             . '&redirect_uri=' . route('auth.discord.callback')
             . '&response_type=code&scope=identify%20email%20guilds%20guilds.join&prompt=none',
-        ], 200, [], null, false);
+        ], 200);
     }
 
     /**
@@ -48,8 +48,8 @@ class DiscordController extends Controller
     public function callback(Request $request)
     {
         $code = Http::asForm()->post('https://discord.com/api/oauth2/token', [
-            'client_id' => $this->settings->get('Trexzactyl::discord:id'),
-            'client_secret' => $this->settings->get('Trexzactyl::discord:secret'),
+            'client_id' => $this->settings->get('Trexzactyl::discord:id', ''),
+            'client_secret' => $this->settings->get('Trexzactyl::discord:secret', ''),
             'grant_type' => 'authorization_code',
             'code' => $request->input('code'),
             'redirect_uri' => route('auth.discord.callback'),
@@ -74,10 +74,10 @@ class DiscordController extends Controller
         } else {
             $approved = true;
 
-            if ($this->settings->get('Trexzactyl::discord:enabled') != 'true') {
+            if ($this->settings->get('Trexzactyl::discord:enabled', 'false') != 'true') {
                 return;
             }
-            if ($this->settings->get('Trexzactyl::approvals:enabled') == 'true') {
+            if ($this->settings->get('Trexzactyl::approvals:enabled', 'false') == 'true') {
                 $approved = false;
             }
 
@@ -101,10 +101,11 @@ class DiscordController extends Controller
 
             try {
                 $this->creationService->handle($data);
+                $user = User::where('username', $discord->id)->first();
+                $user->notify(new \Trexzactyl\Notifications\DiscordAccountCreated($user, $data['password']));
             } catch (\Exception $e) {
                 return;
             }
-            $user = User::where('username', $discord->id)->first();
             Auth::loginUsingId($user->id, true);
 
             return redirect('/');

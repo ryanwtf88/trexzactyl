@@ -23,10 +23,10 @@ class DiscordController extends ClientApiController
     {
         return new JsonResponse([
             'https://discord.com/api/oauth2/authorize?'
-            . 'client_id=' . $this->settings->get('Trexzactyl::discord:id')
+            . 'client_id=' . $this->settings->get('Trexzactyl::discord:id', '')
             . '&redirect_uri=' . route('api:client.account.discord.callback')
             . '&response_type=code&scope=identify%20email%20guilds%20guilds.join&prompt=none',
-        ], 200, [], null, false);
+        ], 200);
     }
 
     public function unlink(): JsonResponse
@@ -42,8 +42,8 @@ class DiscordController extends ClientApiController
     public function callback(Request $request): RedirectResponse
     {
         $code = Http::asForm()->post('https://discord.com/api/oauth2/token', [
-            'client_id' => $this->settings->get('Trexzactyl::discord:id'),
-            'client_secret' => $this->settings->get('Trexzactyl::discord:secret'),
+            'client_id' => $this->settings->get('Trexzactyl::discord:id', ''),
+            'client_secret' => $this->settings->get('Trexzactyl::discord:secret', ''),
             'grant_type' => 'authorization_code',
             'code' => $request->input('code'),
             'redirect_uri' => route('api:client.account.discord.callback'),
@@ -59,7 +59,10 @@ class DiscordController extends ClientApiController
         }
 
         $discord = json_decode(Http::withHeaders(['Authorization' => 'Bearer ' . $req->access_token])->asForm()->get('https://discord.com/api/users/@me')->body());
-        User::query()->where('id', Auth::user()->id)->update(['discord_id' => $discord->id]);
+        /** @var \Trexzactyl\Models\User $user */
+        $user = Auth::user();
+        User::query()->where('id', $user->id)->update(['discord_id' => $discord->id]);
+        $user->notify(new \Trexzactyl\Notifications\DiscordLinked($user));
 
         return redirect('/account');
     }

@@ -1,6 +1,7 @@
 import tw from 'twin.macro';
 import Reaptcha from 'reaptcha';
 import login from '@/api/auth/login';
+import { Mail, MessageSquare } from 'react-feather';
 import { object, string } from 'yup';
 import useFlash from '@/plugins/useFlash';
 import { useStoreState } from 'easy-peasy';
@@ -9,6 +10,7 @@ import Field from '@/components/elements/Field';
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/elements/button/index';
 import { Link, RouteComponentProps } from 'react-router-dom';
+import FlashMessageRender from '@/components/FlashMessageRender';
 import LoginFormContainer from '@/components/auth/LoginFormContainer';
 
 interface Values {
@@ -16,19 +18,30 @@ interface Values {
     password: string;
 }
 
-const LoginContainer = ({ history }: RouteComponentProps) => {
+const LoginContainer = ({ history, location }: RouteComponentProps) => {
     const ref = useRef<Reaptcha>(null);
     const [token, setToken] = useState('');
     const name = useStoreState((state) => state.settings.data?.name);
-    const email = useStoreState((state) => state.settings.data?.registration.email);
-    const discord = useStoreState((state) => state.settings.data?.registration.discord);
-
-    const { clearFlashes, clearAndAddHttpError } = useFlash();
-    const { enabled: recaptchaEnabled, siteKey } = useStoreState((state) => state.settings.data!.recaptcha);
+    const { clearFlashes, addFlash, clearAndAddHttpError } = useFlash();
+    const { email, discord } = useStoreState(
+        (state) => state.settings.data?.registration || { email: false, discord: false }
+    );
+    const { enabled: recaptchaEnabled, siteKey } = useStoreState(
+        (state) => state.settings.data?.recaptcha || { enabled: false, siteKey: '' }
+    );
 
     useEffect(() => {
         clearFlashes();
-    }, []);
+
+        const state = (location.state as any) || {};
+
+        if (state.invalidToken) {
+            addFlash({
+                type: 'danger',
+                message: 'The token provided is invalid or has expired. Please try logging in again.',
+            });
+        }
+    }, [location]);
 
     const onSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
         clearFlashes();
@@ -46,7 +59,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
             return;
         }
 
-        login({ ...values, recaptchaData: token })
+        login({ username: values.username, password: values.password, recaptchaData: token })
             .then((response) => {
                 if (response.complete) {
                     // @ts-expect-error this is valid
@@ -72,25 +85,32 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
             onSubmit={onSubmit}
             initialValues={{ username: '', password: '' }}
             validationSchema={object().shape({
-                username: string().required('A username or email must be provided.'),
+                username: string().required('A username or email address must be provided.'),
                 password: string().required('Please enter your account password.'),
             })}
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (
                 <LoginFormContainer title={'Login to ' + name} css={tw`w-full flex`}>
+                    <FlashMessageRender css={tw`mb-4`} />
                     <Field light type={'text'} label={'Username or Email'} name={'username'} disabled={isSubmitting} />
                     <div css={tw`mt-6`}>
                         <Field light type={'password'} label={'Password'} name={'password'} disabled={isSubmitting} />
                     </div>
-                    <div css={tw`mt-8`}>
+                    <div css={tw`flex flex-row-reverse items-center justify-between mt-8`}>
                         <Button
                             type={'submit'}
                             size={Button.Sizes.Large}
-                            css={tw`w-full bg-blue-600/10 text-blue-400 border border-blue-500/30 hover:bg-blue-600/20 hover:border-blue-500/60 font-black uppercase tracking-widest text-sm py-4 rounded-xl transition-all shadow-lg`}
+                            css={tw`w-1/3 bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 rounded-xl transition-all font-black uppercase tracking-widest text-xs py-3`}
                             disabled={isSubmitting}
                         >
-                            Log into Account
+                            Login
                         </Button>
+                        <Link
+                            to={'/auth/password'}
+                            css={tw`text-xs text-neutral-500 font-bold uppercase tracking-wider hover:text-neutral-400 transition-colors`}
+                        >
+                            Forgot password?
+                        </Link>
                     </div>
                     {recaptchaEnabled && (
                         <Reaptcha
@@ -107,29 +127,23 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                             }}
                         />
                     )}
-                    <div css={tw`mt-10 text-center`}>
-                        <Link
-                            to={'/auth/password'}
-                            css={tw`text-[10px] text-neutral-500 font-black tracking-widest no-underline uppercase hover:text-neutral-300 transition-colors`}
-                        >
-                            Forgot password?
-                        </Link>
-                    </div>
                     {(email || discord) && (
-                        <div css={tw`mt-6 pt-6 border-t border-neutral-700/50 flex justify-center items-center gap-6`}>
+                        <div css={tw`mt-8 pt-8 border-t border-neutral-700/50 flex flex-col gap-4`}>
                             {email && (
                                 <Link
                                     to={'/auth/register'}
-                                    css={tw`text-[10px] text-neutral-500 font-black tracking-widest no-underline uppercase hover:text-blue-400 transition-colors`}
+                                    css={tw`flex items-center justify-center gap-3 bg-blue-500 bg-opacity-10 text-blue-400 border border-blue-500 border-opacity-20 py-4 rounded-2xl hover:bg-opacity-20 transition-all font-black text-xs uppercase tracking-widest`}
                                 >
+                                    <Mail size={18} />
                                     Signup with Email
                                 </Link>
                             )}
                             {discord && (
                                 <Link
                                     to={'/auth/discord'}
-                                    css={tw`text-[10px] text-neutral-500 font-black tracking-widest no-underline uppercase hover:text-blue-400 transition-colors`}
+                                    css={tw`flex items-center justify-center gap-3 bg-indigo-500 bg-opacity-10 text-indigo-400 border border-indigo-500 border-opacity-20 py-4 rounded-2xl hover:bg-opacity-20 transition-all font-black text-xs uppercase tracking-widest`}
                                 >
+                                    <MessageSquare size={18} />
                                     Login with Discord
                                 </Link>
                             )}

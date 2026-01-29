@@ -9,7 +9,7 @@ const SubNavigation = styled.div`
 
         & > a,
         & > div {
-            ${tw`inline-block py-3 px-4 text-neutral-400 no-underline whitespace-nowrap transition-all duration-300 font-bold tracking-wide uppercase text-[11px]`};
+            ${tw`inline-block py-3 px-4 text-neutral-400 no-underline whitespace-nowrap transition-all duration-300 font-bold text-xs`};
 
             &:not(:first-of-type) {
                 ${tw`ml-2`};

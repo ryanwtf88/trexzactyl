@@ -41,28 +41,33 @@ export default () => {
                 <Fade timeout={150}>
                     <>
                         {databases.length > 0 ? (
-                            databases.map((database) => (
-                                <DatabaseRow key={database.id} database={database} />
-                            ))
+                            databases.map((database) => <DatabaseRow key={database.id} database={database} />)
                         ) : (
-                            <div css={tw`p-12 text-center bg-neutral-900/50 backdrop-blur-md rounded-xl border border-neutral-700`}>
+                            <div
+                                css={tw`p-12 text-center bg-neutral-900/50 backdrop-blur-md rounded-xl border border-neutral-700`}
+                            >
                                 <Icon.Database size={48} css={tw`mx-auto mb-4 opacity-10 text-neutral-100`} />
                                 <p className={'text-sm font-bold text-neutral-500 uppercase tracking-widest'}>
-                                    {databaseLimit > 0 ? 'It looks like you have no databases.' : 'Databases cannot be created for this server.'}
+                                    {databaseLimit > 0
+                                        ? 'It looks like you have no databases.'
+                                        : 'Databases cannot be created for this server.'}
                                 </p>
                             </div>
                         )}
                         <Can action={'database.create'}>
-                            <div css={tw`mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md`}>
+                            <div
+                                css={tw`mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md`}
+                            >
                                 <div css={tw`flex items-center gap-3`}>
                                     <Icon.Activity size={18} css={tw`text-blue-400`} />
                                     <p css={tw`text-sm text-neutral-400 font-bold uppercase tracking-wider`}>
-                                        Usage: <span css={tw`text-neutral-100 ml-1`}>{databases.length} / {databaseLimit} allocated</span>
+                                        Usage:{' '}
+                                        <span css={tw`text-neutral-100 ml-1`}>
+                                            {databases.length} / {databaseLimit} allocated
+                                        </span>
                                     </p>
                                 </div>
-                                {databaseLimit > 0 && databaseLimit !== databases.length && (
-                                    <CreateDatabaseButton />
-                                )}
+                                {databaseLimit > 0 && databaseLimit !== databases.length && <CreateDatabaseButton />}
                             </div>
                         </Can>
                     </>

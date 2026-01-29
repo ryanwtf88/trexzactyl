@@ -12,7 +12,7 @@ const StatsGrid = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
     margin-bottom: 32px;
-    
+
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
     }
@@ -23,15 +23,15 @@ const StatCard = styled.div<{ color: string }>`
     border-radius: 16px;
     padding: 24px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    border-left: 4px solid ${props => props.color};
+    border-left: 4px solid ${(props) => props.color};
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     animation: fadeInUp 0.5s ease-out;
-    
+
     &:hover {
         transform: translateY(-4px);
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     }
-    
+
     @keyframes fadeInUp {
         from {
             opacity: 0;
@@ -48,15 +48,15 @@ const StatIcon = styled.div<{ color: string }>`
     width: 56px;
     height: 56px;
     border-radius: 12px;
-    background: ${props => props.color}15;
+    background: ${(props) => props.color}15;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 16px;
-    
+
     i {
         font-size: 28px;
-        color: ${props => props.color};
+        color: ${(props) => props.color};
     }
 `;
 
@@ -78,7 +78,7 @@ const StatLabel = styled.div`
 
 const StatChange = styled.div<{ positive: boolean }>`
     font-size: 0.875rem;
-    color: ${props => props.positive ? '#10b981' : '#ef4444'};
+    color: ${(props) => (props.positive ? '#10b981' : '#ef4444')};
     margin-top: 8px;
     display: flex;
     align-items: center;
@@ -99,14 +99,14 @@ const AdminDashboard: React.FC = () => {
         nodes: 0,
         allocations: 0,
     });
-    
+
     const [loading, setLoading] = useState(true);
-    
+
     useEffect(() => {
         // Fetch stats from API
         fetch('/admin/statistics.json')
-            .then(res => res.json())
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => {
                 setStats({
                     servers: data.servers || 0,
                     users: data.users || 0,
@@ -119,7 +119,7 @@ const AdminDashboard: React.FC = () => {
                 setLoading(false);
             });
     }, []);
-    
+
     const statCards = [
         {
             icon: 'fa-server',
@@ -154,18 +154,18 @@ const AdminDashboard: React.FC = () => {
             positive: true,
         },
     ];
-    
+
     if (loading) {
         return (
             <DashboardContainer>
                 <div style={{ textAlign: 'center', padding: '48px' }}>
-                    <i className="fa fa-spinner fa-spin" style={{ fontSize: '48px', color: '#3b82f6' }}></i>
+                    <i className='fa fa-spinner fa-spin' style={{ fontSize: '48px', color: '#3b82f6' }}></i>
                     <p style={{ marginTop: '16px', color: '#6b7280' }}>Loading dashboard...</p>
                 </div>
             </DashboardContainer>
         );
     }
-    
+
     return (
         <DashboardContainer>
             <StatsGrid>

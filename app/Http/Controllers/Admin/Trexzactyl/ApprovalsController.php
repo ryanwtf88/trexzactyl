@@ -10,6 +10,7 @@ use Prologue\Alerts\AlertsMessageBag;
 use Trexzactyl\Http\Controllers\Controller;
 use Trexzactyl\Contracts\Repository\SettingsRepositoryInterface;
 use Trexzactyl\Http\Requests\Admin\Trexzactyl\ApprovalFormRequest;
+use Trexzactyl\Exceptions\DisplayException;
 
 class ApprovalsController extends Controller
 {
@@ -31,7 +32,7 @@ class ApprovalsController extends Controller
 
         return view('admin.trexzactyl.approvals', [
             'enabled' => $this->settings->get('trexzactyl::approvals:enabled', false),
-            'webhook' => $this->settings->get('trexzactyl::approvals:webhook'),
+            'webhook' => $this->settings->get('trexzactyl::approvals:webhook', ''),
             'users' => $users,
         ]);
     }
@@ -68,7 +69,7 @@ class ApprovalsController extends Controller
             }
         }
 
-        $this->alert->success('All users have been ' . $action === 'approve' ? 'approved ' : 'denied successfully.')->flash();
+        $this->alert->success('All users have been ' . ($action === 'approve' ? 'approved ' : 'denied successfully.'))->flash();
 
         return redirect()->route('admin.trexzactyl.approvals');
     }

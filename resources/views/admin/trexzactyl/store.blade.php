@@ -30,9 +30,9 @@
 
         /* Ensure inputs are visible and interactive regardless of theme overrides */
         .form-control {
-            background-color: #fff !important;
-            color: #333 !important;
-            border: 1px solid #d2d6de !important;
+            background-color: #201F31 !important;
+            color: #cad1d8 !important;
+            border: 1px solid #201F31 !important;
         }
 
         /* Fix for dark themes where text might be invisible in the body */

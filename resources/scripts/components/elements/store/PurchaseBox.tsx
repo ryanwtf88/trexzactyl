@@ -37,15 +37,15 @@ const IconWrapper = styled.div`
 
 const CostBadge = styled.div`
     ${tw`inline-flex flex-col items-center justify-center p-4 rounded-2xl bg-black/40 border border-white/5 mb-8 w-full`};
-    
+
     .label {
-        ${tw`text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 mb-1`};
+        ${tw`text-xs font-bold text-neutral-500 mb-1`};
     }
-    
+
     .value {
         ${tw`text-2xl font-black text-white tracking-tight`};
         & span {
-            ${tw`text-xs text-neutral-500 font-bold ml-1 tracking-normal`};
+            ${tw`text-xs text-neutral-500 font-medium ml-1 tracking-normal`};
         }
     }
 `;
@@ -63,37 +63,36 @@ interface BoxProps {
 }
 
 export default (props: BoxProps) => (
-    <PremiumPurchaseBox
-        className={'group'}
-        whileHover={{ translateY: -8 }}
-    >
+    <PremiumPurchaseBox className={'group'} whileHover={{ translateY: -8 }}>
         <IconWrapper>
             {React.cloneElement(props.icon as React.ReactElement, { size: 32, strokeWidth: 2.5 })}
         </IconWrapper>
 
-        <h2 css={tw`text-2xl font-black uppercase tracking-tight text-white mb-3`}>
-            {props.type}
-        </h2>
+        <h2 css={tw`text-2xl font-bold text-white mb-3`}>{props.type}</h2>
 
-        <p css={tw`text-xs text-neutral-400 font-bold leading-relaxed mb-8 h-10 overflow-hidden px-2 uppercase tracking-wide`}>
+        <p css={tw`text-xs text-neutral-400 font-bold leading-relaxed mb-8 h-10 overflow-hidden px-2`}>
             {props.description}
         </p>
 
         <CostBadge>
-            <span className="label">Cost per {props.amount}{props.suffix}</span>
-            <div className="value">
-                {props.cost} <span>CREDITS</span>
+            <span className='label'>
+                Cost per {props.amount}
+                {props.suffix}
+            </span>
+            <div className='value'>
+                {props.cost} <span>Credits</span>
             </div>
         </CostBadge>
 
         <Button
-            css={tw`w-full bg-blue-600 font-black uppercase tracking-widest text-[10px] py-4 rounded-xl transition-all shadow-lg hover:shadow-xl active:scale-95`}
+            css={tw`w-full bg-blue-600 font-bold text-xs py-4 rounded-xl transition-all shadow-lg hover:shadow-xl active:scale-95`}
             onClick={() => {
                 props.setOpen(true);
                 props.setResource(props.type.toLowerCase());
             }}
         >
-            Buy +{props.amount}{props.suffix}
+            Buy +{props.amount}
+            {props.suffix}
         </Button>
     </PremiumPurchaseBox>
 );

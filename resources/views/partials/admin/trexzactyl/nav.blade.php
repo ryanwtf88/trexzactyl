@@ -16,6 +16,9 @@
                     <li @if($activeTab === 'advanced') class="active" @endif>
                         <a href="{{ route('admin.trexzactyl.advanced') }}">Advanced</a>
                     </li>
+                    <li @if($activeTab === 'tickets') class="active" @endif>
+                        <a href="{{ route('admin.tickets.index') }}">Tickets</a>
+                    </li>
 
                     <li style="margin-left: 5px; margin-right: 5px;"><a>-</a></li>
 
@@ -42,6 +45,9 @@
                     </li>
                     <li @if($activeTab === 'coupons') class="active" @endif>
                         <a href="{{ route('admin.trexzactyl.coupons') }}">Coupons</a>
+                    </li>
+                    <li @if($activeTab === 'upgrade') class="active" @endif>
+                        <a href="{{ route('admin.trexzactyl.upgrade') }}">Upgrade</a>
                     </li>
                 </ul>
             </div>

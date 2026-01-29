@@ -22,7 +22,7 @@ const NavLinks = styled.div`
     ${tw`hidden md:flex items-center space-x-1 h-full ml-8`};
 
     & > a {
-        ${tw`relative px-4 h-full flex items-center text-[11px] font-black uppercase tracking-[0.2em] text-neutral-400 hover:text-neutral-100 transition-all duration-300`};
+        ${tw`inline-block py-3 px-4 text-neutral-400 no-underline whitespace-nowrap transition-all duration-300 font-bold text-xs`};
 
         &.active {
             ${tw`text-blue-400`};
@@ -63,12 +63,22 @@ export default () => {
             <SpinnerOverlay visible={isLoggingOut} />
             <NavContent>
                 <div css={tw`flex items-center h-full`}>
-                    <Link to={'/'} className={'group'} css={tw`flex items-center transition-transform duration-300 hover:scale-105`}>
-                        <img className={'h-8 sm:h-9 w-auto'} src={logo ?? 'https://avatars.githubusercontent.com/u/91636558'} alt={'Logo'} />
+                    <Link
+                        to={'/'}
+                        className={'group'}
+                        css={tw`flex items-center transition-transform duration-300 hover:scale-105`}
+                    >
+                        <img
+                            className={'h-8 sm:h-9 w-auto'}
+                            src={logo ?? 'https://avatars.githubusercontent.com/u/91636558'}
+                            alt={'Logo'}
+                        />
                     </Link>
 
                     <NavLinks>
-                        <NavLink to={'/'} exact>SERVERS</NavLink>
+                        <NavLink to={'/'} exact>
+                            SERVERS
+                        </NavLink>
                         <NavLink to={'/account'}>ACCOUNT</NavLink>
                         {store && <NavLink to={'/store'}>STORE</NavLink>}
                         {tickets && <NavLink to={'/tickets'}>TICKETS</NavLink>}
@@ -112,7 +122,7 @@ export default () => {
                                 <Icon.Settings size={18} />
                             </a>
                         )}
-                    </div >
+                    </div>
                 </RightNav>
             </NavContent>
         </Nav>

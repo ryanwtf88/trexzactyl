@@ -57,14 +57,31 @@ const FileObjectRow = ({ file }: { file: FileObject }) => (
         <Clickable file={file}>
             <FileIcon>
                 {file.isFile ? (
-                    <>{file.isSymlink ? <Icon.Download size={18} /> : file.isArchiveType() ? <Icon.Archive size={18} /> : <Icon.File size={18} />}</>
+                    <>
+                        {file.isSymlink ? (
+                            <Icon.Download size={18} />
+                        ) : file.isArchiveType() ? (
+                            <Icon.Archive size={18} />
+                        ) : (
+                            <Icon.File size={18} />
+                        )}
+                    </>
                 ) : (
                     <Icon.Folder size={18} />
                 )}
             </FileIcon>
             <FileDetails>{file.name}</FileDetails>
-            {file.isFile && <div css={tw`w-1/6 text-right mr-4 hidden sm:block text-xs text-neutral-500 group-hover:text-neutral-400`}>{bytesToString(file.size)}</div>}
-            <div css={tw`w-1/5 text-right mr-4 hidden md:block text-xs text-neutral-500 group-hover:text-neutral-400`} title={file.modifiedAt.toString()}>
+            {file.isFile && (
+                <div
+                    css={tw`w-1/6 text-right mr-4 hidden sm:block text-xs text-neutral-500 group-hover:text-neutral-400`}
+                >
+                    {bytesToString(file.size)}
+                </div>
+            )}
+            <div
+                css={tw`w-1/5 text-right mr-4 hidden md:block text-xs text-neutral-500 group-hover:text-neutral-400`}
+                title={file.modifiedAt.toString()}
+            >
                 {Math.abs(differenceInHours(file.modifiedAt, new Date())) > 48
                     ? format(file.modifiedAt, 'MMM do, yyyy')
                     : formatDistanceToNow(file.modifiedAt, { addSuffix: true })}

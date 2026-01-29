@@ -104,9 +104,11 @@ export default () => {
         connect(uuid);
     }, [uuid]);
 
+    const nodeRef = React.useRef(null);
+
     return error ? (
-        <CSSTransition timeout={150} in appear classNames={'fade'}>
-            <div css={tw`bg-yellow-500`}>
+        <CSSTransition timeout={150} in appear classNames={'fade'} nodeRef={nodeRef}>
+            <div css={tw`bg-yellow-500`} ref={nodeRef}>
                 <ContentContainer css={tw`flex items-center justify-center`}>
                     {error === 'connecting' ? (
                         <>

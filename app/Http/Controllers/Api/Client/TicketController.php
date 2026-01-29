@@ -9,10 +9,11 @@ use Trexzactyl\Exceptions\DisplayException;
 use Trexzactyl\Http\Requests\Api\Client\ClientApiRequest;
 use Trexzactyl\Transformers\Api\Client\Tickets\TicketTransformer;
 use Trexzactyl\Transformers\Api\Client\Tickets\TicketMessageTransformer;
+use Trexzactyl\Services\Tickets\DiscordWebhookService;
 
 class TicketController extends ClientApiController
 {
-    public function __construct()
+    public function __construct(protected DiscordWebhookService $webhookService)
     {
         parent::__construct();
     }
@@ -62,7 +63,7 @@ class TicketController extends ClientApiController
         $description = $request->input('description');
         $total = Ticket::where('client_id', $user)->count();
 
-        if ($this->settings->get('Trexzactyl::tickets:max') <= $total) {
+        if ($this->settings->get('Trexzactyl::tickets:max', 3) <= $total) {
             throw new DisplayException('You already have ' . $total . ' tickets open.');
         }
 
@@ -78,6 +79,15 @@ class TicketController extends ClientApiController
             'ticket_id' => $model->id,
             'content' => $description,
         ]);
+
+        $request->user()->notify(new \Trexzactyl\Notifications\TicketCreated($model, $request->user()));
+
+        $this->webhookService->dispatch(
+            'New Ticket Created',
+            $description,
+            $model->id,
+            $request->user()->email
+        );
 
         return new JsonResponse(['id' => $model->id]);
     }
@@ -98,6 +108,13 @@ class TicketController extends ClientApiController
             'content' => $request->input('description'),
         ]);
 
+        $this->webhookService->dispatch(
+            'New User Reply',
+            $request->input('description'),
+            $ticket->id,
+            $request->user()->email
+        );
+
         return new JsonResponse([], JsonResponse::HTTP_NO_CONTENT);
     }
 
@@ -108,8 +125,14 @@ class TicketController extends ClientApiController
      */
     public function close(ClientApiRequest $request, int $id): JsonResponse
     {
-        Ticket::findOrFail($id)->delete();
+        $ticket = Ticket::findOrFail($id);
+        $ticketId = $ticket->id;
+        $username = $request->user()->username;
+
+        $ticket->delete();
         TicketMessage::where('ticket_id', $id)->delete();
+
+        $request->user()->notify(new \Trexzactyl\Notifications\TicketDeleted($ticketId, $username));
 
         return new JsonResponse([], JsonResponse::HTTP_NO_CONTENT);
     }

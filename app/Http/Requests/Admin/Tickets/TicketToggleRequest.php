@@ -15,6 +15,7 @@ class TicketToggleRequest extends AdminFormRequest
         return [
             'enabled' => 'required|in:true,false',
             'max' => 'required|min:0|max:10',
+            'webhook' => 'nullable|url',
         ];
     }
 }

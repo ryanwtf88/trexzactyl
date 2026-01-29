@@ -41,15 +41,30 @@ const RenameServerBox = () => {
             </div>
 
             <Form css={tw`mb-0`}>
-                <Field id={'name'} name={'name'} label={'Server Name'} type={'text'} css={tw`bg-neutral-800/50 border-neutral-700 focus:border-blue-500`} />
+                <Field
+                    id={'name'}
+                    name={'name'}
+                    label={'Server Name'}
+                    type={'text'}
+                    css={tw`bg-neutral-800/50 border-neutral-700 focus:border-blue-500`}
+                />
                 <div css={tw`mt-6`}>
-                    <Label css={tw`text-xs font-black text-neutral-500 uppercase tracking-widest mb-2 block`}>Server Description</Label>
+                    <Label css={tw`text-xs font-black text-neutral-500 uppercase tracking-widest mb-2 block`}>
+                        Server Description
+                    </Label>
                     <FormikFieldWrapper name={'description'}>
-                        <FormikField as={StyledTextarea} name={'description'} rows={3} placeholder={'Add a description for this server...'} />
+                        <FormikField
+                            as={StyledTextarea}
+                            name={'description'}
+                            rows={3}
+                            placeholder={'Add a description for this server...'}
+                        />
                     </FormikFieldWrapper>
                 </div>
                 <div css={tw`mt-8 flex justify-end`}>
-                    <Button type={'submit'} css={tw`px-8`}>Save Changes</Button>
+                    <Button type={'submit'} css={tw`px-8`}>
+                        Save Changes
+                    </Button>
                 </div>
             </Form>
         </Card>
@@ -81,8 +96,8 @@ export default () => {
         <Formik
             onSubmit={submit}
             initialValues={{
-                name: server.name,
-                description: server.description,
+                name: server.name ?? '',
+                description: server.description ?? '',
             }}
             validationSchema={object().shape({
                 name: string().required().min(1),

@@ -107,8 +107,10 @@ export default () => {
                 <div css={tw`mb-6 p-4 rounded-xl border border-blue-500/20 bg-blue-500/5 flex items-start gap-4`}>
                     <Icon.Info size={20} css={tw`text-blue-400 mt-0.5`} />
                     <p css={tw`text-neutral-400 text-sm leading-relaxed`}>
-                        You&apos;re editing a <code css={tw`font-mono bg-neutral-900 rounded py-0.5 px-1.5 text-blue-300`}>.pteroignore</code> file.
-                        Entries here are excluded from backups. Use <code css={tw`text-blue-300`}>*</code> for wildcards and <code css={tw`text-blue-300`}>!</code> to negate rules.
+                        You&apos;re editing a{' '}
+                        <code css={tw`font-mono bg-neutral-900 rounded py-0.5 px-1.5 text-blue-300`}>.pteroignore</code>{' '}
+                        file. Entries here are excluded from backups. Use <code css={tw`text-blue-300`}>*</code> for
+                        wildcards and <code css={tw`text-blue-300`}>!</code> to negate rules.
                     </p>
                 </div>
             )}
@@ -129,15 +131,19 @@ export default () => {
                     filename={hash.replace(/^#/, '')}
                     onModeChanged={setMode}
                     initialContent={content}
-                    fetchContent={(value) => { fetchFileContent = value; }}
-                    onContentSaved={() => action !== 'edit' ? setModalVisible(true) : save()}
+                    fetchContent={(value) => {
+                        fetchFileContent = value;
+                    }}
+                    onContentSaved={() => (action !== 'edit' ? setModalVisible(true) : save())}
                 />
             </EditorWrapper>
 
             <ControlsContainer>
                 <div css={tw`flex items-center gap-4`}>
                     <div css={tw`flex flex-col`}>
-                        <span css={tw`text-[10px] text-neutral-500 font-bold uppercase tracking-widest mb-1 ml-1`}>Syntax Mode</span>
+                        <span css={tw`text-[10px] text-neutral-500 font-bold uppercase tracking-widest mb-1 ml-1`}>
+                            Syntax Mode
+                        </span>
                         <StyledSelect value={mode} onChange={(e) => setMode(e.currentTarget.value)}>
                             {modes.map((mode) => (
                                 <option key={`${mode.name}_${mode.mime}`} value={mode.mime}>
@@ -150,11 +156,15 @@ export default () => {
                 <div>
                     {action === 'edit' ? (
                         <Can action={'file.update'}>
-                            <Button css={tw`px-8`} onClick={() => save()}>Save Changes</Button>
+                            <Button css={tw`px-8`} onClick={() => save()}>
+                                Save Changes
+                            </Button>
                         </Can>
                     ) : (
                         <Can action={'file.create'}>
-                            <Button css={tw`px-8`} onClick={() => setModalVisible(true)}>Create File</Button>
+                            <Button css={tw`px-8`} onClick={() => setModalVisible(true)}>
+                                Create File
+                            </Button>
                         </Can>
                     )}
                 </div>

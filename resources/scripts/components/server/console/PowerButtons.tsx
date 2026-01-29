@@ -30,10 +30,10 @@ const PowerButton = styled.button<{ $variant: 'start' | 'restart' | 'stop' | 'ki
         $variant === 'start'
             ? tw`bg-green-600/10 text-green-400 border-green-500/30 hover:bg-green-600/20 hover:border-green-500/60`
             : $variant === 'restart'
-                ? tw`bg-blue-600/10 text-blue-400 border-blue-500/30 hover:bg-blue-600/20 hover:border-blue-500/60`
-                : $variant === 'renew'
-                    ? tw`bg-cyan-600/10 text-cyan-400 border-cyan-500/30 hover:bg-cyan-600/20 hover:border-cyan-500/60`
-                    : tw`bg-red-600/10 text-red-400 border-red-500/30 hover:bg-red-600/20 hover:border-red-500/60`};
+            ? tw`bg-blue-600/10 text-blue-400 border-blue-500/30 hover:bg-blue-600/20 hover:border-blue-500/60`
+            : $variant === 'renew'
+            ? tw`bg-cyan-600/10 text-cyan-400 border-cyan-500/30 hover:bg-cyan-600/20 hover:border-cyan-500/60`
+            : tw`bg-red-600/10 text-red-400 border-red-500/30 hover:bg-red-600/20 hover:border-red-500/60`};
 `;
 
 export default ({ className }: PowerButtonProps) => {
@@ -121,8 +121,8 @@ export default ({ className }: PowerButtonProps) => {
                 <SpinnerOverlay visible={loading} />
                 {store && (
                     <>
-                        You will be charged {store.cost} credits to add {store.days} days until your next
-                        renewal is due.
+                        You will be charged {store.cost} credits to add {store.days} days until your next renewal is
+                        due.
                     </>
                 )}
             </Dialog.Confirm>

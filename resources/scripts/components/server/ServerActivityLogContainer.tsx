@@ -24,7 +24,10 @@ export default () => {
     const { hash } = useLocationHash();
     const { clearAndAddHttpError } = useFlashKey('server:activity');
     const [filters, setFilters] = useState<ActivityLogFilters>({ page: 1, sorts: { timestamp: -1 } });
-    const { data, isValidating, error } = useActivityLogs(filters, { revalidateOnMount: true, revalidateOnFocus: false });
+    const { data, isValidating, error } = useActivityLogs(filters, {
+        revalidateOnMount: true,
+        revalidateOnFocus: false,
+    });
 
     useEffect(() => {
         setFilters((value) => ({ ...value, filters: { ip: hash.ip, event: hash.event } }));
@@ -49,7 +52,9 @@ export default () => {
             ) : !data?.items.length ? (
                 <div css={tw`p-12 text-center bg-neutral-900/50 backdrop-blur-md rounded-xl border border-neutral-700`}>
                     <Icon.List size={48} css={tw`mx-auto mb-4 opacity-10 text-neutral-100`} />
-                    <p className={'text-sm font-bold text-neutral-500 uppercase tracking-widest'}>No activity logs available</p>
+                    <p className={'text-sm font-bold text-neutral-500 uppercase tracking-widest'}>
+                        No activity logs available
+                    </p>
                 </div>
             ) : (
                 <ActivityContainer className={'j-up'}>

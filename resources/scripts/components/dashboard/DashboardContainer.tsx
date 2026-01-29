@@ -13,6 +13,7 @@ import ServerRow from '@/components/dashboard/ServerRow';
 import Pagination from '@/components/elements/Pagination';
 import { usePersistedState } from '@/plugins/usePersistedState';
 import PageContentBlock from '@/components/elements/PageContentBlock';
+import OverviewStats from '@/components/dashboard/OverviewStats';
 
 export default () => {
     const { search } = useLocation();
@@ -51,8 +52,11 @@ export default () => {
     }, [error]);
 
     return (
-        <PageContentBlock title={'Dashboard'} css={tw`-mt-10 sm:mt-10`} showFlashKey={'dashboard'}>
-            <div css={tw`mb-10 p-8 rounded-2xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md flex justify-between items-center relative overflow-hidden -mt-10 sm:mt-0`}>
+        <PageContentBlock title={'Dashboard'} css={tw`-mt-10 md:mt-10`} showFlashKey={'dashboard'}>
+            <OverviewStats />
+            <div
+                css={tw`mb-10 px-8 py-5 md:py-7 rounded-2xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md flex justify-between items-center relative overflow-hidden -mt-9 md:mt-0`}
+            >
                 <div css={tw`absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-3xl -mr-16 -mt-16`} />
                 <div css={tw`absolute bottom-0 left-0 w-24 h-24 bg-purple-500/10 blur-3xl -ml-12 -mb-12`} />
 
@@ -63,7 +67,9 @@ export default () => {
                                 {showOnlyAdmin ? 'ADMIN OVERVIEW' : 'MY SERVERS'}
                             </h1>
                             <h3 className={'text-lg mt-1 text-neutral-400 font-medium'}>
-                                {showOnlyAdmin ? 'Viewing all managed instances across the platform.' : 'Directly manage your active server instances.'}
+                                {showOnlyAdmin
+                                    ? 'Viewing all managed instances across the platform.'
+                                    : 'Directly manage your active server instances.'}
                             </h3>
                         </div>
                         <div css={tw`relative z-10`}>
@@ -77,7 +83,11 @@ export default () => {
                 ) : (
                     <div css={tw`relative z-10`}>
                         <h1 className={'text-4xl font-black tracking-tight text-neutral-100 uppercase'}>
-                            Welcome back, <span css={tw`text-blue-400 border-b-2 border-blue-500/30 pb-0.5`}>{firstName || username}</span>!
+                            Welcome back,{' '}
+                            <span css={tw`text-blue-400 border-b-2 border-blue-500/30 pb-0.5`}>
+                                {firstName || username}
+                            </span>
+                            !
                         </h1>
                         <h3 className={'text-lg mt-2 text-neutral-400 font-medium'}>
                             Your dashboard is ready. Select an instance below to start managing.
@@ -98,7 +108,7 @@ export default () => {
                                             key={server.uuid}
                                             server={server}
                                             className={'j-up'}
-                                            css={tw`mt-2`}
+                                            css={tw`mt-7 md:mt-2`}
                                         />
                                     ))}
                                 </>

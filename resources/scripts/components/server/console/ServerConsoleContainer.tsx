@@ -31,15 +31,17 @@ const ServerConsoleContainer = () => {
                     {isNodeUnderMaintenance
                         ? 'The node of this server is currently under maintenance and all actions are unavailable.'
                         : isInstalling
-                            ? 'This server is currently running its installation process and most actions are unavailable.'
-                            : 'This server is currently being transferred to another node and all actions are unavailable.'}
+                        ? 'This server is currently running its installation process and most actions are unavailable.'
+                        : 'This server is currently being transferred to another node and all actions are unavailable.'}
                 </Alert>
             )}
 
             <HeaderCard>
                 <div className={'w-full sm:min-w-0'}>
                     <h1 className={'text-3xl font-bold text-neutral-100 truncate'}>{name}</h1>
-                    <p className={'text-sm text-neutral-400 mt-1 line-clamp-1'}>{description || 'No description provided.'}</p>
+                    <p className={'text-sm text-neutral-400 mt-1 line-clamp-1'}>
+                        {description || 'No description provided.'}
+                    </p>
                 </div>
                 <Can action={['control.start', 'control.stop', 'control.restart']} matchAny>
                     <PowerButtons className={'w-full sm:w-auto'} />

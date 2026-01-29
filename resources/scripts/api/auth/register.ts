@@ -4,6 +4,7 @@ export interface RegisterResponse {
     complete: boolean;
     intended?: string;
     confirmationToken?: string;
+    verified?: boolean;
 }
 
 export interface RegisterData {
@@ -33,6 +34,7 @@ export default ({ username, email, password, recaptchaData }: RegisterData): Pro
                     complete: response.data.data.complete,
                     intended: response.data.data.intended || undefined,
                     confirmationToken: response.data.data.confirmation_token || undefined,
+                    verified: response.data.data.verified || false,
                 });
             })
             .catch(reject);

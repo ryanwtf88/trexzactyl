@@ -79,7 +79,8 @@ export default ({ className }: WithClassname) => {
                             .url()
                             .test('unique', 'File or directory with that name already exists.', (v) => {
                                 return (
-                                    v !== undefined && v !== null &&
+                                    v !== undefined &&
+                                    v !== null &&
                                     data !== undefined &&
                                     data.filter((f) => f.name.toLowerCase() === v.toLowerCase()).length < 1
                                 );

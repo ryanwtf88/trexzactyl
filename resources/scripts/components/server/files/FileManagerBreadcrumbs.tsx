@@ -58,9 +58,7 @@ export default ({ renderLeft, withinFileEditor, isNewFile }: Props) => {
             {breadcrumbs().map((crumb, index) =>
                 crumb.path ? (
                     <React.Fragment key={index}>
-                        <CrumbLink to={`/server/${id}/files#${encodePathSegments(crumb.path)}`}>
-                            {crumb.name}
-                        </CrumbLink>
+                        <CrumbLink to={`/server/${id}/files#${encodePathSegments(crumb.path)}`}>{crumb.name}</CrumbLink>
                         <span className={'text-neutral-700 mx-1'}>/</span>
                     </React.Fragment>
                 ) : (

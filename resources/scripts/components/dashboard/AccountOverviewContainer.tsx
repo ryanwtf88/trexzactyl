@@ -40,10 +40,7 @@ export default () => {
                     Your account must have two-factor authentication enabled in order to continue.
                 </Alert>
             )}
-            <div
-                className={'j-up'}
-                css={[tw`lg:grid lg:grid-cols-2 gap-8 mb-10 mt-10`]}
-            >
+            <div className={'j-up'} css={[tw`lg:grid lg:grid-cols-2 gap-8 mb-10 mt-10`]}>
                 <ContentBox title={'Update Username'} showFlashes={'account:username'}>
                     <UpdateUsernameForm />
                 </ContentBox>

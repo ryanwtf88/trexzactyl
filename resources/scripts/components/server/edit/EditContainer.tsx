@@ -55,7 +55,9 @@ const EditContainer = () => {
             </IconWrapper>
             <h3 css={tw`text-sm font-black text-neutral-100 uppercase tracking-widest mb-2`}>{title}</h3>
             <p css={tw`text-[10px] text-neutral-500 font-bold uppercase mb-6 text-center leading-relaxed h-8`}>
-                {desc}<br />{limit}
+                {desc}
+                <br />
+                {limit}
             </p>
 
             <div css={tw`flex items-center gap-3 w-full`}>

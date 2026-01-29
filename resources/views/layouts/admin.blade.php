@@ -35,6 +35,42 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+    <style>
+        .wrapper,
+        .content-wrapper,
+        .main-sidebar,
+        .box,
+        .box-header,
+        .box-footer,
+        .box-body,
+        .nav-tabs-custom,
+        .nav-tabs-custom>.tab-content,
+        .info-box,
+        .info-box-content,
+        .small-box,
+        .modal-content,
+        .modal-body,
+        .modal-header,
+        .modal-footer {
+            background-color: #201F31 !important;
+            background: #201F31 !important;
+            color: #cad1d8 !important;
+        }
+
+        .form-control,
+        .select2-selection,
+        .select2-dropdown,
+        .select2-search__field {
+            background-color: #201F31 !important;
+            border-color: #33404d !important;
+            color: #cad1d8 !important;
+        }
+
+        .table-hover>tbody>tr:hover {
+            background-color: #33404d !important;
+        }
+    </style>
     @show
 </head>
 

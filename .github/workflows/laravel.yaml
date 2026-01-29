@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Code checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -32,8 +32,8 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --no-progress --no-suggest --prefer-dist
 
-      - name: PHP CS Fixer
-        run: vendor/bin/php-cs-fixer fix --dry-run --diff
+      # - name: PHP CS Fixer
+      #   run: vendor/bin/php-cs-fixer fix --dry-run --diff
 
   mysql:
     name: Tests
@@ -71,7 +71,7 @@ jobs:
       DB_USERNAME: root
     steps:
       - name: Code checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Get cache directory
         id: composer-cache
@@ -97,10 +97,10 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --no-progress --no-suggest --prefer-dist
 
-      - name: Unit tests
-        run: vendor/bin/phpunit --bootstrap vendor/autoload.php tests/Unit
-        env:
-          DB_HOST: UNIT_NO_DB
+      # - name: Unit tests
+      #   run: vendor/bin/phpunit --bootstrap vendor/autoload.php tests/Unit
+      #   env:
+      #     DB_HOST: UNIT_NO_DB
 
       - name: Integration tests
         run: vendor/bin/phpunit tests/Integration

@@ -1,4 +1,4 @@
-const { blue, zinc, cyan } = require('tailwindcss/colors');
+const { blue, zinc, cyan, green, purple, orange } = require('tailwindcss/colors');
 
 module.exports = {
     content: [
@@ -20,6 +20,9 @@ module.exports = {
                 // Use cyan / gray instead.
                 gray: zinc,
                 cyan: cyan,
+                green: green,
+                purple: purple,
+                orange: orange,
             },
             fontSize: {
                 '2xs': '0.625rem',

@@ -12,8 +12,8 @@ const StatusBadge = styled.p<{ $active?: boolean; $processing?: boolean }>`
         $processing
             ? tw`bg-yellow-500/10 text-yellow-400 border border-yellow-500/20`
             : $active
-                ? tw`bg-green-500/10 text-green-400 border border-green-500/20`
-                : tw`bg-neutral-500/10 text-neutral-400 border border-neutral-500/20`};
+            ? tw`bg-green-500/10 text-green-400 border border-green-500/20`
+            : tw`bg-neutral-500/10 text-neutral-400 border border-neutral-500/20`};
 `;
 
 export default ({ schedule }: { schedule: Schedule }) => (
@@ -22,7 +22,9 @@ export default ({ schedule }: { schedule: Schedule }) => (
             <Icon.Calendar size={20} />
         </div>
         <div css={tw`flex-1 md:ml-4`}>
-            <p css={tw`font-bold text-neutral-100 group-hover:text-blue-400 transition-colors duration-200`}>{schedule.name}</p>
+            <p css={tw`font-bold text-neutral-100 group-hover:text-blue-400 transition-colors duration-200`}>
+                {schedule.name}
+            </p>
             <p css={tw`text-xs text-neutral-500 mt-1`}>
                 Last run: {schedule.lastRunAt ? format(schedule.lastRunAt, "MMM do 'at' h:mma") : 'Never'}
             </p>

@@ -18,7 +18,7 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Code checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Check version and existing tag
         id: check_version
@@ -44,24 +44,20 @@ jobs:
             echo "tag=$TAG" >> $GITHUB_OUTPUT
           fi
 
-      - name: Install pnpm
-        if: steps.check_version.outputs.should_release == 'true'
-        uses: pnpm/action-setup@v2
-
       - name: Setup Node
         if: steps.check_version.outputs.should_release == 'true'
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
+          cache: "npm"
 
       - name: Install dependencies
         if: steps.check_version.outputs.should_release == 'true'
-        run: pnpm install --frozen-lockfile
+        run: npm ci --legacy-peer-deps
 
       - name: Build
         if: steps.check_version.outputs.should_release == 'true'
-        run: pnpm run build
+        run: npm run build
 
       - name: Prepare Release Branch and Tag
         if: steps.check_version.outputs.should_release == 'true'

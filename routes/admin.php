@@ -48,7 +48,7 @@ Route::group(['prefix' => '/'], function () {
         Route::patch('/', [Trexzactyl\ApprovalsController::class, 'update'])->name('admin.trexzactyl.approvals');
 
         Route::post('/deny/{id}', [Trexzactyl\ApprovalsController::class, 'deny'])->name('admin.trexzactyl.approvals.deny');
-        Route::post('/approve/all', [Trexzactyl\ApprovalsController::class, 'bulkAction'])->name('admin.trexzactyl.approvals.all');
+        Route::post('/approve/all/{action}', [Trexzactyl\ApprovalsController::class, 'bulkAction'])->name('admin.trexzactyl.approvals.all');
         Route::post('/approve/{id}', [Trexzactyl\ApprovalsController::class, 'approve'])->name('admin.trexzactyl.approvals.approve');
     });
 
@@ -97,7 +97,7 @@ Route::group(['prefix' => 'tickets'], function () {
     Route::get('/', [Admin\TicketsController::class, 'index'])->name('admin.tickets.index');
     Route::get('/{ticket:id}', [Admin\TicketsController::class, 'view'])->name('admin.tickets.view');
 
-    Route::post('/', [Admin\TicketsController::class, 'toggle'])->name('admin.tickets.index');
+    Route::post('/', [Admin\TicketsController::class, 'toggle'])->name('admin.tickets.toggle');
     Route::post('/{ticket:id}/status', [Admin\TicketsController::class, 'status'])->name('admin.tickets.status');
     Route::post('/{ticket:id}/delete', [Admin\TicketsController::class, 'delete'])->name('admin.tickets.delete');
     Route::post('/{ticket:id}/message', [Admin\TicketsController::class, 'message'])->name('admin.tickets.message');

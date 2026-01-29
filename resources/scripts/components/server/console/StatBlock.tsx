@@ -35,7 +35,9 @@ export default ({ title, copyOnClick, icon, className, children }: Props) => {
                         <div className={'text-neutral-500'}>
                             <Icon icon={icon} />
                         </div>
-                        {title && <p className={'text-xs text-neutral-400 font-bold uppercase tracking-wider'}>{title}</p>}
+                        {title && (
+                            <p className={'text-xs text-neutral-400 font-bold uppercase tracking-wider'}>{title}</p>
+                        )}
                     </div>
                     <div
                         ref={ref}

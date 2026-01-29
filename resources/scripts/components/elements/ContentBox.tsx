@@ -15,7 +15,7 @@ type Props = Readonly<
 
 const ContentBox = ({ title, borderColor, showFlashes, showLoadingOverlay, children, isLight, ...props }: Props) => (
     <div {...props}>
-        {title && <h2 css={tw`text-sm font-black text-neutral-400 uppercase tracking-widest mb-4 px-4`}>{title}</h2>}
+        {title && <h2 css={tw`text-sm font-bold text-neutral-300 mb-4 px-4`}>{title}</h2>}
         {showFlashes && (
             <FlashMessageRender byKey={typeof showFlashes === 'string' ? showFlashes : undefined} css={tw`mb-4`} />
         )}

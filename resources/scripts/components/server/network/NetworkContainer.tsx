@@ -63,11 +63,16 @@ const NetworkContainer = () => {
                     {allocationLimit > 0 && (
                         <Can action={'allocation.create'}>
                             <SpinnerOverlay visible={loading} />
-                            <div css={tw`mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md`}>
+                            <div
+                                css={tw`mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md`}
+                            >
                                 <div css={tw`flex items-center gap-3`}>
                                     <Icon.Activity size={18} css={tw`text-blue-400`} />
                                     <p css={tw`text-sm text-neutral-400 font-bold uppercase tracking-wider`}>
-                                        Allocations: <span css={tw`text-neutral-100 ml-1`}>{data.length} / {allocationLimit} used</span>
+                                        Allocations:{' '}
+                                        <span css={tw`text-neutral-100 ml-1`}>
+                                            {data.length} / {allocationLimit} used
+                                        </span>
                                     </p>
                                 </div>
                                 {allocationLimit > data.length && (

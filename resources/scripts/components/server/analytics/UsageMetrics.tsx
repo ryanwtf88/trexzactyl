@@ -3,10 +3,9 @@ import UptimeDuration from '../UptimeDuration';
 import { ServerContext } from '@/state/server';
 import React, { useEffect, useState } from 'react';
 import ContentBox from '@/components/elements/ContentBox';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as Icon from 'react-feather';
 import styles from '@/components/server/console/style.module.css';
 import { SocketEvent, SocketRequest } from '@/components/server/events';
-import { faClock, faMicrochip, faMemory, faHdd } from '@fortawesome/free-solid-svg-icons';
 
 type Stats = Record<'memory' | 'cpu' | 'disk' | 'uptime', number>;
 
@@ -87,7 +86,7 @@ export default () => {
                 <ContentBox isLight>
                     <div className={'text-center'}>
                         <p className={'font-bold text-xl'}>
-                            <FontAwesomeIcon icon={faClock} size={'1x'} />
+                            <Icon.Clock size={20} />
                             <br />
                             Server is <span className={getColorFromStatus(status ?? 'offline')}>{status}</span>
                         </p>
@@ -103,7 +102,7 @@ export default () => {
                 <ContentBox isLight>
                     <div className={'text-center'}>
                         <p className={'font-bold text-xl'}>
-                            <FontAwesomeIcon icon={faMicrochip} size={'1x'} />
+                            <Icon.Cpu size={20} />
                             <br />
                             CPU usage is {getStatusFromUsage(parseInt(cpuUsed))}
                         </p>
@@ -113,7 +112,7 @@ export default () => {
                 <ContentBox isLight>
                     <div className={'text-center'}>
                         <p className={'font-bold text-xl'}>
-                            <FontAwesomeIcon icon={faMemory} size={'1x'} />
+                            <Icon.Database size={20} />
                             <br />
                             RAM usage is {getStatusFromUsage(parseInt(memoryUsed))}
                         </p>
@@ -123,7 +122,7 @@ export default () => {
                 <ContentBox isLight>
                     <div className={'text-center'}>
                         <p className={'font-bold text-xl'}>
-                            <FontAwesomeIcon icon={faHdd} size={'1x'} />
+                            <Icon.HardDrive size={20} />
                             <br />
                             Disk usage is {getStatusFromUsage(parseInt(diskUsed))}
                         </p>

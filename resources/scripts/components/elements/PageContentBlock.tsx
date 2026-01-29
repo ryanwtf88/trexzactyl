@@ -11,6 +11,7 @@ export interface PageContentBlockProps {
     description?: string | null;
     className?: string;
     showFlashKey?: string;
+    children?: React.ReactNode;
 }
 
 const PageContentBlock: React.FC<PageContentBlockProps> = ({
@@ -21,6 +22,7 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({
     children,
 }) => {
     const alert = useStoreState((state) => state.settings.data!.alert);
+    const nodeRef = React.useRef(null);
 
     useEffect(() => {
         if (title) {
@@ -29,15 +31,15 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({
     }, [title]);
 
     return (
-        <CSSTransition timeout={150} classNames={'fade'} appear in>
-            <div css={tw`my-4`}>
+        <CSSTransition timeout={150} classNames={'fade'} appear in nodeRef={nodeRef}>
+            <div css={tw`my-4 md:mt-10`} ref={nodeRef}>
                 <ContentContainer className={className}>
                     {alert.message && (
                         <Alert type={alert.type} className={'my-4'}>
                             {alert.message}
                         </Alert>
                     )}
-                    {showFlashKey && <FlashMessageRender byKey={showFlashKey} css={tw`my-4`} />}
+                    {showFlashKey && <FlashMessageRender byKey={showFlashKey} css={tw`mb-4 mt-7 md:mt-4`} />}
                     {description && (
                         <div className={'my-10 j-left'}>
                             <h1 className={'text-5xl'}>{title}</h1>

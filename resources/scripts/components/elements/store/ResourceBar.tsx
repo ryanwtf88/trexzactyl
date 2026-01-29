@@ -78,15 +78,11 @@ const ResourceCard = ({ title, icon, amount, toHuman, suffix, color, delay }: Bo
         transition={{ delay, duration: 0.3 }}
         whileHover={{ translateY: -4 }}
     >
-        <IconWrapper $color={color}>
-            {React.cloneElement(icon, { size: 18, strokeWidth: 2.5 })}
-        </IconWrapper>
+        <IconWrapper $color={color}>{React.cloneElement(icon, { size: 18, strokeWidth: 2.5 })}</IconWrapper>
         <ResourceTitle>{title}</ResourceTitle>
         <ResourceValue>
-            <span className="amount">
-                {toHuman ? megabytesToHuman(amount) : amount.toLocaleString()}
-            </span>
-            {suffix && <span className="suffix">{suffix}</span>}
+            <span className='amount'>{toHuman ? megabytesToHuman(amount) : amount.toLocaleString()}</span>
+            {suffix && <span className='suffix'>{suffix}</span>}
         </ResourceValue>
     </PremiumBox>
 );
@@ -98,11 +94,12 @@ export default () => {
         getResources().then((resources) => setResources(resources));
     }, []);
 
-    if (!resources) return (
-        <div css={tw`w-full flex justify-center py-10`}>
-            <Spinner size={'large'} />
-        </div>
-    );
+    if (!resources)
+        return (
+            <div css={tw`w-full flex justify-center py-10`}>
+                <Spinner size={'large'} />
+            </div>
+        );
 
     return (
         <StoreContainer css={tw`grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-4 w-full`}>

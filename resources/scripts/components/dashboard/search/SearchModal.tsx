@@ -107,8 +107,14 @@ export default ({ ...props }: Props) => {
                                     onClick={() => props.onDismissed()}
                                 >
                                     <div css={tw`flex-1 mr-4`}>
-                                        <p css={tw`text-sm font-black text-neutral-100 uppercase tracking-widest leading-none`}>{server.name}</p>
-                                        <p css={tw`mt-1.5 text-[10px] font-bold text-neutral-500 font-mono tracking-tighter opacity-80`}>
+                                        <p
+                                            css={tw`text-sm font-black text-neutral-100 uppercase tracking-widest leading-none`}
+                                        >
+                                            {server.name}
+                                        </p>
+                                        <p
+                                            css={tw`mt-1.5 text-[10px] font-bold text-neutral-500 font-mono tracking-tighter opacity-80`}
+                                        >
                                             {server.allocations
                                                 .filter((alloc) => alloc.isDefault)
                                                 .map((allocation) => (
@@ -119,7 +125,9 @@ export default ({ ...props }: Props) => {
                                         </p>
                                     </div>
                                     <div css={tw`flex-none text-right`}>
-                                        <span css={tw`text-[10px] font-black uppercase tracking-widest py-1 px-2.5 bg-blue-500/10 text-blue-400 rounded-lg border border-blue-500/30`}>
+                                        <span
+                                            css={tw`text-[10px] font-black uppercase tracking-widest py-1 px-2.5 bg-blue-500/10 text-blue-400 rounded-lg border border-blue-500/30`}
+                                        >
                                             {server.node}
                                         </span>
                                     </div>

@@ -14,12 +14,10 @@ export default () => {
         <PageContentBlock title={'Storefront Overview'}>
             <div css={tw`flex flex-col lg:flex-row lg:items-end justify-between mt-10 mb-12 gap-8`}>
                 <div css={tw`flex-1`}>
-                    <h1 css={tw`text-4xl md:text-6xl font-black uppercase tracking-tighter text-white mr-4`}>
+                    <h1 css={tw`text-4xl md:text-6xl font-black text-white mr-4`}>
                         Hey, <span css={tw`text-blue-500`}>{username}</span>!
                     </h1>
-                    <h3 css={tw`text-lg md:text-2xl mt-2 text-neutral-500 font-bold uppercase tracking-widest`}>
-                        👋 Welcome to the store
-                    </h3>
+                    <h3 css={tw`text-lg md:text-2xl mt-2 text-neutral-500 font-bold`}>👋 Welcome to the store</h3>
                 </div>
             </div>
 
