@@ -74,7 +74,7 @@ jobs:
           git checkout -b $BRANCH
           
           # Bake version into app.php
-          sed -i "s/    'version' => 'canary',/    'version' => '$VERSION',/" config/app.php
+          sed -i "s/'version' => env('APP_VERSION', '3.7.4'),/'version' => '$VERSION',/" config/app.php
           
           git add config/app.php
           git commit -m "Release $TAG"

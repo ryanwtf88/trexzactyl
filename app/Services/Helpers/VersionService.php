@@ -20,21 +20,21 @@ class VersionService
 
         // Cache the version for 1 hour to avoid reading file on every request
         return Cache::remember('app_version', 3600, function () {
-            // Try composer.json first
-            $composerPath = base_path('composer.json');
-            if (file_exists($composerPath)) {
-                $composerJson = json_decode(file_get_contents($composerPath), true);
-                if (isset($composerJson['version'])) {
-                    return $composerJson['version'];
-                }
-            }
-
-            // Try package.json
+            // Try package.json first (Prioritized per user request)
             $packagePath = base_path('package.json');
             if (file_exists($packagePath)) {
                 $packageJson = json_decode(file_get_contents($packagePath), true);
                 if (isset($packageJson['version'])) {
                     return $packageJson['version'];
+                }
+            }
+
+            // Try composer.json
+            $composerPath = base_path('composer.json');
+            if (file_exists($composerPath)) {
+                $composerJson = json_decode(file_get_contents($composerPath), true);
+                if (isset($composerJson['version'])) {
+                    return $composerJson['version'];
                 }
             }
 

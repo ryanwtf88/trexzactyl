@@ -18,20 +18,31 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box
-                @if($version->isLatestPanel())
-                    box-success
-                @else
-                    box-danger
-                @endif
-            ">
+                        @if($version->isLatestPanel())
+                            box-success
+                        @else
+                            box-danger
+                        @endif
+                    ">
                 <div class="box-header with-border">
-                    <i class="fa fa-code-fork"></i> <h3 class="box-title">Software Release <small>Verify Trexzactyl is up-to-date.</small></h3>
+                    <i class="fa fa-code-fork"></i>
+                    <h3 class="box-title">Software Release <small>Verify Trexzactyl is up-to-date.</small></h3>
                 </div>
                 <div class="box-body">
                     @if ($version->isLatestPanel())
-                        You are running Trexzactyl <code>{{ \Trexzactyl\Services\Helpers\VersionService::getCurrentVersion() }}</code>. 
+                        You are running Trexzactyl
+                        <code>{{ \Trexzactyl\Services\Helpers\VersionService::getCurrentVersion() }}</code>.
                     @else
-                        Trexzactyl is not up-to-date. <code>{{ \Trexzactyl\Services\Helpers\VersionService::getCurrentVersion() }} (current) -> <a href="https://github.com/Trexzactyl/Trexzactyl/releases/v{{ $version->getPanel() }}" target="_blank">{{ $version->getPanel() }}</a> (latest)</code>
+                        <div class="alert alert-danger">
+                            <i class="fa fa-exclamation-triangle"></i> <strong>A new version of Trexzactyl is
+                                available!</strong><br>
+                            You are running version
+                            <code>{{ \Trexzactyl\Services\Helpers\VersionService::getCurrentVersion() }}</code>. The latest
+                            version is <code>{{ $version->getPanel() }}</code>.
+                            <br><br>
+                            <a href="https://github.com/Trexzactyl/trexzactyl/releases/v{{ $version->getPanel() }}"
+                                target="_blank" class="btn btn-sm btn-default">View Release Notes</a>
+                        </div>
                     @endif
                 </div>
             </div>
@@ -81,7 +92,9 @@
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <i class="fa fa-bar-chart"></i> <h3 class="box-title">Resource Utilization <small>A glance of the total amount of resources used.</small></h3>
+                    <i class="fa fa-bar-chart"></i>
+                    <h3 class="box-title">Resource Utilization <small>A glance of the total amount of resources
+                            used.</small></h3>
                 </div>
                 <div class="box-body">
                     <div class="col-xs-12 col-md-4">
@@ -110,4 +123,3 @@
     {!! Theme::js('vendor/chartjs/chart.min.js') !!}
     {!! Theme::js('js/admin/statistics.js') !!}
 @endsection
-

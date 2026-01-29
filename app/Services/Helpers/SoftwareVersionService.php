@@ -46,7 +46,7 @@ class SoftwareVersionService
      */
     public function getDiscord(): string
     {
-        return Arr::get(self::$result, 'discord') ?? 'https://discord.gg/qttGR4Z5Pk';
+        return Arr::get(self::$result, 'discord') ?? 'https://discord.gg/jBDBRjzQHu';
     }
 
     /**
@@ -54,7 +54,7 @@ class SoftwareVersionService
      */
     public function getDonations(): string
     {
-        return Arr::get(self::$result, 'donations') ?? 'https://github.com/sponsors/matthewpi';
+        return Arr::get(self::$result, 'donations') ?? 'https://discord.gg/jBDBRjzQHu';
     }
 
     /**
@@ -62,11 +62,12 @@ class SoftwareVersionService
      */
     public function isLatestPanel(): bool
     {
-        if (config('app.version') === 'canary') {
+        $currentVersion = VersionService::getCurrentVersion();
+        if ($currentVersion === 'canary') {
             return true;
         }
 
-        return version_compare(config('app.version'), $this->getPanel()) >= 0;
+        return version_compare($currentVersion, $this->getPanel()) >= 0;
     }
 
     /**
