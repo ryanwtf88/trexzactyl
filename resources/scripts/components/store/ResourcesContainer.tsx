@@ -1,12 +1,10 @@
 import tw from 'twin.macro';
-import { breakpoint } from '@/theme';
 import * as Icon from 'react-feather';
 import { Link } from 'react-router-dom';
 import useFlash from '@/plugins/useFlash';
 import styled from 'styled-components/macro';
 import React, { useState, useEffect } from 'react';
 import Spinner from '@/components/elements/Spinner';
-import { Button } from '@/components/elements/button';
 import { Dialog } from '@/components/elements/dialog';
 import { getCosts, Costs } from '@/api/store/getCosts';
 import purchaseResource from '@/api/store/purchaseResource';
@@ -135,9 +133,9 @@ export default () => {
                     description={'Add more MySQL databases for your applications.'}
                 />
                 <div
-                    css={tw`bg-neutral-900/40 backdrop-blur-xl border border-neutral-700 rounded-3xl p-10 relative overflow-hidden flex flex-col justify-center`}
+                    css={tw`bg-neutral-900 bg-opacity-40 backdrop-blur-xl border border-neutral-700 rounded-sm p-10 relative overflow-hidden flex flex-col justify-center`}
                 >
-                    <div css={tw`absolute top-0 right-0 w-24 h-24 bg-blue-500/10 blur-2xl -mr-12 -mt-12`} />
+                    <div css={tw`absolute top-0 right-0 w-24 h-24 bg-blue-500 bg-opacity-10 blur-2xl -mr-12 -mt-12`} />
                     <h3 css={tw`text-lg font-bold text-white mb-6 flex items-center`}>
                         <Icon.Info size={20} css={tw`mr-3 text-blue-400`} strokeWidth={2.5} /> Usage Guide
                     </h3>
@@ -164,12 +162,14 @@ export default () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
-                    css={tw`w-full max-w-5xl bg-neutral-900/40 backdrop-blur-xl border border-neutral-700 p-12 rounded-[2.5rem] text-center relative overflow-hidden shadow-2xl hover:border-blue-500 transition-all duration-500`}
+                    css={tw`w-full max-w-5xl bg-neutral-900 bg-opacity-40 backdrop-blur-xl border border-neutral-700 p-12 rounded-sm text-center relative overflow-hidden shadow-2xl hover:border-blue-500 transition-all duration-500`}
                 >
                     <div
                         css={tw`absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5 opacity-50`}
                     />
-                    <div css={tw`absolute -bottom-24 -left-24 w-64 h-64 bg-blue-500/10 blur-[100px] rounded-full`} />
+                    <div
+                        css={tw`absolute -bottom-24 -left-24 w-64 h-64 bg-blue-500 bg-opacity-10 blur-3xl rounded-full`}
+                    />
                     <div css={tw`relative z-10`}>
                         <h1 css={tw`text-5xl md:text-6xl font-black text-white mb-4`}>Deploy Now</h1>
                         <p css={tw`text-neutral-500 font-bold text-xs mb-10`}>
@@ -177,7 +177,7 @@ export default () => {
                         </p>
                         <Link to={'/store/create'}>
                             <button
-                                css={tw`px-16 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm py-5 rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-95`}
+                                css={tw`px-16 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm py-5 rounded-sm transition-all shadow-xl hover:shadow-2xl active:scale-95`}
                             >
                                 Initialize Instance
                             </button>

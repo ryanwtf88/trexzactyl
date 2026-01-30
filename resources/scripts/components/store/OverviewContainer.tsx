@@ -32,7 +32,7 @@ export default () => {
             />
             <StoreBanner
                 title={'Need more resources?'}
-                className={'bg-gradient-to-br from-green-600/20 via-transparent to-emerald-600/20'}
+                className={'bg-gradient-to-br from-green-600/20 via-transparent to-green-600/20'}
                 action={'Buy Resources'}
                 link={'resources'}
             />

@@ -24,16 +24,16 @@ import styled from 'styled-components/macro';
 import * as Icon from 'react-feather';
 
 const EditorWrapper = styled.div`
-    ${tw`relative rounded-xl border border-neutral-700 bg-[#1e1e1e]`};
+    ${tw`relative rounded-xl border border-neutral-700 bg-neutral-900`};
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
 `;
 
 const ControlsContainer = styled.div`
-    ${tw`flex flex-wrap items-center justify-between gap-4 p-4 mt-4 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md`};
+    ${tw`flex flex-wrap items-center justify-between gap-4 p-4 mt-4 rounded-xl border border-neutral-700 bg-neutral-900 bg-opacity-50 backdrop-blur-md`};
 `;
 
 const StyledSelect = styled(Select)`
-    ${tw`bg-neutral-800/50 border-neutral-700 text-xs font-bold uppercase tracking-wider`};
+    ${tw`bg-neutral-800 bg-opacity-50 border-neutral-700 text-xs font-bold uppercase tracking-wider`};
 `;
 
 export default () => {
@@ -104,7 +104,9 @@ export default () => {
             </div>
 
             {hash.replace(/^#/, '').endsWith('.pteroignore') && (
-                <div css={tw`mb-6 p-4 rounded-xl border border-blue-500/20 bg-blue-500/5 flex items-start gap-4`}>
+                <div
+                    css={tw`mb-6 p-4 rounded-xl border border-blue-500 border-opacity-20 bg-blue-500 bg-opacity-5 flex items-start gap-4`}
+                >
                     <Icon.Info size={20} css={tw`text-blue-400 mt-0.5`} />
                     <p css={tw`text-neutral-400 text-sm leading-relaxed`}>
                         You&apos;re editing a{' '}
@@ -141,7 +143,7 @@ export default () => {
             <ControlsContainer>
                 <div css={tw`flex items-center gap-4`}>
                     <div css={tw`flex flex-col`}>
-                        <span css={tw`text-[10px] text-neutral-500 font-bold uppercase tracking-widest mb-1 ml-1`}>
+                        <span css={tw`text-xs text-neutral-500 font-bold uppercase tracking-wider mb-1 ml-1`}>
                             Syntax Mode
                         </span>
                         <StyledSelect value={mode} onChange={(e) => setMode(e.currentTarget.value)}>

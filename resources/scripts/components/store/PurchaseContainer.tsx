@@ -5,28 +5,11 @@ import styled from 'styled-components/macro';
 import { useStoreState } from '@/state/hooks';
 import React, { useEffect, useState } from 'react';
 import Spinner from '@/components/elements/Spinner';
-import ContentBox from '@/components/elements/ContentBox';
 import { getResources, Resources } from '@/api/store/getResources';
 import PageContentBlock from '@/components/elements/PageContentBlock';
 import StripePurchaseForm from '@/components/store/forms/StripePurchaseForm';
 import PaypalPurchaseForm from '@/components/store/forms/PaypalPurchaseForm';
 import ManualPurchaseForm from '@/components/store/forms/ManualPurchaseForm';
-
-const Container = styled.div`
-    ${tw`flex flex-wrap`};
-
-    & > div {
-        ${tw`w-full`};
-
-        ${breakpoint('sm')`
-      width: calc(50% - 1rem);
-    `}
-
-        ${breakpoint('md')`
-      ${tw`w-auto flex-1`};
-    `}
-    }
-`;
 
 export default () => {
     const [resources, setResources] = useState<Resources>();
@@ -47,19 +30,21 @@ export default () => {
             <div css={tw`lg:grid lg:grid-cols-2 my-10 gap-8`}>
                 <div
                     className={'group'}
-                    css={tw`bg-neutral-900/40 backdrop-blur-xl border border-neutral-700 rounded-3xl p-10 flex flex-col items-center justify-center text-center relative overflow-hidden transition-all hover:border-blue-500 shadow-2xl`}
+                    css={tw`bg-neutral-900 bg-opacity-40 backdrop-blur-xl border border-neutral-700 rounded-sm p-10 flex flex-col items-center justify-center text-center relative overflow-hidden transition-all hover:border-blue-500 shadow-2xl`}
                 >
                     <div
-                        css={tw`absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-60`}
+                        css={tw`absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-60`}
                     />
                     <div
                         css={tw`absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/10 opacity-50`}
                     />
-                    <div css={tw`absolute -bottom-10 -right-10 w-40 h-40 bg-blue-500/10 blur-[80px] rounded-full`} />
+                    <div
+                        css={tw`absolute -bottom-10 -right-10 w-40 h-40 bg-blue-500 bg-opacity-10 blur-3xl rounded-full`}
+                    />
 
                     <div css={tw`relative z-10`}>
                         <div
-                            css={tw`bg-blue-600/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-blue-500/20 group-hover:scale-110 transition-transform duration-500 shadow-lg`}
+                            css={tw`bg-blue-600 bg-opacity-10 w-16 h-16 rounded-sm flex items-center justify-center mx-auto mb-6 border border-blue-500 border-opacity-20 group-hover:scale-110 transition-transform duration-500 shadow-lg`}
                         >
                             <Icon.DollarSign size={32} css={tw`text-blue-400`} strokeWidth={2.5} />
                         </div>
@@ -72,7 +57,7 @@ export default () => {
                 </div>
 
                 <div
-                    css={tw`bg-neutral-900/40 backdrop-blur-xl border border-neutral-700 rounded-3xl p-10 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl hover:border-blue-500 transition-all`}
+                    css={tw`bg-neutral-900 bg-opacity-40 backdrop-blur-xl border border-neutral-700 rounded-sm p-10 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl hover:border-blue-500 transition-all`}
                 >
                     <div
                         css={tw`absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5 opacity-50`}
@@ -86,7 +71,7 @@ export default () => {
                                 {paypal && (
                                     <div
                                         className={'group'}
-                                        css={tw`shadow-lg hover:shadow-xl transition-all p-1 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10`}
+                                        css={tw`shadow-lg hover:shadow-xl transition-all p-1 bg-white/5 rounded-sm border border-white/5 hover:bg-white/10`}
                                     >
                                         <PaypalPurchaseForm />
                                     </div>
@@ -94,7 +79,7 @@ export default () => {
                                 {stripe && (
                                     <div
                                         className={'group'}
-                                        css={tw`shadow-lg hover:shadow-xl transition-all p-1 bg-white/5 rounded-2xl border border-white/5 text-left hover:bg-white/10`}
+                                        css={tw`shadow-lg hover:shadow-xl transition-all p-1 bg-white/5 rounded-sm border border-white/5 text-left hover:bg-white/10`}
                                     >
                                         <StripePurchaseForm />
                                     </div>
@@ -102,10 +87,10 @@ export default () => {
                                 {(bkash || nagad) && (
                                     <div
                                         className={'group'}
-                                        css={tw`p-6 bg-white/5 rounded-2xl border border-white/5 text-left relative overflow-hidden hover:border-blue-500 transition-all`}
+                                        css={tw`p-6 bg-white/5 rounded-sm border border-white/5 text-left relative overflow-hidden hover:border-blue-500 transition-all`}
                                     >
                                         <div
-                                            css={tw`absolute top-0 right-0 w-24 h-24 bg-blue-500/10 blur-2xl rounded-full -mr-12 -mt-12 transition-all group-hover:bg-blue-500/20`}
+                                            css={tw`absolute top-0 right-0 w-24 h-24 bg-blue-500 bg-opacity-10 blur-2xl -mr-12 -mt-12 transition-all group-hover:bg-blue-500 bg-opacity-20`}
                                         />
                                         <h3 css={tw`text-base text-white font-bold mb-4 flex items-center`}>
                                             <Icon.CreditCard size={18} css={tw`mr-2 text-blue-400`} strokeWidth={2.5} />
@@ -132,13 +117,13 @@ export default () => {
                     <div css={tw`lg:grid lg:grid-cols-2 gap-8`}>
                         <div
                             className={'group'}
-                            css={tw`bg-neutral-900/40 backdrop-blur-xl border border-neutral-700 rounded-3xl p-12 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl hover:border-green-500 transition-all`}
+                            css={tw`bg-neutral-900 bg-opacity-40 backdrop-blur-xl border border-neutral-700 rounded-sm p-12 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl hover:border-green-500 transition-all`}
                         >
                             <div
                                 css={tw`absolute inset-0 bg-gradient-to-br from-green-600/5 via-transparent to-transparent opacity-50`}
                             />
                             <div
-                                css={tw`bg-green-600/10 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 border border-green-500/20 group-hover:rotate-12 transition-transform duration-500 shadow-lg`}
+                                css={tw`bg-green-600 bg-opacity-10 w-20 h-20 rounded-sm flex items-center justify-center mb-8 border border-green-500 border-opacity-20 group-hover:rotate-12 transition-transform duration-500 shadow-lg`}
                             >
                                 <Icon.Zap size={40} css={tw`text-green-400 animate-pulse`} strokeWidth={2.5} />
                             </div>
@@ -150,10 +135,10 @@ export default () => {
 
                         <div
                             className={'group'}
-                            css={tw`bg-neutral-900/40 backdrop-blur-xl border border-neutral-700 rounded-3xl p-12 flex flex-col justify-center relative overflow-hidden shadow-2xl hover:border-blue-500 transition-all`}
+                            css={tw`bg-neutral-900 bg-opacity-40 backdrop-blur-xl border border-neutral-700 rounded-sm p-12 flex flex-col justify-center relative overflow-hidden shadow-2xl hover:border-blue-500 transition-all`}
                         >
                             <div
-                                css={tw`absolute -bottom-20 -right-20 w-60 h-60 bg-blue-500/5 blur-[100px] rounded-full`}
+                                css={tw`absolute -bottom-20 -right-20 w-60 h-60 bg-blue-500 bg-opacity-5 blur-3xl rounded-full`}
                             />
                             <h3 css={tw`text-xl font-bold text-white mb-6 flex items-center`}>
                                 <Icon.Info css={tw`mr-3 text-blue-400`} size={24} strokeWidth={2.5} />
@@ -164,7 +149,7 @@ export default () => {
                                     Your account balance increases automatically while you remain active on the panel.
                                 </p>
                                 <div
-                                    css={tw`bg-blue-600/10 rounded-2xl p-6 border border-blue-500/20 group-hover:bg-blue-600/20 transition-all`}
+                                    css={tw`bg-blue-600 bg-opacity-10 rounded-sm p-6 border border-blue-500 border-opacity-20 group-hover:bg-blue-600 bg-opacity-20 transition-all`}
                                 >
                                     <p css={tw`text-sm text-blue-300 tracking-wide italic leading-relaxed`}>
                                         <span css={tw`text-white font-bold mr-1.5`}>{earn.amount} Credits</span>

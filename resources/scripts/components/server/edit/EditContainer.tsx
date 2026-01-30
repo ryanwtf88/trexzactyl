@@ -10,9 +10,10 @@ import { Button } from '@/components/elements/button/index';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import ServerContentBlock from '@/components/elements/ServerContentBlock';
 
-const ResourceCard = styled.div`
-    ${tw`p-6 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md flex flex-col items-center transition-all duration-300`};
-    ${tw`hover:border-blue-500/50 hover:shadow-lg`};
+import GlassCard from '@/components/elements/GlassCard';
+
+const ResourceCard = styled(GlassCard)`
+    ${tw`p-6 flex flex-col items-center`};
 `;
 
 const IconWrapper = styled.div`

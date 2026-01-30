@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useStoreState } from '@/state/hooks';
 import http from '@/api/http';
-import { Form, Formik, FormikHelpers, useFormikContext } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import { object, string, number } from 'yup';
 import Field from '@/components/elements/Field';
 import Button from '@/components/elements/button/Button';
@@ -175,7 +175,7 @@ export default () => {
                                     <div css={tw`flex items-center justify-between`}>
                                         <span css={tw`font-bold text-xl text-white`}>bKash</span>
                                         {values.currency === 'bkash' && (
-                                            <Icon.CheckCircle size={24} css={tw`text-[#E2136E]`} />
+                                            <Icon.CheckCircle size={24} css={tw`text-xs`} />
                                         )}
                                     </div>
                                     <div css={tw`mt-2 text-gray-400 text-sm`}>Pay via App or *247#</div>
@@ -192,7 +192,7 @@ export default () => {
                                     <div css={tw`flex items-center justify-between`}>
                                         <span css={tw`font-bold text-xl text-white`}>Nagad</span>
                                         {values.currency === 'nagad' && (
-                                            <Icon.CheckCircle size={24} css={tw`text-[#F6921E]`} />
+                                            <Icon.CheckCircle size={24} css={tw`text-xs`} />
                                         )}
                                     </div>
                                     <div css={tw`mt-2 text-gray-400 text-sm`}>Pay via App or *167#</div>
@@ -278,7 +278,7 @@ export default () => {
                                                 BDT
                                             </span>
                                         </div>
-                                        <p tw='text-[10px] text-neutral-500 mt-2 italic text-right'>
+                                        <p tw='text-xs text-neutral-500 mt-2 italic text-right'>
                                             Rate: 1 USD = {storefront?.gateways.conversion_rate || 115} BDT
                                         </p>
                                     </div>

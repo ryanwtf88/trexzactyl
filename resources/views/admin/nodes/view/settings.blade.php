@@ -45,15 +45,7 @@
                                         <code>[Space]</code> (min 1, max 100 characters).</small></p>
                             </div>
                         </div>
-                        <div class="form-group col-xs-12">
-                            <label for="console_name" class="control-label">Console Name</label>
-                            <div>
-                                <input type="text" autocomplete="off" name="console_name" class="form-control"
-                                    value="{{ old('console_name', $node->console_name) }}" />
-                                <p class="text-muted"><small>Custom text to display in the server console (e.g. "Pterodactyl
-                                        Demon"). Leave empty for default.</small></p>
-                            </div>
-                        </div>
+
                         <div class="form-group col-xs-12">
                             <label for="description" class="control-label">Description</label>
                             <div>

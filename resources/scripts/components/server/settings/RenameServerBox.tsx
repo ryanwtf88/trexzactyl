@@ -17,11 +17,11 @@ import styled from 'styled-components/macro';
 import * as Icon from 'react-feather';
 
 const Card = styled.div`
-    ${tw`p-6 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md relative overflow-hidden`};
+    ${tw`p-6 rounded-xl border border-neutral-700 bg-neutral-900 bg-opacity-50 backdrop-blur-md relative overflow-hidden`};
 `;
 
 const StyledTextarea = styled(Textarea)`
-    ${tw`bg-neutral-800/50 border-neutral-700 focus:border-blue-500 transition-all duration-200 text-sm`};
+    ${tw`bg-neutral-800 bg-opacity-50 border-neutral-700 focus:border-blue-500 transition-all duration-200 text-sm`};
 `;
 
 const RenameServerBox = () => {
@@ -31,12 +31,12 @@ const RenameServerBox = () => {
         <Card>
             <SpinnerOverlay visible={isSubmitting} />
             <div css={tw`flex items-center gap-3 mb-6`}>
-                <div css={tw`p-2 rounded-lg bg-blue-500/10 text-blue-400`}>
+                <div css={tw`p-2 rounded-lg bg-blue-500 bg-opacity-10 text-blue-400`}>
                     <Icon.Edit2 size={18} />
                 </div>
                 <div>
-                    <h3 css={tw`text-sm font-black text-neutral-100 uppercase tracking-widest`}>Update Details</h3>
-                    <p css={tw`text-[10px] text-neutral-500 font-bold uppercase`}>Name and description</p>
+                    <h3 css={tw`text-sm font-black text-neutral-100 uppercase tracking-wider`}>Update Details</h3>
+                    <p css={tw`text-xs text-neutral-500 font-bold uppercase`}>Name and description</p>
                 </div>
             </div>
 
@@ -46,10 +46,10 @@ const RenameServerBox = () => {
                     name={'name'}
                     label={'Server Name'}
                     type={'text'}
-                    css={tw`bg-neutral-800/50 border-neutral-700 focus:border-blue-500`}
+                    css={tw`bg-neutral-800 bg-opacity-50 border-neutral-700 focus:border-blue-500`}
                 />
                 <div css={tw`mt-6`}>
-                    <Label css={tw`text-xs font-black text-neutral-500 uppercase tracking-widest mb-2 block`}>
+                    <Label css={tw`text-xs font-black text-neutral-500 uppercase tracking-wider mb-2 block`}>
                         Server Description
                     </Label>
                     <FormikFieldWrapper name={'description'}>

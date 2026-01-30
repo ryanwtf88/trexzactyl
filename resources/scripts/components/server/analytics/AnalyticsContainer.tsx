@@ -13,10 +13,12 @@ import styled from 'styled-components/macro';
 import tw from 'twin.macro';
 import * as Icon from 'react-feather';
 
+import GlassCard from '@/components/elements/GlassCard';
+
 type Stats = Record<'memory' | 'cpu' | 'disk' | 'uptime', number>;
 
-const AnalyticsCard = styled.div`
-    ${tw`p-6 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md h-full`};
+const AnalyticsCard = styled(GlassCard)`
+    ${tw`p-6 h-full`};
 `;
 
 const UsageItem = styled.div`

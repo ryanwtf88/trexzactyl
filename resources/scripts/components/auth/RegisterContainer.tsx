@@ -112,7 +112,7 @@ const RegisterContainer = ({ history }: RouteComponentProps) => {
                     />
                     <Button
                         type={'submit'}
-                        css={tw`mt-8 w-full bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 rounded-xl transition-all font-black uppercase tracking-widest text-xs py-3`}
+                        css={tw`mt-8 w-full bg-blue-500 bg-opacity-10 text-blue-400 border border-blue-500 border-opacity-20 hover:bg-blue-500 bg-opacity-20 rounded-xl transition-all font-black uppercase tracking-wider text-xs py-3`}
                         size={Button.Sizes.Large}
                         disabled={isSubmitting}
                     >
@@ -136,7 +136,7 @@ const RegisterContainer = ({ history }: RouteComponentProps) => {
                     <div css={tw`mt-10 text-center`}>
                         <Link
                             to={'/auth/login'}
-                            css={tw`text-[10px] text-neutral-500 font-black tracking-widest no-underline uppercase hover:text-neutral-300 transition-colors`}
+                            css={tw`text-xs text-neutral-500 font-black tracking-wider no-underline uppercase hover:text-neutral-300 transition-colors`}
                         >
                             Return to login
                         </Link>

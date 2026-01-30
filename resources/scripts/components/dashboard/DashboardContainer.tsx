@@ -55,10 +55,10 @@ export default () => {
         <PageContentBlock title={'Dashboard'} css={tw`-mt-10 md:mt-10`} showFlashKey={'dashboard'}>
             <OverviewStats />
             <div
-                css={tw`mb-10 px-8 py-5 md:py-7 rounded-[2px] border border-neutral-700 bg-neutral-900/40 backdrop-blur-xl flex justify-between items-center relative overflow-hidden mt-[30px] md:mt-0`}
+                css={tw`mb-10 px-8 py-5 md:py-7 rounded-sm border border-neutral-700 bg-neutral-900 bg-opacity-40 backdrop-blur-xl flex justify-between items-center relative overflow-hidden mt-8 md:mt-0`}
             >
-                <div css={tw`absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-3xl -mr-16 -mt-16`} />
-                <div css={tw`absolute bottom-0 left-0 w-24 h-24 bg-purple-500/10 blur-3xl -ml-12 -mb-12`} />
+                <div css={tw`absolute top-0 right-0 w-32 h-32 bg-blue-500 bg-opacity-10 blur-3xl -mr-16 -mt-16`} />
+                <div css={tw`absolute bottom-0 left-0 w-24 h-24 bg-purple-500 bg-opacity-10 blur-3xl -ml-12 -mb-12`} />
 
                 {rootAdmin ? (
                     <>
@@ -84,7 +84,7 @@ export default () => {
                     <div css={tw`relative z-10`}>
                         <h1 className={'text-4xl font-black tracking-tight text-neutral-100 uppercase'}>
                             Welcome back,{' '}
-                            <span css={tw`text-blue-400 border-b-2 border-blue-500/30 pb-0.5`}>
+                            <span css={tw`text-blue-400 border-b-2 border-blue-500 border-opacity-30 pb-0.5`}>
                                 {firstName || username}
                             </span>
                             !

@@ -23,8 +23,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 
 const PremiumBox = styled(motion.div)`
-    ${tw`bg-neutral-900/40 backdrop-blur-xl border border-neutral-700 p-8 rounded-3xl relative overflow-hidden transition-all duration-300`};
-    ${tw`hover:border-blue-500 hover:bg-neutral-900/60`};
+    ${tw`bg-neutral-900 bg-opacity-40 backdrop-blur-xl border border-neutral-700 p-8 rounded-sm relative overflow-hidden transition-all duration-300`};
+    ${tw`hover:border-blue-500 hover:bg-neutral-900 bg-opacity-60`};
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
     &::before {
@@ -40,7 +40,7 @@ const PremiumBox = styled(motion.div)`
 `;
 
 const IconWrapper = styled.div`
-    ${tw`bg-blue-600/10 p-3 rounded-2xl border border-blue-500/20 mr-4 transition-transform duration-500`};
+    ${tw`bg-blue-600 bg-opacity-10 p-3 rounded-sm border border-blue-500 border-opacity-20 mr-4 transition-transform duration-500`};
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 `;
 
@@ -49,9 +49,9 @@ const InputLabel = styled.h3`
 `;
 
 const PoolInfo = styled.div`
-    ${tw`mt-6 pt-4 border-t border-white/5 flex flex-wrap gap-4 text-[10px] font-bold text-neutral-500`};
+    ${tw`mt-6 pt-4 border-t border-white/5 flex flex-wrap gap-4 text-xs font-bold text-neutral-500`};
     & span {
-        ${tw`bg-neutral-800/50 px-2 py-1 rounded border border-white/5`};
+        ${tw`bg-neutral-800 bg-opacity-50 px-2 py-1 rounded border border-white/5`};
     }
     & b {
         ${tw`text-blue-400 font-black`};
@@ -200,14 +200,14 @@ export default () => {
                                     <InputLabel>Server Name</InputLabel>
                                     <Field
                                         name={'name'}
-                                        css={tw`bg-neutral-900/50 border-neutral-700 focus:border-blue-500 rounded-2xl h-12 text-sm px-4 font-bold tracking-wide`}
+                                        css={tw`bg-neutral-900 bg-opacity-50 border-neutral-700 focus:border-blue-500 rounded-sm h-12 text-sm px-4 font-bold tracking-wide`}
                                     />
                                 </div>
                                 <div>
                                     <InputLabel>Description</InputLabel>
                                     <Field
                                         name={'description'}
-                                        css={tw`bg-neutral-900/50 border-neutral-700 focus:border-blue-500 rounded-2xl h-12 text-sm px-4 font-bold tracking-wide`}
+                                        css={tw`bg-neutral-900 bg-opacity-50 border-neutral-700 focus:border-blue-500 rounded-sm h-12 text-sm px-4 font-bold tracking-wide`}
                                     />
                                 </div>
                             </div>
@@ -233,7 +233,7 @@ export default () => {
                                     <Field
                                         name={'cpu'}
                                         type={'number'}
-                                        css={tw`bg-neutral-900/50 border-neutral-700 focus:border-blue-500 rounded-2xl h-12 text-sm px-4 font-black tabular-nums tracking-tighter`}
+                                        css={tw`bg-neutral-900 bg-opacity-50 border-neutral-700 focus:border-blue-500 rounded-sm h-12 text-sm px-4 font-black tabular-nums tracking-tighter`}
                                     />
                                 </div>
                                 <div>
@@ -241,7 +241,7 @@ export default () => {
                                     <Field
                                         name={'memory'}
                                         type={'number'}
-                                        css={tw`bg-neutral-900/50 border-neutral-700 focus:border-blue-500 rounded-2xl h-12 text-sm px-4 font-black tabular-nums tracking-tighter`}
+                                        css={tw`bg-neutral-900 bg-opacity-50 border-neutral-700 focus:border-blue-500 rounded-sm h-12 text-sm px-4 font-black tabular-nums tracking-tighter`}
                                     />
                                 </div>
                                 <div>
@@ -249,7 +249,7 @@ export default () => {
                                     <Field
                                         name={'disk'}
                                         type={'number'}
-                                        css={tw`bg-neutral-900/50 border-neutral-700 focus:border-blue-500 rounded-2xl h-12 text-sm px-4 font-black tabular-nums tracking-tighter`}
+                                        css={tw`bg-neutral-900 bg-opacity-50 border-neutral-700 focus:border-blue-500 rounded-sm h-12 text-sm px-4 font-black tabular-nums tracking-tighter`}
                                     />
                                 </div>
                             </div>
@@ -288,7 +288,7 @@ export default () => {
                                     <Field
                                         name={'ports'}
                                         type={'number'}
-                                        css={tw`bg-neutral-900/50 border-neutral-700 focus:border-blue-500 rounded-2xl h-12 text-sm px-4 font-black tabular-nums`}
+                                        css={tw`bg-neutral-900 bg-opacity-50 border-neutral-700 focus:border-blue-500 rounded-sm h-12 text-sm px-4 font-black tabular-nums`}
                                     />
                                 </div>
                                 <div>
@@ -296,7 +296,7 @@ export default () => {
                                     <Field
                                         name={'databases'}
                                         type={'number'}
-                                        css={tw`bg-neutral-900/50 border-neutral-700 focus:border-blue-500 rounded-2xl h-12 text-sm px-4 font-black tabular-nums`}
+                                        css={tw`bg-neutral-900 bg-opacity-50 border-neutral-700 focus:border-blue-500 rounded-sm h-12 text-sm px-4 font-black tabular-nums`}
                                     />
                                 </div>
                                 <div>
@@ -304,7 +304,7 @@ export default () => {
                                     <Field
                                         name={'backups'}
                                         type={'number'}
-                                        css={tw`bg-neutral-900/50 border-neutral-700 focus:border-blue-500 rounded-2xl h-12 text-sm px-4 font-black tabular-nums`}
+                                        css={tw`bg-neutral-900 bg-opacity-50 border-neutral-700 focus:border-blue-500 rounded-sm h-12 text-sm px-4 font-black tabular-nums`}
                                     />
                                 </div>
                             </div>
@@ -341,7 +341,7 @@ export default () => {
                                     <Select
                                         name={'node'}
                                         onChange={(e) => setNode(parseInt(e.target.value))}
-                                        css={tw`bg-neutral-900/50 border-neutral-700 focus:border-blue-500 rounded-2xl h-12 text-xs px-4 font-bold`}
+                                        css={tw`bg-neutral-900 bg-opacity-50 border-neutral-700 focus:border-blue-500 rounded-sm h-12 text-xs px-4 font-bold`}
                                     >
                                         {!node && <option>Select a node...</option>}
                                         {nodes.map((n) => (
@@ -357,7 +357,7 @@ export default () => {
                                     <Select
                                         name={'nest'}
                                         onChange={(e) => changeNest(e)}
-                                        css={tw`bg-neutral-900/50 border-neutral-700 focus:border-blue-500 rounded-2xl h-12 text-xs px-4 font-bold`}
+                                        css={tw`bg-neutral-900 bg-opacity-50 border-neutral-700 focus:border-blue-500 rounded-sm h-12 text-xs px-4 font-bold`}
                                     >
                                         {!nest && <option>Select a nest...</option>}
                                         {nests.map((n) => (
@@ -368,20 +368,31 @@ export default () => {
                                     </Select>
                                 </div>
                             </div>
-                            <div css={tw`w-full`}>
-                                <InputLabel>Application</InputLabel>
-                                <Select
-                                    name={'egg'}
-                                    onChange={(e) => setEgg(parseInt(e.target.value))}
-                                    css={tw`bg-neutral-900/50 border-neutral-700 focus:border-blue-500 rounded-2xl h-12 text-xs px-4 font-bold uppercase tracking-widest`}
-                                >
-                                    {!egg && <option>Select an egg...</option>}
-                                    {eggs.map((e) => (
-                                        <option key={e.id} value={e.id}>
-                                            {e.name}
-                                        </option>
-                                    ))}
-                                </Select>
+                            <div css={tw`w-full grid grid-cols-1 sm:grid-cols-2 gap-4`}>
+                                <div>
+                                    <InputLabel>Application</InputLabel>
+                                    <Select
+                                        name={'egg'}
+                                        onChange={(e) => setEgg(parseInt(e.target.value))}
+                                        css={tw`bg-neutral-900 bg-opacity-50 border-neutral-700 focus:border-blue-500 rounded-sm h-12 text-xs px-4 font-bold uppercase tracking-wider`}
+                                    >
+                                        {!egg && <option>Select an egg...</option>}
+                                        {eggs.map((e) => (
+                                            <option key={e.id} value={e.id}>
+                                                {e.name}
+                                            </option>
+                                        ))}
+                                    </Select>
+                                </div>
+                                <div>
+                                    <InputLabel>Deployment Fee</InputLabel>
+                                    <div
+                                        css={tw`bg-neutral-900 bg-opacity-50 border border-neutral-700 rounded-sm h-12 flex items-center px-4 font-black text-blue-400 text-sm`}
+                                    >
+                                        <Icon.CreditCard size={14} css={tw`mr-2 text-neutral-500`} />
+                                        {nodes?.find((n) => n.id === node)?.deployFee || 0} Credits
+                                    </div>
+                                </div>
                             </div>
                         </PremiumBox>
                     </div>
@@ -390,20 +401,27 @@ export default () => {
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
-                        css={tw`bg-blue-600/5 backdrop-blur-xl border border-blue-500 p-10 rounded-3xl flex flex-col lg:flex-row items-center justify-between mt-12 relative overflow-hidden`}
+                        css={tw`bg-blue-600 bg-opacity-5 backdrop-blur-xl border border-blue-500 border-opacity-50 p-10 rounded-sm flex flex-col lg:flex-row items-center justify-between mt-12 relative overflow-hidden`}
                     >
-                        <div css={tw`absolute -bottom-20 -right-20 w-64 h-64 bg-blue-500/10 blur-3xl rounded-full`} />
+                        <div
+                            css={tw`absolute -bottom-20 -right-20 w-64 h-64 bg-blue-500 bg-opacity-10 blur-3xl rounded-full`}
+                        />
                         <div css={tw`mb-8 lg:mb-0 text-center lg:text-left relative z-10`}>
                             <h2 css={tw`text-3xl font-black text-white mb-2`}>Ready for Launch</h2>
                             <p css={tw`text-neutral-500 text-xs font-bold`}>
                                 Initialize your high-performance environment now
+                                {nodes?.find((n) => n.id === node)?.deployFee ? (
+                                    <span css={tw`text-blue-400 ml-2 animate-pulse`}>
+                                        (Fee: {nodes?.find((n) => n.id === node)?.deployFee} credits)
+                                    </span>
+                                ) : null}
                             </p>
                         </div>
                         <div css={tw`w-full lg:w-auto relative z-10`}>
                             <InputSpinner visible={loading}>
                                 <Button
                                     type={'submit'}
-                                    css={tw`w-full lg:px-20 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm py-5 rounded-2xl transition-all shadow-xl active:scale-95`}
+                                    css={tw`w-full lg:px-20 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm py-5 rounded-sm transition-all shadow-xl active:scale-95`}
                                     size={Button.Sizes.Large}
                                     disabled={loading}
                                 >

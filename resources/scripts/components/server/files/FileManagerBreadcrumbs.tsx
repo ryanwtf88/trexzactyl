@@ -13,7 +13,7 @@ interface Props {
 }
 
 const BreadcrumbContainer = styled.div`
-    ${tw`flex flex-grow-0 items-center text-sm font-medium overflow-x-hidden p-2 bg-neutral-900/50 backdrop-blur-md border border-neutral-700 rounded-lg`};
+    ${tw`flex flex-grow-0 items-center text-sm font-medium overflow-x-hidden p-2 bg-neutral-900 bg-opacity-50 backdrop-blur-md border border-neutral-700 rounded-lg`};
 `;
 
 const CrumbLink = styled(NavLink)`

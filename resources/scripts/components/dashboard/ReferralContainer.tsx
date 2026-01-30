@@ -122,14 +122,11 @@ export default () => {
                         <p css={tw`text-center my-2`}>{!loading && 'No referral codes exist for this account.'}</p>
                     ) : (
                         codes.map((code, index) => (
-                            <GreyRowBox
-                                key={code.code}
-                                css={[tw`bg-neutral-900 flex items-center`, index > 0 && tw`mt-2`]}
-                            >
+                            <GreyRowBox key={code.code} css={[tw`flex items-center`, index > 0 && tw`mt-2`]}>
                                 <Icon.GitBranch css={tw`text-neutral-300`} />
                                 <div css={tw`ml-4 flex-1 overflow-hidden`}>
                                     <p css={tw`text-sm break-words`}>{code.code}</p>
-                                    <p css={tw`text-2xs text-neutral-300 uppercase`}>
+                                    <p css={tw`text-xs text-neutral-300 uppercase`}>
                                         Created at:&nbsp;
                                         {code.createdAt ? format(code.createdAt, 'MMM do, yyyy HH:mm') : 'Never'}
                                     </p>
@@ -158,20 +155,17 @@ export default () => {
                         <p css={tw`text-center my-2`}>{!loading && 'No referral activity exists for this account.'}</p>
                     ) : (
                         activity.map((act, index) => (
-                            <GreyRowBox
-                                key={act.code}
-                                css={[tw`bg-neutral-900 flex items-center`, index > 0 && tw`mt-2`]}
-                            >
+                            <GreyRowBox key={act.code} css={[tw`flex items-center`, index > 0 && tw`mt-2`]}>
                                 <Icon.GitBranch css={tw`text-neutral-300`} />
                                 <div css={tw`ml-4 flex-1 overflow-hidden`}>
                                     <p css={tw`text-sm break-words`}>
                                         {act.userEmail} (ID: {act.userId})
                                     </p>
-                                    <p css={tw`text-2xs text-neutral-300 uppercase`}>
+                                    <p css={tw`text-xs text-neutral-300 uppercase`}>
                                         Used at:&nbsp;
                                         {act.createdAt ? format(act.createdAt, 'MMM do, yyyy HH:mm') : 'Never'}
                                     </p>
-                                    <p css={tw`text-2xs text-neutral-300 uppercase`}>Code used:&nbsp;{act.code}</p>
+                                    <p css={tw`text-xs text-neutral-300 uppercase`}>Code used:&nbsp;{act.code}</p>
                                 </div>
                             </GreyRowBox>
                         ))

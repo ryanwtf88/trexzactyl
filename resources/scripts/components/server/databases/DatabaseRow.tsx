@@ -21,12 +21,12 @@ import RotatePasswordButton from '@/components/server/databases/RotatePasswordBu
 import styled from 'styled-components/macro';
 
 const DatabaseCard = styled.div`
-    ${tw`flex flex-wrap md:flex-nowrap items-center p-4 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md mb-3 transition-all duration-300`};
-    ${tw`hover:border-blue-500/50 hover:shadow-lg hover:-translate-y-0.5`};
+    ${tw`flex flex-wrap md:flex-nowrap items-center p-4 rounded-sm border border-neutral-700 bg-neutral-900 bg-opacity-40 backdrop-blur-xl mb-3 transition-all duration-300`};
+    ${tw`hover:border-blue-500 border-opacity-50 hover:shadow-lg hover:-translate-y-0.5`};
 `;
 
 const IconWrapper = styled.div`
-    ${tw`flex-none p-2.5 rounded-xl bg-blue-500/10 text-blue-400 transition-colors group-hover:bg-blue-500 group-hover:text-white`};
+    ${tw`flex-none p-2.5 rounded-sm bg-blue-500 bg-opacity-10 text-blue-400 transition-colors group-hover:bg-blue-500 group-hover:text-white`};
 `;
 
 const StatBlock = styled.div`
@@ -38,7 +38,7 @@ const DetailText = styled.p`
 `;
 
 const DetailLabel = styled.p`
-    ${tw`mt-1 text-[10px] text-neutral-500 uppercase font-black tracking-widest select-none`};
+    ${tw`mt-1 text-xs text-neutral-500 uppercase font-black tracking-wider select-none`};
 `;
 
 const DatabaseRow = ({ database, className }: { database: ServerDatabase; className?: string }) => {
@@ -120,10 +120,10 @@ const DatabaseRow = ({ database, className }: { database: ServerDatabase; classN
 
             <Modal visible={connectionVisible} onDismissed={() => setConnectionVisible(false)}>
                 <div css={tw`flex items-center gap-3 mb-6`}>
-                    <div css={tw`p-2 rounded-lg bg-blue-500/10 text-blue-400`}>
+                    <div css={tw`p-2 rounded-sm bg-blue-500 bg-opacity-10 text-blue-400`}>
                         <Icon.Terminal size={18} />
                     </div>
-                    <h3 css={tw`text-xl font-black text-neutral-100 uppercase tracking-widest`}>Connection Details</h3>
+                    <h3 css={tw`text-xl font-black text-neutral-100 uppercase tracking-wider`}>Connection Details</h3>
                 </div>
                 <div className={'space-y-6'}>
                     <div>
@@ -133,7 +133,7 @@ const DatabaseRow = ({ database, className }: { database: ServerDatabase; classN
                                 type={'text'}
                                 readOnly
                                 value={database.connectionString}
-                                css={tw`bg-neutral-800/50 border-neutral-700`}
+                                css={tw`bg-neutral-800 bg-opacity-50 border-neutral-700`}
                             />
                         </CopyOnClick>
                     </div>
@@ -144,7 +144,7 @@ const DatabaseRow = ({ database, className }: { database: ServerDatabase; classN
                                 type={'text'}
                                 readOnly
                                 value={database.username}
-                                css={tw`bg-neutral-800/50 border-neutral-700`}
+                                css={tw`bg-neutral-800 bg-opacity-50 border-neutral-700`}
                             />
                         </CopyOnClick>
                     </div>
@@ -156,7 +156,7 @@ const DatabaseRow = ({ database, className }: { database: ServerDatabase; classN
                                     type={'text'}
                                     readOnly
                                     value={database.password}
-                                    css={tw`bg-neutral-800/50 border-neutral-700`}
+                                    css={tw`bg-neutral-800 bg-opacity-50 border-neutral-700`}
                                 />
                             </CopyOnClick>
                         </div>
@@ -168,7 +168,7 @@ const DatabaseRow = ({ database, className }: { database: ServerDatabase; classN
                                 type={'text'}
                                 readOnly
                                 value={jdbcConnectionString}
-                                css={tw`bg-neutral-800/50 border-neutral-700 font-mono text-xs`}
+                                css={tw`bg-neutral-800 bg-opacity-50 border-neutral-700 font-mono text-xs`}
                             />
                         </CopyOnClick>
                     </div>
@@ -195,7 +195,7 @@ const DatabaseRow = ({ database, className }: { database: ServerDatabase; classN
                             {database.name}
                         </p>
                     </CopyOnClick>
-                    <p css={tw`text-[10px] text-neutral-500 font-bold uppercase tracking-tight`}>
+                    <p css={tw`text-xs text-neutral-500 font-bold uppercase tracking-tight`}>
                         {database.connectionString}
                     </p>
                 </div>
@@ -208,7 +208,7 @@ const DatabaseRow = ({ database, className }: { database: ServerDatabase; classN
                 <div css={tw`ml-8 flex items-center gap-2`}>
                     <Button
                         variant={Button.Variants.Secondary}
-                        css={tw`px-3 bg-neutral-800/50 border-neutral-700`}
+                        css={tw`px-3 bg-neutral-800 bg-opacity-50 border-neutral-700`}
                         onClick={() => setConnectionVisible(true)}
                     >
                         <Icon.Eye size={16} />
@@ -216,7 +216,7 @@ const DatabaseRow = ({ database, className }: { database: ServerDatabase; classN
                     <Can action={'database.delete'}>
                         <Button.Danger
                             variant={Button.Variants.Secondary}
-                            css={tw`px-3 bg-red-500/10 border-red-500/20 text-red-400`}
+                            css={tw`px-3 bg-red-500 bg-opacity-10 border-red-500 border-opacity-20 text-red-400`}
                             onClick={() => setVisible(true)}
                         >
                             <Icon.Trash size={16} />

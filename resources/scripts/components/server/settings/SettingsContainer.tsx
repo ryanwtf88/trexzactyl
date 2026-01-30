@@ -12,8 +12,10 @@ import { useStoreState } from 'easy-peasy';
 import styled from 'styled-components/macro';
 import * as Icon from 'react-feather';
 
-const DebugCard = styled.div`
-    ${tw`p-6 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md mb-6`};
+import GlassCard from '@/components/elements/GlassCard';
+
+const DebugCard = styled(GlassCard)`
+    ${tw`p-6 mb-6`};
 `;
 
 const InfoRow = styled.div`

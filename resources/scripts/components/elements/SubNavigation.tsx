@@ -2,10 +2,10 @@ import tw, { theme } from 'twin.macro';
 import styled from 'styled-components/macro';
 
 const SubNavigation = styled.div`
-    ${tw`bg-neutral-900/40 backdrop-blur-xl border-b border-white/5 overflow-x-auto mb-4 sm:mb-10 w-full`};
+    ${tw`bg-neutral-900 bg-opacity-40 backdrop-blur-xl border-b border-white/5 overflow-x-auto mb-4 sm:mb-10 w-full`};
 
     & > div {
-        ${tw`flex text-sm mx-auto px-2 max-w-[1200px]`};
+        ${tw`flex text-sm mx-auto px-2 max-w-7xl`};
 
         & > a,
         & > div {

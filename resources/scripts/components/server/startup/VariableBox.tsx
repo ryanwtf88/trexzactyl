@@ -16,13 +16,14 @@ import updateStartupVariable from '@/api/server/updateStartupVariable';
 import styled from 'styled-components/macro';
 import * as Icon from 'react-feather';
 
-const VariableCard = styled.div`
-    ${tw`p-6 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md transition-all duration-300`};
-    ${tw`hover:border-blue-500/50 hover:shadow-lg`};
+import GlassCard from '@/components/elements/GlassCard';
+
+const VariableCard = styled(GlassCard)`
+    ${tw`p-6 transition-all duration-300`};
 `;
 
 const Badge = styled.span`
-    ${tw`bg-neutral-800 text-neutral-500 text-[10px] py-0.5 px-2 rounded-full font-black uppercase tracking-widest mr-2`};
+    ${tw`bg-neutral-800 text-neutral-500 text-xs py-0.5 px-2 rounded-full font-black uppercase tracking-wider mr-2`};
 `;
 
 const VariableBox = ({ variable }: { variable: ServerEggVariable }) => {
@@ -68,12 +69,14 @@ const VariableBox = ({ variable }: { variable: ServerEggVariable }) => {
                 <div css={tw`flex items-center`}>
                     {!variable.isEditable && <Badge>Read Only</Badge>}
                     <h4
-                        css={tw`text-xs font-black text-neutral-400 uppercase tracking-widest group-hover:text-blue-400 transition-colors`}
+                        css={tw`text-xs font-black text-neutral-400 uppercase tracking-wider group-hover:text-blue-400 transition-colors`}
                     >
                         {variable.name}
                     </h4>
                 </div>
-                <div css={tw`font-mono text-[10px] text-neutral-600 font-bold bg-neutral-800/50 px-2 py-0.5 rounded`}>
+                <div
+                    css={tw`font-mono text-xs text-neutral-600 font-bold bg-neutral-800 bg-opacity-50 px-2 py-0.5 rounded`}
+                >
                     {variable.envVariable}
                 </div>
             </div>
@@ -111,7 +114,7 @@ const VariableBox = ({ variable }: { variable: ServerEggVariable }) => {
                                 name={variable.envVariable}
                                 defaultValue={variable.serverValue}
                                 disabled={!canEdit || !variable.isEditable}
-                                css={tw`bg-neutral-800/50 border-neutral-700 focus:border-blue-500`}
+                                css={tw`bg-neutral-800 bg-opacity-50 border-neutral-700 focus:border-blue-500`}
                             >
                                 {selectValues.map((selectValue) => (
                                     <option key={selectValue.replace('in:', '')} value={selectValue.replace('in:', '')}>
@@ -130,7 +133,7 @@ const VariableBox = ({ variable }: { variable: ServerEggVariable }) => {
                                 name={variable.envVariable}
                                 defaultValue={variable.serverValue}
                                 placeholder={variable.defaultValue}
-                                css={tw`bg-neutral-800/50 border-neutral-700 focus:border-blue-500`}
+                                css={tw`bg-neutral-800 bg-opacity-50 border-neutral-700 focus:border-blue-500`}
                             />
                         )}
                     </>

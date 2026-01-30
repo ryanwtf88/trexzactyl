@@ -48,7 +48,7 @@ class StoreVerificationService
 
         foreach ($types as $type) {
             $suffix = '';
-            $limit = $this->settings->get($prefix . $type);
+            $limit = $this->settings->get($prefix . $type, 0);
 
             if (in_array($type, ['slot', 'port', 'backup', 'database'])) {
                 $suffix = 's';
@@ -69,7 +69,7 @@ class StoreVerificationService
     {
         $fee = Node::find($request->input('node'))->deploy_fee;
 
-        if ($fee > $request->user()->store_balance) {
+        if (($fee ?? 0) > $request->user()->store_balance) {
             throw new DisplayException('You do not have enough credits to deploy to this node, as it has a deployment fee of ' . $fee . ' credits.');
         }
     }

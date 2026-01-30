@@ -36,7 +36,7 @@ const BackupContainer = () => {
                     !items.length ? (
                         backupLimit > 0 ? (
                             <div
-                                css={tw`p-12 flex flex-col items-center justify-center text-neutral-500 bg-neutral-900/50 backdrop-blur-md rounded-xl border border-neutral-700`}
+                                css={tw`p-12 flex flex-col items-center justify-center text-neutral-500 bg-neutral-900 bg-opacity-40 backdrop-blur-xl rounded-sm border border-neutral-700`}
                             >
                                 <Icon.Database size={48} css={tw`mb-4 opacity-20`} />
                                 <p css={tw`text-sm`}>
@@ -50,7 +50,9 @@ const BackupContainer = () => {
                 }
             </Pagination>
             {backupLimit === 0 && (
-                <div css={tw`p-8 rounded-xl bg-red-500/5 border border-red-500/10 flex items-center gap-4`}>
+                <div
+                    css={tw`p-8 rounded-sm bg-red-500 bg-opacity-5 border border-red-500 border-opacity-10 flex items-center gap-4`}
+                >
                     <Icon.AlertTriangle css={tw`text-red-400`} />
                     <p css={tw`text-sm text-red-100`}>
                         Backups cannot be created for this server because the backup limit is set to 0.
@@ -61,7 +63,7 @@ const BackupContainer = () => {
                 <div css={tw`mt-8 flex flex-col sm:flex-row items-center justify-between gap-4`}>
                     {backupLimit > 0 && (
                         <div
-                            css={tw`flex items-center gap-3 p-3 rounded-lg bg-neutral-900/50 border border-neutral-700`}
+                            css={tw`flex items-center gap-3 p-3 rounded-sm bg-neutral-900 bg-opacity-40 border border-neutral-700 backdrop-blur-xl`}
                         >
                             <Icon.PieChart size={16} css={tw`text-blue-400`} />
                             <p css={tw`text-xs text-neutral-400 font-bold uppercase tracking-wider`}>

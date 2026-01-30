@@ -23,7 +23,7 @@ export default () => {
     };
 
     const PanelDiv = styled.div`
-        ${tw`h-[calc(100vh - 2rem)] sticky bg-neutral-900/40 backdrop-blur-xl flex flex-col w-24 fixed top-4 left-4 rounded-3xl border border-white/5 shadow-2xl overflow-hidden`};
+        ${tw`h-screen sticky bg-neutral-900 bg-opacity-40 backdrop-blur-xl flex flex-col w-24 fixed top-4 left-4 rounded-3xl border border-white/5 shadow-2xl overflow-hidden`};
 
         & > div {
             ${tw`mx-auto w-full flex flex-col items-center px-4`};
@@ -114,7 +114,7 @@ export default () => {
             <div css={tw`pb-6 w-full px-4`}>
                 <button
                     onClick={onTriggerLogout}
-                    css={tw`w-full flex justify-center items-center bg-red-500/10 hover:bg-red-500/20 text-red-400 p-3 rounded-2xl transition-all`}
+                    css={tw`w-full flex justify-center items-center bg-red-500 bg-opacity-10 hover:bg-red-500 bg-opacity-20 text-red-400 p-3 rounded-2xl transition-all`}
                 >
                     <Tooltip placement={'right'} content={'Logout'}>
                         <Icon.LogOut size={24} />

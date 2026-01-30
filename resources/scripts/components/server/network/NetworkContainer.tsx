@@ -64,7 +64,7 @@ const NetworkContainer = () => {
                         <Can action={'allocation.create'}>
                             <SpinnerOverlay visible={loading} />
                             <div
-                                css={tw`mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md`}
+                                css={tw`mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-sm border border-neutral-700 bg-neutral-900 bg-opacity-40 backdrop-blur-xl`}
                             >
                                 <div css={tw`flex items-center gap-3`}>
                                     <Icon.Activity size={18} css={tw`text-blue-400`} />

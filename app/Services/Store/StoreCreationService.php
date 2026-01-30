@@ -68,6 +68,12 @@ class StoreCreationService
             $data['environment'][$var->env_variable] = $request->get($key, $var->default_value);
         }
 
+        // Deduct the deployment fee from the user's balance.
+        $fee = Node::find($node)->deploy_fee;
+        if ($fee > 0) {
+            $request->user()->decrement('store_balance', $fee);
+        }
+
         return $this->creationService->handle($data);
     }
 

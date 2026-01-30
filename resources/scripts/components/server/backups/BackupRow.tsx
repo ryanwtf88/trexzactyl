@@ -13,16 +13,16 @@ import BackupContextMenu from '@/components/server/backups/BackupContextMenu';
 import styled from 'styled-components/macro';
 
 const BackupCard = styled.div`
-    ${tw`flex flex-wrap md:flex-nowrap items-center p-4 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md mb-3 transition-all duration-300`};
-    ${tw`hover:border-blue-500/50 hover:shadow-lg hover:-translate-y-0.5`};
+    ${tw`flex flex-wrap md:flex-nowrap items-center p-4 rounded-sm border border-neutral-700 bg-neutral-900 bg-opacity-40 backdrop-blur-xl mb-3 transition-all duration-300`};
+    ${tw`hover:border-blue-500 border-opacity-50 hover:shadow-lg hover:-translate-y-0.5`};
 `;
 
 const LockIcon = styled.div<{ $locked?: boolean }>`
-    ${tw`flex-none p-2 rounded-xl transition-colors duration-200`};
+    ${tw`flex-none p-2 rounded-sm transition-colors duration-200`};
     ${({ $locked }) =>
         $locked
-            ? tw`bg-yellow-500/10 text-yellow-500`
-            : tw`bg-neutral-800 text-neutral-500 group-hover:bg-blue-500/10 group-hover:text-blue-400`};
+            ? tw`bg-yellow-500 bg-opacity-10 text-yellow-500`
+            : tw`bg-neutral-800 text-neutral-500 group-hover:bg-blue-500 bg-opacity-10 group-hover:text-blue-400`};
 `;
 
 export default ({ backup, className }: { backup: ServerBackup; className?: string }) => {
@@ -71,7 +71,7 @@ export default ({ backup, className }: { backup: ServerBackup; className?: strin
                     <div css={tw`flex items-center text-sm mb-1`}>
                         {backup.completedAt !== null && !backup.isSuccessful && (
                             <span
-                                css={tw`bg-red-500/10 text-red-400 py-0.5 px-2 rounded-full text-[10px] font-bold uppercase border border-red-500/20 mr-2`}
+                                css={tw`bg-red-500 bg-opacity-10 text-red-400 py-0.5 px-2 rounded-sm text-xs font-bold uppercase border border-red-500 border-opacity-20 mr-2`}
                             >
                                 Failed
                             </span>
@@ -87,7 +87,7 @@ export default ({ backup, className }: { backup: ServerBackup; className?: strin
                             </span>
                         )}
                     </div>
-                    <p css={tw`text-[10px] text-neutral-600 font-mono truncate tracking-tight uppercase`}>
+                    <p css={tw`text-xs text-neutral-600 font-mono truncate tracking-tight uppercase`}>
                         {backup.checksum}
                     </p>
                 </div>
@@ -101,7 +101,7 @@ export default ({ backup, className }: { backup: ServerBackup; className?: strin
                     >
                         {formatDistanceToNow(backup.createdAt, { addSuffix: true })}
                     </p>
-                    <p css={tw`text-[10px] text-neutral-500 uppercase font-black`}>Archived</p>
+                    <p css={tw`text-xs text-neutral-500 uppercase font-black`}>Archived</p>
                 </div>
 
                 <Can action={['backup.download', 'backup.restore', 'backup.delete']} matchAny>

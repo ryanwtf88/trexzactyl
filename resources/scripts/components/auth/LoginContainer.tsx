@@ -100,7 +100,7 @@ const LoginContainer = ({ history, location }: RouteComponentProps) => {
                         <Button
                             type={'submit'}
                             size={Button.Sizes.Large}
-                            css={tw`w-1/3 bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 rounded-xl transition-all font-black uppercase tracking-widest text-xs py-3`}
+                            css={tw`w-1/3 bg-blue-500 bg-opacity-10 text-blue-400 border border-blue-500 border-opacity-20 hover:bg-blue-500 bg-opacity-20 rounded-xl transition-all font-black uppercase tracking-wider text-xs py-3`}
                             disabled={isSubmitting}
                         >
                             Login
@@ -128,11 +128,11 @@ const LoginContainer = ({ history, location }: RouteComponentProps) => {
                         />
                     )}
                     {(email || discord) && (
-                        <div css={tw`mt-8 pt-8 border-t border-neutral-700/50 flex flex-col gap-4`}>
+                        <div css={tw`mt-8 pt-8 border-t border-neutral-700 border-opacity-50 flex flex-col gap-4`}>
                             {email && (
                                 <Link
                                     to={'/auth/register'}
-                                    css={tw`flex items-center justify-center gap-3 bg-blue-500 bg-opacity-10 text-blue-400 border border-blue-500 border-opacity-20 py-4 rounded-2xl hover:bg-opacity-20 transition-all font-black text-xs uppercase tracking-widest`}
+                                    css={tw`flex items-center justify-center gap-3 bg-blue-500 bg-opacity-50 text-blue-400 border border-blue-500 border-opacity-20 py-4 rounded-2xl hover:bg-opacity-50 transition-all font-black text-xs uppercase tracking-wider`}
                                 >
                                     <Mail size={18} />
                                     Signup with Email
@@ -141,7 +141,7 @@ const LoginContainer = ({ history, location }: RouteComponentProps) => {
                             {discord && (
                                 <Link
                                     to={'/auth/discord'}
-                                    css={tw`flex items-center justify-center gap-3 bg-indigo-500 bg-opacity-10 text-indigo-400 border border-indigo-500 border-opacity-20 py-4 rounded-2xl hover:bg-opacity-20 transition-all font-black text-xs uppercase tracking-widest`}
+                                    css={tw`flex items-center justify-center gap-3 bg-indigo-500 bg-opacity-50 text-indigo-400 border border-indigo-500 border-opacity-20 py-4 rounded-2xl hover:bg-opacity-50 transition-all font-black text-xs uppercase tracking-wider`}
                                 >
                                     <MessageSquare size={18} />
                                     Login with Discord

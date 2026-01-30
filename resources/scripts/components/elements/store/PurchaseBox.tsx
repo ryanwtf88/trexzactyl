@@ -5,8 +5,8 @@ import styled from 'styled-components/macro';
 import { motion } from 'framer-motion';
 
 const PremiumPurchaseBoxContainer = styled.div`
-    ${tw`relative flex flex-col p-8 rounded-3xl border border-neutral-700 bg-neutral-900/40 backdrop-blur-xl transition-all duration-300 overflow-hidden text-center`};
-    ${tw`hover:border-blue-500/50 hover:shadow-2xl`};
+    ${tw`relative flex flex-col p-8 rounded-sm border border-neutral-700 bg-neutral-900 bg-opacity-40 backdrop-blur-xl transition-all duration-300 overflow-hidden text-center`};
+    ${tw`hover:border-blue-500 border-opacity-50 hover:shadow-2xl`};
 
     &::before {
         content: '';
@@ -21,7 +21,7 @@ const PremiumPurchaseBoxContainer = styled.div`
 const PremiumPurchaseBox = motion(PremiumPurchaseBoxContainer);
 
 const IconWrapper = styled.div`
-    ${tw`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 transition-all duration-500`};
+    ${tw`w-16 h-16 rounded-sm flex items-center justify-center mx-auto mb-6 transition-all duration-500`};
     background: rgba(59, 130, 246, 0.1);
     color: #3b82f6;
     border: 1px solid rgba(59, 130, 246, 0.2);
@@ -36,7 +36,7 @@ const IconWrapper = styled.div`
 `;
 
 const CostBadge = styled.div`
-    ${tw`inline-flex flex-col items-center justify-center p-4 rounded-2xl bg-black/40 border border-white/5 mb-8 w-full`};
+    ${tw`inline-flex flex-col items-center justify-center p-4 rounded-sm bg-black/40 border border-neutral-700 mb-8 w-full`};
 
     .label {
         ${tw`text-xs font-bold text-neutral-500 mb-1`};
@@ -85,7 +85,7 @@ export default (props: BoxProps) => (
         </CostBadge>
 
         <Button
-            css={tw`w-full bg-blue-600 font-bold text-xs py-4 rounded-xl transition-all shadow-lg hover:shadow-xl active:scale-95`}
+            css={tw`w-full bg-blue-600 font-bold text-xs py-4 rounded-sm transition-all shadow-lg hover:shadow-xl active:scale-95`}
             onClick={() => {
                 props.setOpen(true);
                 props.setResource(props.type.toLowerCase());

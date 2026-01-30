@@ -11,11 +11,11 @@ import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import SearchContainer from '@/components/dashboard/search/SearchContainer';
 
 const Nav = styled.nav`
-    ${tw`fixed top-0 left-0 right-0 z-50 bg-neutral-900/40 backdrop-blur-xl border-b border-white/5`};
+    ${tw`fixed top-0 left-0 right-0 z-50 bg-neutral-900 bg-opacity-40 backdrop-blur-xl border-b border-white/5`};
 `;
 
 const NavContent = styled.div`
-    ${tw`max-w-[1200px] mx-auto h-16 flex items-center justify-between px-4 sm:px-6`};
+    ${tw`max-w-7xl mx-auto h-16 flex items-center justify-between px-4 sm:px-6`};
 `;
 
 const NavLinks = styled.div`
@@ -28,7 +28,7 @@ const NavLinks = styled.div`
             ${tw`text-blue-400`};
             &::after {
                 content: '';
-                ${tw`absolute bottom-0 left-4 right-4 h-0.5 bg-blue-500 rounded-full shadow-[0_0_10px_#3b82f6]`};
+                ${tw`absolute bottom-0 left-4 right-4 h-0.5 bg-blue-500 rounded-sm shadow-lg`};
             }
         }
     }
@@ -39,7 +39,7 @@ const RightNav = styled.div`
 `;
 
 const ActionButton = styled.div`
-    ${tw`bg-white/5 hover:bg-white/10 p-2.5 rounded-xl transition-all duration-300 cursor-pointer text-neutral-400 hover:text-neutral-100 border border-transparent hover:border-white/5 flex items-center justify-center`};
+    ${tw`bg-white/5 hover:bg-white/10 p-2.5 rounded-sm transition-all duration-300 cursor-pointer text-neutral-400 hover:text-neutral-100 border border-transparent hover:border-white/5 flex items-center justify-center`};
 `;
 
 export default () => {
@@ -93,7 +93,7 @@ export default () => {
 
                     <button onClick={onTriggerLogout} css={tw`focus:outline-none mr-2 sm:mr-0`}>
                         <Tooltip placement={'bottom'} content={'Logout'}>
-                            <ActionButton css={tw`text-red-400/80 hover:text-red-400`}>
+                            <ActionButton css={tw`text-red-400 text-opacity-80 hover:text-red-400`}>
                                 <Icon.LogOut size={18} />
                             </ActionButton>
                         </Tooltip>

@@ -150,10 +150,10 @@ export default ({ className }: WithClassname) => {
             <Button
                 className={className}
                 onClick={() => fileUploadInput.current && fileUploadInput.current.click()}
-                css={tw`bg-neutral-800/50 text-neutral-300 border border-neutral-700 hover:bg-neutral-800/80 hover:border-neutral-600 font-black uppercase tracking-widest text-[10px] px-4 py-2 rounded-lg transition-all`}
+                css={tw`bg-neutral-800 bg-opacity-50 text-neutral-300 border border-neutral-700 hover:bg-neutral-800 bg-opacity-80 hover:border-neutral-600 font-black uppercase tracking-wider text-xs px-4 py-2 rounded-lg transition-all`}
             >
                 <div css={tw`flex items-center gap-2`}>
-                    <Icon.Upload css={tw`w-[18px] h-[18px] sm:w-[14px] sm:h-[14px]`} />
+                    <Icon.Upload css={tw`w-4 h-4 sm:w-3 sm:h-3`} />
                     <span css={tw`hidden sm:block`}>Upload</span>
                 </div>
             </Button>

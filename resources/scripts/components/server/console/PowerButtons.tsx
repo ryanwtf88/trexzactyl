@@ -21,19 +21,19 @@ const ButtonGroup = styled.div`
 `;
 
 const PowerButton = styled.button<{ $variant: 'start' | 'restart' | 'stop' | 'kill' | 'renew'; $isSmall?: boolean }>`
-    ${tw`flex-1 px-6 py-2.5 rounded-[2px] font-black uppercase tracking-widest text-sm transition-all duration-200 border`};
+    ${tw`flex-1 px-6 py-2.5 rounded-sm font-black uppercase tracking-wider text-sm transition-all duration-200 border`};
     ${tw`disabled:opacity-50 disabled:cursor-not-allowed`};
 
-    ${({ $isSmall }) => $isSmall && tw`sm:px-6 sm:py-2.5 px-2 py-2 text-[10px]`};
+    ${({ $isSmall }) => $isSmall && tw`sm:px-6 sm:py-2.5 px-2 py-2 text-xs`};
 
     ${({ $variant }) =>
         $variant === 'start'
-            ? tw`bg-green-600/10 text-green-400 border-green-500/30 hover:bg-green-600/20 hover:border-green-500/60`
+            ? tw`bg-green-600 bg-opacity-10 text-green-400 border-green-500 border-opacity-30 hover:bg-green-600 bg-opacity-20 hover:border-green-500 border-opacity-60`
             : $variant === 'restart'
-                ? tw`bg-blue-600/10 text-blue-400 border-blue-500/30 hover:bg-blue-600/20 hover:border-blue-500/60`
-                : $variant === 'renew'
-                    ? tw`bg-cyan-600/10 text-cyan-400 border-cyan-500/30 hover:bg-cyan-600/20 hover:border-cyan-500/60`
-                    : tw`bg-red-600/10 text-red-400 border-red-500/30 hover:bg-red-600/20 hover:border-red-500/60`};
+            ? tw`bg-blue-600 bg-opacity-10 text-blue-400 border-blue-500 border-opacity-30 hover:bg-blue-600 bg-opacity-20 hover:border-blue-500 border-opacity-60`
+            : $variant === 'renew'
+            ? tw`bg-cyan-600 bg-opacity-10 text-cyan-400 border-cyan-500 border-opacity-30 hover:bg-cyan-600 bg-opacity-20 hover:border-cyan-500 border-opacity-60`
+            : tw`bg-red-600 bg-opacity-10 text-red-400 border-red-500 border-opacity-30 hover:bg-red-600 bg-opacity-20 hover:border-red-500 border-opacity-60`};
 `;
 
 export default ({ className }: PowerButtonProps) => {

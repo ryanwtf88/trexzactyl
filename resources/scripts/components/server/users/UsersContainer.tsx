@@ -49,7 +49,7 @@ export default () => {
         <ServerContentBlock title={'Users'}>
             {!subusers.length ? (
                 <div
-                    css={tw`p-12 flex flex-col items-center justify-center text-neutral-500 bg-neutral-900/50 backdrop-blur-md rounded-xl border border-neutral-700`}
+                    css={tw`p-12 flex flex-col items-center justify-center text-neutral-500 bg-neutral-900 bg-opacity-40 backdrop-blur-xl rounded-sm border border-neutral-700`}
                 >
                     <Icon.Users size={48} css={tw`mb-4 opacity-20`} />
                     <p css={tw`text-sm`}>It looks like you don&apos;t have any subusers.</p>

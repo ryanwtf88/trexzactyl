@@ -15,8 +15,8 @@ import { bytesToString } from '@/lib/formatters';
 import styled from 'styled-components/macro';
 
 const FileRow = styled.div`
-    ${tw`flex items-center p-4 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md mb-2 transition-all duration-200`};
-    ${tw`hover:border-blue-500/30 hover:shadow-md hover:-translate-y-0.5`};
+    ${tw`flex items-center p-4 rounded-xl border border-neutral-700 bg-neutral-900 bg-opacity-50 backdrop-blur-md mb-2 transition-all duration-200`};
+    ${tw`hover:border-blue-500 border-opacity-30 hover:shadow-md hover:-translate-y-0.5`};
 `;
 
 const FileIcon = styled.div`

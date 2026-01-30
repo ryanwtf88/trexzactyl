@@ -30,11 +30,9 @@ const Container = styled.div`
 
 export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => (
     <Container className={'relative'}>
-        <div css={tw`fixed inset-0 z-[-1] pointer-events-none overflow-hidden`}>
-            <div css={tw`absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/10 blur-[120px] rounded-full`} />
-            <div
-                css={tw`absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/10 blur-[120px] rounded-full`}
-            />
+        <div css={tw`fixed inset-0 z-0 pointer-events-none overflow-hidden`}>
+            <div css={tw`absolute top-0 left-0 w-1/3 h-1/3 bg-blue-500 bg-opacity-10 blur-3xl rounded-full`} />
+            <div css={tw`absolute bottom-0 right-0 w-1/3 h-1/3 bg-purple-500 bg-opacity-10 blur-3xl rounded-full`} />
         </div>
 
         {title && (
@@ -43,13 +41,13 @@ export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => 
         <FlashMessageRender css={tw`mb-4 px-1`} />
         <Form {...props} ref={ref} css={tw`relative z-10`}>
             <div
-                css={tw`w-full bg-neutral-900/40 backdrop-blur-xl border border-neutral-700/50 shadow-2xl rounded-3xl p-10`}
+                css={tw`w-full bg-neutral-900 bg-opacity-40 backdrop-blur-xl border border-neutral-700 border-opacity-50 shadow-2xl rounded-3xl p-10`}
             >
                 <div css={tw`flex-1`}>{props.children}</div>
             </div>
         </Form>
         <div
-            css={tw`mt-8 flex flex-col sm:flex-row justify-between items-center text-[10px] font-black uppercase tracking-widest text-neutral-500 gap-4`}
+            css={tw`mt-8 flex flex-col sm:flex-row justify-between items-center text-xs font-black uppercase tracking-wider text-neutral-500 gap-4`}
         >
             <p>
                 &copy;{' '}

@@ -22,10 +22,10 @@ interface Values {
 }
 
 const ServerResult = styled(Link)`
-    ${tw`flex items-center bg-neutral-900/50 backdrop-blur-md p-4 rounded-xl border border-neutral-700 no-underline transition-all duration-200`};
+    ${tw`flex items-center bg-neutral-900 bg-opacity-40 backdrop-blur-xl p-4 rounded-sm border border-neutral-700 no-underline transition-all duration-200`};
 
     &:hover {
-        ${tw`shadow-lg border-blue-500/50 -translate-y-0.5`};
+        ${tw`shadow-lg border-blue-500 border-opacity-50 -translate-y-0.5`};
     }
 
     &:not(:last-of-type) {
@@ -108,12 +108,12 @@ export default ({ ...props }: Props) => {
                                 >
                                     <div css={tw`flex-1 mr-4`}>
                                         <p
-                                            css={tw`text-sm font-black text-neutral-100 uppercase tracking-widest leading-none`}
+                                            css={tw`text-sm font-black text-neutral-100 uppercase tracking-wider leading-none`}
                                         >
                                             {server.name}
                                         </p>
                                         <p
-                                            css={tw`mt-1.5 text-[10px] font-bold text-neutral-500 font-mono tracking-tighter opacity-80`}
+                                            css={tw`mt-1.5 text-xs font-bold text-neutral-500 font-mono tracking-tighter opacity-80`}
                                         >
                                             {server.allocations
                                                 .filter((alloc) => alloc.isDefault)
@@ -126,7 +126,7 @@ export default ({ ...props }: Props) => {
                                     </div>
                                     <div css={tw`flex-none text-right`}>
                                         <span
-                                            css={tw`text-[10px] font-black uppercase tracking-widest py-1 px-2.5 bg-blue-500/10 text-blue-400 rounded-lg border border-blue-500/30`}
+                                            css={tw`text-xs font-black uppercase tracking-wider py-1 px-2.5 bg-blue-500 bg-opacity-10 text-blue-400 rounded-sm border border-blue-500 border-opacity-30`}
                                         >
                                             {server.node}
                                         </span>

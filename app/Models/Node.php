@@ -85,7 +85,6 @@ class Node extends Model
     protected $fillable = [
         'public',
         'name',
-        'console_name',
         'location_id',
         'fqdn',
         'scheme',
@@ -105,7 +104,6 @@ class Node extends Model
 
     public static array $validationRules = [
         'name' => 'required|regex:/^([\w .-]{1,100})$/',
-        'console_name' => 'nullable|string|max:255',
         'description' => 'string|nullable',
         'location_id' => 'required|exists:locations,id',
         'deployable' => 'required|boolean',

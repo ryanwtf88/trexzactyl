@@ -12,8 +12,10 @@ import PaginationFooter from '@/components/elements/table/PaginationFooter';
 import ActivityLogEntry from '@/components/elements/activity/ActivityLogEntry';
 import styled from 'styled-components/macro';
 
-const ActivityContainer = styled.div`
-    ${tw`rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md overflow-hidden`};
+import GlassCard from '@/components/elements/GlassCard';
+
+const ActivityContainer = styled(GlassCard)`
+    ${tw`overflow-hidden`};
 `;
 
 const FilterPill = styled(Link)`

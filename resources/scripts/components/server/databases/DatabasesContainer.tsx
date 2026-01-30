@@ -44,10 +44,10 @@ export default () => {
                             databases.map((database) => <DatabaseRow key={database.id} database={database} />)
                         ) : (
                             <div
-                                css={tw`p-12 text-center bg-neutral-900/50 backdrop-blur-md rounded-xl border border-neutral-700`}
+                                css={tw`p-12 text-center bg-neutral-900 bg-opacity-40 backdrop-blur-xl rounded-sm border border-neutral-700`}
                             >
                                 <Icon.Database size={48} css={tw`mx-auto mb-4 opacity-10 text-neutral-100`} />
-                                <p className={'text-sm font-bold text-neutral-500 uppercase tracking-widest'}>
+                                <p className={'text-sm font-bold text-neutral-500 uppercase tracking-wider'}>
                                     {databaseLimit > 0
                                         ? 'It looks like you have no databases.'
                                         : 'Databases cannot be created for this server.'}
@@ -56,7 +56,7 @@ export default () => {
                         )}
                         <Can action={'database.create'}>
                             <div
-                                css={tw`mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md`}
+                                css={tw`mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-sm border border-neutral-700 bg-neutral-900 bg-opacity-40 backdrop-blur-xl`}
                             >
                                 <div css={tw`flex items-center gap-3`}>
                                     <Icon.Activity size={18} css={tw`text-blue-400`} />

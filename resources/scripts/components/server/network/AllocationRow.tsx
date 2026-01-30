@@ -20,21 +20,21 @@ import DeleteAllocationButton from '@/components/server/network/DeleteAllocation
 import setPrimaryServerAllocation from '@/api/server/network/setPrimaryServerAllocation';
 
 const AllocationCard = styled.div`
-    ${tw`flex flex-wrap md:flex-nowrap items-center p-4 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md mb-3 transition-all duration-300`};
-    ${tw`hover:border-blue-500/50 hover:shadow-lg hover:-translate-y-0.5`};
+    ${tw`flex flex-wrap md:flex-nowrap items-center p-4 rounded-sm border border-neutral-700 bg-neutral-900 bg-opacity-40 backdrop-blur-xl mb-3 transition-all duration-300`};
+    ${tw`hover:border-blue-500 border-opacity-50 hover:shadow-lg hover:-translate-y-0.5`};
 `;
 
 const Label = styled.label`
-    ${tw`uppercase text-[10px] font-black mt-1 text-neutral-500 block px-1 select-none transition-colors duration-150`};
+    ${tw`uppercase text-xs font-black mt-1 text-neutral-500 block px-1 select-none transition-colors duration-150`};
 `;
 
 const StyledTextarea = styled(Textarea)`
-    ${tw`bg-neutral-800/50 border-neutral-700 hover:border-neutral-600 focus:border-blue-500 transition-all duration-200 text-sm`};
+    ${tw`bg-neutral-800 bg-opacity-50 border-neutral-700 hover:border-neutral-600 focus:border-blue-500 transition-all duration-200 text-sm`};
 `;
 
 const Badge = styled.div`
-    ${tw`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider`};
-    ${tw`bg-blue-500/10 text-blue-400 border border-blue-500/20`};
+    ${tw`px-3 py-1 rounded-sm text-xs font-bold uppercase tracking-wider`};
+    ${tw`bg-blue-500 bg-opacity-10 text-blue-400 border border-blue-500 border-opacity-20`};
 `;
 
 const AllocationRow = ({ allocation }: { allocation: Allocation }) => {
@@ -74,7 +74,7 @@ const AllocationRow = ({ allocation }: { allocation: Allocation }) => {
                 <div css={tw`mr-8 flex-1 md:w-48`}>
                     <CopyOnClick text={allocation.alias || ip(allocation.ip)}>
                         <Code
-                            css={tw`bg-neutral-800/50 text-neutral-100 border-neutral-700 px-2 py-1 rounded w-48 truncate block group-hover:border-blue-500/30 transition-all`}
+                            css={tw`bg-neutral-800 bg-opacity-50 text-neutral-100 border-neutral-700 px-2 py-1 rounded-sm w-48 truncate block group-hover:border-blue-500 border-opacity-30 transition-all`}
                         >
                             {allocation.alias || ip(allocation.ip)}
                         </Code>
@@ -83,7 +83,7 @@ const AllocationRow = ({ allocation }: { allocation: Allocation }) => {
                 </div>
                 <div css={tw`w-20 md:w-24 overflow-hidden`}>
                     <Code
-                        css={tw`bg-neutral-800/50 text-neutral-100 border-neutral-700 px-2 py-1 rounded block group-hover:border-blue-500/30 transition-all`}
+                        css={tw`bg-neutral-800 bg-opacity-50 text-neutral-100 border-neutral-700 px-2 py-1 rounded-sm block group-hover:border-blue-500 border-opacity-30 transition-all`}
                     >
                         {allocation.port}
                     </Code>
@@ -98,7 +98,7 @@ const AllocationRow = ({ allocation }: { allocation: Allocation }) => {
                         defaultValue={allocation.notes || undefined}
                         onChange={(e) => setAllocationNotes(e.currentTarget.value)}
                         rows={1}
-                        css={tw`resize-none overflow-hidden min-h-[38px] py-2`}
+                        css={tw`resize-none overflow-hidden h-10 py-2`}
                     />
                 </InputSpinner>
             </div>

@@ -9,8 +9,8 @@ import { getResources, Resources } from '@/api/store/getResources';
 import { motion } from 'framer-motion';
 
 const PremiumBoxContainer = styled.div<{ $color: string }>`
-    ${tw`relative flex flex-col p-5 rounded-2xl border border-neutral-700 bg-neutral-900/40 backdrop-blur-xl transition-all duration-300 overflow-hidden`};
-    ${tw`hover:border-blue-500/50 hover:shadow-2xl`};
+    ${tw`relative flex flex-col p-5 rounded-sm border border-neutral-700 bg-neutral-900 bg-opacity-40 backdrop-blur-xl transition-all duration-300 overflow-hidden`};
+    ${tw`hover:border-blue-500 border-opacity-50 hover:shadow-2xl`};
 
     &::before {
         content: '';
@@ -40,14 +40,14 @@ const PremiumBoxContainer = styled.div<{ $color: string }>`
 const PremiumBox = motion(PremiumBoxContainer);
 
 const IconWrapper = styled.div<{ $color: string }>`
-    ${tw`w-9 h-9 rounded-xl flex items-center justify-center mb-4 transition-all duration-300`};
+    ${tw`w-9 h-9 rounded-sm flex items-center justify-center mb-4 transition-all duration-300`};
     background: ${({ $color }) => `${$color}10`};
     color: ${({ $color }) => $color};
     border: 1px solid ${({ $color }) => `${$color}20`};
 `;
 
 const ResourceTitle = styled.h4`
-    ${tw`text-[10px] font-black uppercase tracking-widest text-neutral-500 mb-1 leading-none`};
+    ${tw`text-xs font-black uppercase tracking-wider text-neutral-500 mb-1 leading-none`};
 `;
 
 const ResourceValue = styled.div`
@@ -56,7 +56,7 @@ const ResourceValue = styled.div`
         ${tw`text-2xl font-black text-white tabular-nums tracking-tighter`};
     }
     & .suffix {
-        ${tw`text-[11px] text-neutral-500 font-black ml-1 uppercase`};
+        ${tw`text-xs text-neutral-500 font-black ml-1 uppercase`};
     }
 `;
 

@@ -12,7 +12,7 @@ import * as Icon from 'react-feather';
 import { motion } from 'framer-motion';
 
 const PremiumCardContainer = styled.div<{ $color: string }>`
-    ${tw`relative p-6 rounded-2xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md overflow-hidden transition-all duration-300`};
+    ${tw`relative p-6 rounded-2xl border border-neutral-700 bg-neutral-900 bg-opacity-50 backdrop-blur-md overflow-hidden transition-all duration-300`};
 
     &::before {
         content: '';
@@ -88,12 +88,12 @@ export default () => {
                         <Icon.Circle size={18} className='animate-pulse' />
                     </IconWrapper>
                     <div css={tw`flex flex-col`}>
-                        <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>
+                        <span css={tw`text-xs uppercase font-bold tracking-wider text-neutral-500 mb-1`}>
                             Earning Rate
                         </span>
                         <div css={tw`flex items-baseline`}>
                             <span css={tw`text-2xl font-black text-white mr-1.5`}>{store.earn.amount}</span>
-                            <span css={tw`text-neutral-400 text-[10px] font-bold uppercase`}>CR / MIN</span>
+                            <span css={tw`text-neutral-400 text-xs font-bold uppercase`}>CR / MIN</span>
                         </div>
                     </div>
                 </PremiumCard>
@@ -109,7 +109,7 @@ export default () => {
                         <Icon.AlertCircle size={18} />
                     </IconWrapper>
                     <div css={tw`flex flex-col`}>
-                        <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>
+                        <span css={tw`text-xs uppercase font-bold tracking-wider text-neutral-500 mb-1`}>
                             Earning Status
                         </span>
                         <span css={tw`text-lg font-black text-red-400 uppercase`}>Disabled</span>
@@ -128,12 +128,12 @@ export default () => {
                     <Icon.DollarSign size={18} />
                 </IconWrapper>
                 <div css={tw`flex flex-col`}>
-                    <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>
+                    <span css={tw`text-xs uppercase font-bold tracking-wider text-neutral-500 mb-1`}>
                         Available Credits
                     </span>
                     <div css={tw`flex items-baseline`}>
                         <span css={tw`text-2xl font-black text-white mr-1.5`}>{bal.toLocaleString()}</span>
-                        <span css={tw`text-neutral-400 text-[10px] font-bold uppercase`}>Credits</span>
+                        <span css={tw`text-neutral-400 text-xs font-bold uppercase`}>Credits</span>
                     </div>
                 </div>
             </PremiumCard>
@@ -149,7 +149,7 @@ export default () => {
                     <Icon.Lock size={18} />
                 </IconWrapper>
                 <div css={tw`flex flex-col`}>
-                    <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>
+                    <span css={tw`text-xs uppercase font-bold tracking-wider text-neutral-500 mb-1`}>
                         Account Security
                     </span>
                     {user.useTotp ? (
@@ -172,7 +172,7 @@ export default () => {
                         <Icon.XCircle size={18} />
                     </IconWrapper>
                     <div css={tw`flex flex-col`}>
-                        <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>
+                        <span css={tw`text-xs uppercase font-bold tracking-wider text-neutral-500 mb-1`}>
                             Account Status
                         </span>
                         <span
@@ -195,7 +195,7 @@ export default () => {
                         <Icon.FileText size={18} />
                     </IconWrapper>
                     <div css={tw`flex flex-col`}>
-                        <span css={tw`text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1`}>
+                        <span css={tw`text-xs uppercase font-bold tracking-wider text-neutral-500 mb-1`}>
                             Latest Activity
                         </span>
                         <div css={tw`truncate max-w-full text-sm font-bold text-neutral-200 uppercase`}>

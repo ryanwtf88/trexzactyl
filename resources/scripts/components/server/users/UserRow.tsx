@@ -9,12 +9,12 @@ import RemoveSubuserButton from '@/components/server/users/RemoveSubuserButton';
 import styled from 'styled-components/macro';
 
 const UserCard = styled.div`
-    ${tw`flex items-center p-4 rounded-xl border border-neutral-700 bg-neutral-900/50 backdrop-blur-md mb-3 transition-all duration-300`};
-    ${tw`hover:border-blue-500/50 hover:shadow-lg hover:-translate-y-0.5`};
+    ${tw`flex flex-wrap md:flex-nowrap items-center p-4 rounded-sm border border-neutral-700 bg-neutral-900 bg-opacity-40 backdrop-blur-xl mb-3 transition-all duration-300`};
+    ${tw`hover:border-blue-500 border-opacity-50 hover:shadow-lg hover:-translate-y-0.5`};
 `;
 
 const Avatar = styled.div`
-    ${tw`w-12 h-12 rounded-xl bg-neutral-800 border-2 border-neutral-700 overflow-hidden hidden md:block group-hover:border-blue-500/50 transition-colors duration-200`};
+    ${tw`w-12 h-12 rounded-sm bg-neutral-800 border-2 border-neutral-700 overflow-hidden hidden md:block group-hover:border-blue-500 border-opacity-50 transition-colors duration-200`};
 `;
 
 const InfoBlock = styled.div`
@@ -49,13 +49,13 @@ export default ({ subuser }: { subuser: Subuser }) => {
             <div css={tw`ml-4 flex flex-col items-center`}>
                 <div
                     css={[
-                        tw`p-2 rounded-lg bg-neutral-800 text-neutral-400 group-hover:bg-blue-500/10 transition-colors duration-200`,
+                        tw`p-2 rounded-sm bg-neutral-800 text-neutral-400 group-hover:bg-blue-500 bg-opacity-10 transition-colors duration-200`,
                         subuser.twoFactorEnabled && tw`text-green-400`,
                     ]}
                 >
                     {subuser.twoFactorEnabled ? <Icon.Lock size={16} /> : <Icon.Unlock size={16} />}
                 </div>
-                <p css={tw`text-[8px] text-neutral-500 uppercase font-black mt-1`}>2FA Security</p>
+                <p css={tw`text-xs text-neutral-500 uppercase font-black mt-1`}>2FA Security</p>
             </div>
 
             {subuser.uuid !== uuid && (
@@ -63,7 +63,7 @@ export default ({ subuser }: { subuser: Subuser }) => {
                     <Can action={'user.update'}>
                         <button
                             type={'button'}
-                            css={tw`p-2 rounded-lg text-neutral-500 hover:text-neutral-100 hover:bg-neutral-800 transition-all duration-150`}
+                            css={tw`p-2 rounded-sm bg-blue-500 bg-opacity-10 text-blue-400`}
                             onClick={() => setVisible(true)}
                         >
                             <Icon.Settings size={18} />

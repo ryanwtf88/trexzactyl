@@ -13,7 +13,7 @@ import tw from 'twin.macro';
 import styled from 'styled-components/macro';
 
 const HeaderCard = styled.div`
-    ${tw`p-6 rounded-[2px] border border-neutral-700 bg-neutral-900/40 backdrop-blur-xl mb-6 flex flex-col sm:flex-row justify-between items-center gap-4`};
+    ${tw`p-6 rounded-sm border border-neutral-700 bg-neutral-900 bg-opacity-40 backdrop-blur-xl mb-6 flex flex-col sm:flex-row justify-between items-center gap-4`};
 `;
 
 const ServerConsoleContainer = () => {
@@ -31,8 +31,8 @@ const ServerConsoleContainer = () => {
                     {isNodeUnderMaintenance
                         ? 'The node of this server is currently under maintenance and all actions are unavailable.'
                         : isInstalling
-                            ? 'This server is currently running its installation process and most actions are unavailable.'
-                            : 'This server is currently being transferred to another node and all actions are unavailable.'}
+                        ? 'This server is currently running its installation process and most actions are unavailable.'
+                        : 'This server is currently being transferred to another node and all actions are unavailable.'}
                 </Alert>
             )}
 
@@ -50,7 +50,7 @@ const ServerConsoleContainer = () => {
 
             <div className={'grid grid-cols-4 gap-6'}>
                 <div className={'col-span-4 lg:col-span-3'}>
-                    <div className={'rounded-[2px]'}>
+                    <div className={'rounded-sm'}>
                         <Spinner.Suspense>
                             <Console />
                         </Spinner.Suspense>

@@ -29,20 +29,20 @@ class RegistrationController extends Controller
     public function index(): View
     {
         return view('admin.trexzactyl.registration', [
-            'enabled' => $this->settings->get('trexzactyl::registration:enabled', false),
-            'verification' => $this->settings->get('trexzactyl::registration:verification', false),
+            'enabled' => $this->settings->get('Trexzactyl::registration:enabled', false),
+            'verification' => $this->settings->get('Trexzactyl::registration:verification', false),
 
-            'discord_enabled' => $this->settings->get('trexzactyl::discord:enabled', false),
-            'discord_id' => $this->settings->get('trexzactyl::discord:id', 0),
-            'discord_secret' => $this->settings->get('trexzactyl::discord:secret', 0),
+            'discord_enabled' => $this->settings->get('Trexzactyl::discord:enabled', false),
+            'discord_id' => $this->settings->get('Trexzactyl::discord:id', 0),
+            'discord_secret' => $this->settings->get('Trexzactyl::discord:secret', 0),
 
-            'cpu' => $this->settings->get('trexzactyl::registration:cpu', 100),
-            'memory' => $this->settings->get('trexzactyl::registration:memory', 1024),
-            'disk' => $this->settings->get('trexzactyl::registration:disk', 5120),
-            'slot' => $this->settings->get('trexzactyl::registration:slot', 1),
-            'port' => $this->settings->get('trexzactyl::registration:port', 1),
-            'backup' => $this->settings->get('trexzactyl::registration:backup', 1),
-            'database' => $this->settings->get('trexzactyl::registration:database', 0),
+            'cpu' => $this->settings->get('Trexzactyl::registration:cpu', 100),
+            'memory' => $this->settings->get('Trexzactyl::registration:memory', 1024),
+            'disk' => $this->settings->get('Trexzactyl::registration:disk', 5120),
+            'slot' => $this->settings->get('Trexzactyl::registration:slot', 1),
+            'port' => $this->settings->get('Trexzactyl::registration:port', 1),
+            'backup' => $this->settings->get('Trexzactyl::registration:backup', 1),
+            'database' => $this->settings->get('Trexzactyl::registration:database', 0),
         ]);
     }
 
@@ -55,7 +55,7 @@ class RegistrationController extends Controller
     public function update(RegistrationFormRequest $request): RedirectResponse
     {
         foreach ($request->normalize() as $key => $value) {
-            $this->settings->set('trexzactyl::' . $key, $value);
+            $this->settings->set('Trexzactyl::' . $key, $value);
         }
 
         $this->writeToEnvironment([

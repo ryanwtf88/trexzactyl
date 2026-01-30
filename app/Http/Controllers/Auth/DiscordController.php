@@ -71,6 +71,12 @@ class DiscordController extends Controller
             Auth::loginUsingId($user->id, true);
 
             return redirect('/');
+        } elseif (User::where('email', $discord->email)->exists()) {
+            $user = User::where('email', $discord->email)->first();
+            $user->update(['discord_id' => $discord->id]);
+            Auth::loginUsingId($user->id, true);
+
+            return redirect('/');
         } else {
             $approved = true;
 
